@@ -38,10 +38,10 @@ export default function RootLayout({
           }}
         />
         <Script
-          src="https://unpkg.com/@tinybirdco/flock.js"
-          data-host="https://api.tinybird.co"
-          data-token={process.env.NEXT_PUBLIC_TINYBIRD_TOKEN}
-        />
+          defer
+          data-domain="xiaoluobod.ing"
+          src="https://plausible.io/js/script.js"
+        ></Script>
       </body>
     </html>
   )
