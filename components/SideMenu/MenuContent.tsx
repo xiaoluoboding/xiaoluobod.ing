@@ -3,61 +3,54 @@ import NextImage from "next/image"
 
 // import { PROFILES, LINKS } from "@/lib/constants"
 
-import {
-  GithubIcon,
-  LinkedinIcon,
-  InstagramIcon,
-  YoutubeIcon,
-  SparklesIcon,
-  PencilLineIcon,
-  NavigationIcon,
-  Wand2Icon,
-  BookmarkIcon,
-  ArmchairIcon,
-  TwitterIcon,
-  MailIcon,
-  CodepenIcon,
-} from "lucide-react"
 import { NavigationLink } from "../NavigationLint"
+import {
+  RiBookmarkLine,
+  RiCodeBoxLine,
+  RiCodeSSlashLine,
+  RiCodepenLine,
+  RiGithubLine,
+  RiGuideLine,
+  RiHomeLine,
+  RiMacLine,
+  RiMacbookLine,
+  RiMessage2Line,
+  RiProductHuntLine,
+  RiQuillPenLine,
+  RiTwitterXLine,
+} from "@remixicon/react"
 
 export const PROFILES = {
   twitter: {
     title: "X (Twitter)",
     username: "robert_shaw_x",
     url: "https://twitter.com/intent/user?screen_name=robert_shaw_x",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-4 w-4"
-        width="44"
-        height="44"
-        viewBox="0 0 24 24"
-        strokeWidth="1.5"
-        stroke="#000000"
-        fill="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
-        <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
-      </svg>
-    ),
+    icon: <RiTwitterXLine size={16} />,
+  },
+  dm: {
+    title: "Direct Message on X",
+    url: "https://dm.new/robert",
+    icon: <RiMessage2Line size={16} />,
   },
   github: {
     title: "GitHub",
     url: "https://github.com/xiaoluoboding",
-    icon: <GithubIcon size={16} />,
+    icon: <RiGithubLine size={16} />,
   },
   codepen: {
     title: "CodePen",
     url: "https://codepen.io/xiaoluoboding",
-    icon: <CodepenIcon size={16} />,
+    icon: <RiCodepenLine size={16} />,
   },
-  dm: {
-    title: "Direct Message",
-    url: "https://dm.mew/robert",
-    icon: <MailIcon size={16} />,
+  producthunt: {
+    title: "ProductHunt",
+    url: "https://www.producthunt.com/@xiaoluoboding",
+    icon: <RiProductHuntLine size={16} />,
+  },
+  indiehackers: {
+    title: "IndieHackers",
+    url: "https://www.indiehackers.com/xiaoluoboding",
+    icon: <RiCodeBoxLine size={16} />,
   },
 }
 
@@ -65,32 +58,37 @@ export const LINKS = [
   {
     href: "/",
     label: "Home",
-    icon: <SparklesIcon size={16} />,
+    icon: <RiHomeLine size={16} />,
   },
   {
     href: "/writing",
     label: "Writing",
-    icon: <PencilLineIcon size={16} />,
+    icon: <RiQuillPenLine size={16} />,
   },
   {
     href: "/journey",
     label: "Journey",
-    icon: <NavigationIcon size={16} />,
+    icon: <RiGuideLine size={16} />,
   },
   {
     href: "/stack",
-    label: "Stack",
-    icon: <Wand2Icon size={16} />,
+    label: "Tech Stack",
+    icon: <RiCodeSSlashLine size={16} />,
+  },
+  {
+    href: "/dock",
+    label: "Macbook Dock",
+    icon: <RiMacbookLine size={16} />,
   },
   {
     href: "/workspace",
     label: "Workspace",
-    icon: <ArmchairIcon size={16} />,
+    icon: <RiMacLine size={16} />,
   },
   {
     href: "/bookmarks",
     label: "Bookmarks",
-    icon: <BookmarkIcon size={16} />,
+    icon: <RiBookmarkLine size={16} />,
   },
 ]
 
