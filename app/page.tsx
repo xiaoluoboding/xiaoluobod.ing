@@ -2,12 +2,12 @@
 import { Suspense } from "react"
 
 import { LoadingSpinner } from "@/components/LoadingSpinner"
-// import { Button } from "@/components/ui/button"
-import { ScrollArea } from "@/components/ui/scroll-area"
+// import { XButton } from "@/components/ui/XButton"
+import { XScrollArea } from "@/components/ui/XScrollArea"
 
 export default function Home() {
   return (
-    <ScrollArea className="relative flex flex-col w-full">
+    <XScrollArea className="relative flex flex-col w-full">
       {/* <FloatingHeader scrollTitle="Robert Shaw" /> */}
       <div className="content-wrapper">
         <div className="content space-y-2">
@@ -26,15 +26,15 @@ export default function Home() {
             my projects.
           </p>
           <Suspense fallback={<LoadingSpinner />}>
-            {/* <Button asChild variant="link" className="inline px-0">
+            {/* <XButton asChild variant="link" className="inline px-0">
               <Link href="/writing">
                 <h2 className="mb-4 mt-8">Writing</h2>
               </Link>
-            </Button> */}
+            </XButton> */}
             {/* <WritingList items={sortedPosts} header="Writing" /> */}
           </Suspense>
         </div>
       </div>
-    </ScrollArea>
+    </XScrollArea>
   )
 }

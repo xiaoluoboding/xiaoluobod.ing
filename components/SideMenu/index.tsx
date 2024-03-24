@@ -3,10 +3,10 @@
 import { useRouter, usePathname } from "next/navigation"
 import { RadioIcon } from "lucide-react"
 
-import { ScrollArea } from "@/components/ui/scroll-area"
+import { XScrollArea } from "@/components/ui/XScrollArea"
 import { useKeyPress } from "@/hooks/useKeyPress"
 import { cn } from "@/lib/utils"
-import { Button } from "../ui/button"
+import { XButton } from "@/components/ui/XButton"
 
 const keyCodePathnameMapping: Record<string, string> = {
   Digit1: "/",
@@ -50,7 +50,7 @@ export const SideMenu = ({
   )
 
   return (
-    <ScrollArea
+    <XScrollArea
       className={cn(
         "hidden bg-neutral-50 lg:flex lg:flex-col lg:border-r",
         isInner ? "lg:w-80 xl:w-96" : "lg:w-60 xl:w-72",
@@ -65,7 +65,7 @@ export const SideMenu = ({
             </span>
             <div className="flex items-center gap-2">
               {(isWritingPath || isBookmarksPath) && (
-                <Button variant="outline" size="sm" asChild>
+                <XButton variant="outline" size="sm" asChild>
                   <a
                     href={isWritingPath ? "/writing.xml" : "/bookmarks.xml"}
                     title="RSS feed"
@@ -75,13 +75,13 @@ export const SideMenu = ({
                     <RadioIcon size={16} className="mr-2" />
                     RSS feed
                   </a>
-                </Button>
+                </XButton>
               )}
             </div>
           </div>
         </div>
       )}
       <div className="bg-neutral-50 p-3">{children}</div>
-    </ScrollArea>
+    </XScrollArea>
   )
 }

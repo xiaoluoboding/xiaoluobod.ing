@@ -209,7 +209,7 @@ const stackList = {
   ],
 }
 
-export default function CardHoverEffectDemo() {
+export default function CardHoverEffect() {
   return (
     <div className="max-w-5xl mx-auto px-8 py-16">
       {Object.keys(stackList).map((key) => {
@@ -221,7 +221,7 @@ export default function CardHoverEffectDemo() {
               </figcaption>
               <figure className="p-0 m-0">
                 <HoverEffect
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-4"
+                  className="grid grid-cols-3 lg:grid-cols-4 py-4"
                   items={stackList[key as keyof typeof stackList]}
                 />
               </figure>
