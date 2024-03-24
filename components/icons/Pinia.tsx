@@ -19,8 +19,8 @@ const Pinia = ({ className }: { className?: string }) => {
             y2="42.862855%"
             id="piniaLinearGradient-1"
           >
-            <stop stop-color="#52CE63" offset="0%"></stop>
-            <stop stop-color="#51A256" offset="100%"></stop>
+            <stop stopColor="#52CE63" offset="0%"></stop>
+            <stop stopColor="#51A256" offset="100%"></stop>
           </linearGradient>
           <linearGradient
             x1="55.348642%"
@@ -29,8 +29,8 @@ const Pinia = ({ className }: { className?: string }) => {
             y2="42.862855%"
             id="piniaLinearGradient-2"
           >
-            <stop stop-color="#52CE63" offset="0%"></stop>
-            <stop stop-color="#51A256" offset="100%"></stop>
+            <stop stopColor="#52CE63" offset="0%"></stop>
+            <stop stopColor="#51A256" offset="100%"></stop>
           </linearGradient>
           <linearGradient
             x1="50%"
@@ -39,8 +39,8 @@ const Pinia = ({ className }: { className?: string }) => {
             y2="58.811243%"
             id="piniaLinearGradient-3"
           >
-            <stop stop-color="#8AE99C" offset="0%"></stop>
-            <stop stop-color="#52CE63" offset="100%"></stop>
+            <stop stopColor="#8AE99C" offset="0%"></stop>
+            <stop stopColor="#52CE63" offset="100%"></stop>
           </linearGradient>
           <linearGradient
             x1="51.37763%"
@@ -49,8 +49,8 @@ const Pinia = ({ className }: { className?: string }) => {
             y2="100%"
             id="piniaLinearGradient-4"
           >
-            <stop stop-color="#FFE56C" offset="0%"></stop>
-            <stop stop-color="#FFC63A" offset="100%"></stop>
+            <stop stopColor="#FFE56C" offset="0%"></stop>
+            <stop stopColor="#FFC63A" offset="100%"></stop>
           </linearGradient>
         </defs>
         <g>

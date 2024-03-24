@@ -20,8 +20,8 @@ const Next = ({ className }: { className?: string }) => {
             y2="96.0801119%"
             id="nextjsLinearGradient-3"
           >
-            <stop stop-color="#FFFFFF" offset="0%"></stop>
-            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+            <stop stopColor="#FFFFFF" offset="0%"></stop>
+            <stop stopColor="#FFFFFF" stopOpacity="0" offset="100%"></stop>
           </linearGradient>
           <linearGradient
             x1="50%"
@@ -30,8 +30,8 @@ const Next = ({ className }: { className?: string }) => {
             y2="73.4375%"
             id="nextjsLinearGradient-4"
           >
-            <stop stop-color="#FFFFFF" offset="0%"></stop>
-            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+            <stop stopColor="#FFFFFF" offset="0%"></stop>
+            <stop stopColor="#FFFFFF" stopOpacity="0" offset="100%"></stop>
           </linearGradient>
         </defs>
         <g>

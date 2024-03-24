@@ -16,8 +16,8 @@ const VSCode = ({ className }: { className?: string }) => {
             y1="0%"
             y2="100%"
           >
-            <stop offset="0%" stop-color="#FFF" />
-            <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+            <stop offset="0%" stopColor="#FFF" />
+            <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
           </linearGradient>
           <path
             id="logosVisualStudioCode1"
@@ -44,7 +44,7 @@ const VSCode = ({ className }: { className?: string }) => {
         />
         <path
           fill="url(#logosVisualStudioCode0)"
-          fill-opacity=".25"
+          fillOpacity=".25"
           d="M180.828 252.605a15.874 15.874 0 0 0 12.65-.486l52.5-25.263a15.938 15.938 0 0 0 9.026-14.363V41.197a15.939 15.939 0 0 0-9.025-14.363L193.477 1.57a15.877 15.877 0 0 0-18.114 3.084L74.857 96.35l-43.78-33.232a10.614 10.614 0 0 0-13.56.603L3.476 76.494c-4.63 4.211-4.635 11.495-.012 15.713l37.967 34.638l-37.967 34.637c-4.623 4.219-4.618 11.502.012 15.714l14.041 12.772a10.614 10.614 0 0 0 13.56.604l43.78-33.233l100.506 91.695a15.857 15.857 0 0 0 5.465 3.571m10.464-183.65l-76.262 57.89l76.262 57.888z"
           mask="url(#logosVisualStudioCode2)"
         />

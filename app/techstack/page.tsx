@@ -214,19 +214,17 @@ export default function CardHoverEffect() {
     <div className="max-w-5xl mx-auto px-8 py-16">
       {Object.keys(stackList).map((key) => {
         return (
-          <>
-            <fieldset className="p-0 m-0">
-              <figcaption className="p-0 m-0 text-lg font-semibold">
-                {key}
-              </figcaption>
-              <figure className="p-0 m-0">
-                <HoverEffect
-                  className="grid grid-cols-3 lg:grid-cols-4 py-4"
-                  items={stackList[key as keyof typeof stackList]}
-                />
-              </figure>
-            </fieldset>
-          </>
+          <fieldset className="p-0 m-0" key={key}>
+            <figcaption className="p-0 m-0 text-lg font-semibold">
+              {key}
+            </figcaption>
+            <figure className="p-0 m-0">
+              <HoverEffect
+                className="grid grid-cols-3 lg:grid-cols-4 py-4"
+                items={stackList[key as keyof typeof stackList]}
+              />
+            </figure>
+          </fieldset>
         )
       })}
     </div>
