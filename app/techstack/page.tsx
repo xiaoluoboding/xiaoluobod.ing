@@ -31,7 +31,7 @@ import {
 } from "@/components/icons"
 import Vite from "@/components/icons/Vite"
 
-export const stackList = {
+const stackList = {
   Language: [
     {
       title: "HTML",
