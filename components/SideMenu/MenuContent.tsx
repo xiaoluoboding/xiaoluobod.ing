@@ -71,7 +71,7 @@ export const LINKS = [
     icon: <RiGuideLine size={16} />,
   },
   {
-    href: "/stack",
+    href: "/techstack",
     label: "Tech Stack",
     icon: <RiCodeSSlashLine size={16} />,
   },
