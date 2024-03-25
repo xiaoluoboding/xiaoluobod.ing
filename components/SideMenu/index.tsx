@@ -18,7 +18,7 @@ const keyCodePathnameMapping: Record<string, string> = {
 }
 
 interface IProps {
-  className: string
+  className?: string
   children: React.ReactNode
   title?: string
   bookmarks?: any[]

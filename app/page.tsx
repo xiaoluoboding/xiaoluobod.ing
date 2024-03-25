@@ -4,19 +4,18 @@ import { Suspense } from "react"
 import { LoadingSpinner } from "@/components/LoadingSpinner"
 // import { XButton } from "@/components/ui/XButton"
 import { XScrollArea } from "@/components/ui/XScrollArea"
+import { PageTitle } from "@/components/PageTitle"
+import { FloatingHeader } from "@/components/FloadingHeader"
 
 export default function Home() {
   return (
-    <XScrollArea className="relative flex flex-col w-full">
-      {/* <FloatingHeader scrollTitle="Robert Shaw" /> */}
+    <XScrollArea className="relative flex flex-col w-full scrollable-area">
+      <FloatingHeader scrollTitle="Robert Shaw" />
       <div className="content-wrapper">
         <div className="content space-y-2">
-          {/* <PageTitle title="Home" className="lg:hidden" /> */}
-          <h1>
-            Hey there, 👋 I&apos;m Robert Shaw, a web dev enthusiast with a
-            passion for Vue.js.
-          </h1>
-          <p></p>
+          <PageTitle title="Home" className="lg:hidden" />
+          <h1>Hey there, 👋 I&apos;m Robert Shaw</h1>
+          <p>A web dev enthusiast with a passion for Vue.js.</p>
           <p>
             🖖 Vue.js fan / 🍎 Swift Learner / ☕️ Coffee lover / 🌵 agave
             guardian
