@@ -89,7 +89,7 @@ export function InsertBookmarkForm({
     setIsLoading(true)
     let data: Partial<Bookmark> = {}
     try {
-      const res = await fetch(`https://metafy.vercel.app/api?url=${link}`, {
+      const res = await fetch(`/api/metafy/${encodeURIComponent(link)}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

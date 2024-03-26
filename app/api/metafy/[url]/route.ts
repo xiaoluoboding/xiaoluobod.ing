@@ -9,8 +9,7 @@ export async function GET(
 
   return tryCatchNextResponse<any>(async () => {
     const res = await fetch(`https://metafy.vercel.app/api?url=${url}`)
-    return {
-      data: res,
-    }
+    const json = await res.json()
+    return json
   })
 }
