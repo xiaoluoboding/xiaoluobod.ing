@@ -14,7 +14,9 @@ export interface Bookmark {
   author: string | null
   publisher: string | null
   domain: string | null
-  tag: BookmarkTag[]
+  tags: BookmarkTag[]
+  created_at?: string
+  updated_at?: string
 }
 
 export interface Collection {

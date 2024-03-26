@@ -15,6 +15,7 @@ export default function Home() {
         <div className="content space-y-2">
           <PageTitle title="Home" className="lg:hidden" />
           <h1>Hey there, 👋 I&apos;m Robert Shaw</h1>
+          <br />
           <p>A web dev enthusiast with a passion for Vue.js.</p>
           <p>
             🖖 Vue.js fan / 🍎 Swift Learner / ☕️ Coffee lover / 🌵 agave

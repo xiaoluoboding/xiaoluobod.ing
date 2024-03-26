@@ -7,6 +7,7 @@ import { XScrollArea } from "@/components/ui/XScrollArea"
 import { useKeyPress } from "@/hooks/useKeyPress"
 import { cn } from "@/lib/utils"
 import { XButton } from "@/components/ui/XButton"
+import { SubmitBookmarkDialog } from "../dialog/SubmitBookmarkDialog"
 
 const keyCodePathnameMapping: Record<string, string> = {
   Digit1: "/",
@@ -76,6 +77,12 @@ export const SideMenu = ({
                     RSS feed
                   </a>
                 </XButton>
+              )}
+              {isBookmarksPath && (
+                <SubmitBookmarkDialog
+                  bookmarks={bookmarks}
+                  currentBookmark={currentBookmark}
+                />
               )}
             </div>
           </div>

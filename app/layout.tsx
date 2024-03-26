@@ -4,7 +4,7 @@ import Script from "next/script"
 
 import "./globals.css"
 import { SideMenu } from "@/components/SideMenu"
-import { Toaster } from "sonner"
+import { XToaster } from "@/components/ui/XToaster"
 import { MenuContent } from "@/components/SideMenu/MenuContent"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -30,11 +30,10 @@ export default function RootLayout({
             <div className="flex flex-1">{children}</div>
           </div>
         </main>
-        <Toaster
-          closeButton
-          richColors
+        <XToaster
+          position="top-center"
           toastOptions={{
-            duration: 5000,
+            duration: 3333,
           }}
         />
         <Script

@@ -24,11 +24,11 @@ async function fetchData() {
   const bookmarkList = (await res.json()) as Bookmark[]
 
   const groupedBookmarkList = groupBy(bookmarkList, (item) => {
-    return item.tag.map((tag) => tag.name)
+    return item.tags.map((tag) => tag.name)
   })
 
   const tagList = bookmarkList.map((item) => {
-    return item.tag.map((tag) => tag.name)
+    return item.tags.map((tag) => tag.name)
   })
   const uniqTagList = uniq(tagList.flat(1))
 
@@ -71,6 +71,15 @@ export default function BookmarksLayout({
     bookmarkStore.setCollectionList(res.collectionList)
     bookmarkStore.setBookmarkList(res.bookmarkList)
   }
+
+  useEffect(() => {
+    if (bookmarkStore.isReRender) {
+      bookmarkStore.setBookmarkState({
+        isReRender: false,
+      })
+      handleInitialData()
+    }
+  }, [bookmarkStore.isReRender])
 
   useEffect(() => {
     setIsClient(true)
