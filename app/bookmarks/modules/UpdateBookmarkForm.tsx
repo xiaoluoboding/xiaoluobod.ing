@@ -68,9 +68,14 @@ export function UpdateBookmarkForm({
     // console.log(values)
     try {
       await handleUpdateBookmarkByLink(values.link)
+      bookmarkStore.setBookmarkState({
+        isReRender: true,
+      })
+      toast.success("Bookmark updated successfully")
     } catch (error: any) {
       toast.error(error.message)
     } finally {
+      setIsLoading(false)
       setDialogOpen(false)
     }
   }
@@ -125,13 +130,6 @@ export function UpdateBookmarkForm({
       },
       body: JSON.stringify(newBookmark),
     })
-    if (result) {
-      bookmarkStore.setBookmarkState({
-        isReRender: true,
-      })
-      toast.success("Bookmark updated successfully")
-      setIsLoading(false)
-    }
   }
 
   return (

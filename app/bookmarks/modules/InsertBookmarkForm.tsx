@@ -29,6 +29,7 @@ import {
 import { XInput } from "@/components/ui/XInput"
 import { cn } from "@/lib/utils"
 import { Bookmark } from "@/lib/types"
+import { useBookmarkStore } from "@/store/bookmark"
 
 const formSchema = z.object({
   link: z.string().url({
@@ -54,7 +55,7 @@ export function InsertBookmarkForm({
   currentBookmark,
 }: IProps) {
   const [isLoading, setIsLoading] = useState(false)
-
+  const bookmarkStore = useBookmarkStore()
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -72,10 +73,14 @@ export function InsertBookmarkForm({
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       await handleInsertBookmarkByLink(values.link)
+      bookmarkStore.setBookmarkState({
+        isReRender: true,
+      })
       toast.success("Bookmark submitted!")
     } catch (error: any) {
       toast.error(error.message)
     } finally {
+      setIsLoading(false)
       setDialogOpen(false)
     }
   }
@@ -115,10 +120,6 @@ export function InsertBookmarkForm({
       },
       body: JSON.stringify(newBookmark),
     })
-    if (result) {
-      toast.success("Bookmark updated successfully")
-      setIsLoading(false)
-    }
   }
 
   return (
