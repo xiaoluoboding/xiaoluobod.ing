@@ -2,6 +2,7 @@ import { cache } from "react"
 
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
+import { NextResponse } from "next/server"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -33,3 +34,26 @@ export const sortByProperty = cache((arr: any[], prop: any) => {
     return 0
   })
 })
+
+export const tryCatchNextResponse = async <T>(
+  fn: () => Promise<T>
+): Promise<NextResponse<T> | Response> => {
+  try {
+    const res = await fn()
+    if (res) {
+      return NextResponse.json(res)
+    } else {
+      return new Response(null, {
+        status: 204,
+      })
+    }
+  } catch (error: any) {
+    const FrontEndResponseErrorData: any = {
+      error: error.data,
+      xRequestId: error.headers?.["x-request-id"],
+    }
+    return NextResponse.json(FrontEndResponseErrorData, {
+      status: error.status,
+    })
+  }
+}

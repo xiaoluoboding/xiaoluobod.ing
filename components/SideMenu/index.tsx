@@ -52,7 +52,7 @@ export const SideMenu = ({
   return (
     <XScrollArea
       className={cn(
-        "hidden bg-neutral-50 lg:flex lg:flex-col lg:border-r",
+        "hidden bg-neutral-50 lg:flex lg:flex-col lg:border-r scrollable-area",
         isInner ? "lg:w-80 xl:w-96" : "lg:w-60 xl:w-72",
         className
       )}

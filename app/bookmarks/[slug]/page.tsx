@@ -1,199 +1,231 @@
-import { Suspense, useCallback, useMemo } from "react"
-import { notFound } from "next/navigation"
-import { cloneDeep } from "lodash-es"
+"use client"
 
-import { cn, sortByProperty } from "@/lib/utils"
+import { Suspense, useCallback, useEffect, useMemo, useState } from "react"
+import { notFound } from "next/navigation"
+import { toast } from "sonner"
+
 import { LoadingSpinner } from "@/components/LoadingSpinner"
 import { XScrollArea } from "@/components/ui/XScrollArea"
 import { PageTitle } from "@/components/PageTitle"
 import { FloatingHeader } from "@/components/FloadingHeader"
 import { BookmarkCard } from "@/components/BookmarkCard/BookmarkCard"
-import { Bookmark } from "@/lib/types"
+import { Bookmark, Collection } from "@/lib/types"
+import { XButton } from "@/components/ui/XButton"
+import { useBookmarkStore } from "@/store/bookmark"
+import {
+  XDrawer,
+  XDrawerContent,
+  XDrawerHeader,
+  XDrawerOverlay,
+  XDrawerPortal,
+  XDrawerTrigger,
+} from "@/components/ui/XDrawer"
+import { CommandIcon } from "lucide-react"
+import { XInput } from "@/components/ui/XInput"
+import { XTextarea } from "@/components/ui/XTextarea"
 
-interface Collection {
-  _id: string
-  title: string
-  slug: string
-  count: number
-}
+// export async function generateStaticParams() {
+//   return collectionList.map((collection: Collection) => ({
+//     slug: collection.slug,
+//   }))
+// }
 
-const collectionList = [
-  {
-    _id: "1",
-    title: "SaaS",
-    slug: "saas",
-    count: 0,
-  },
-  {
-    _id: "2",
-    title: "AI",
-    slug: "ai",
-    count: 0,
-  },
-]
-
-export async function generateStaticParams() {
-  return collectionList.map((collection: Collection) => ({
-    slug: collection.slug,
-  }))
-}
-
-async function fetchData(slug: string) {
-  const currentCollection = collectionList.find(
-    (collection) => collection.slug === slug
-  )
-  if (!currentCollection) notFound()
-
-  const sortedCollection = sortByProperty(collectionList, "title")
-  // const bookmarkItems = await getBookmarkItems(currentBookmark._id)
-  // const bookmarkItems = [
-
-  // ]
-
-  return {
-    collectionList: sortedCollection,
-    currentCollection,
-  }
-}
-
-const bookmarkList: Bookmark[] = [
-  {
-    link: "https://onetab.group",
-    author: null,
-    description:
-      "onetab.group is a chrome extension that allows you to manage your tabs & tab groups in one place. One-click to aggregate all tabs & tab groups into one session.",
-    image: "https://onetab.group/preview.jpg",
-    logo: "https://www.onetab.group/logo.svg",
-    publisher: null,
-    title: "onetab.group: Your all-in-one tab manager for chrome.",
-    domain: null,
-  },
-  {
-    link: "https://sidespace.app",
-    author: null,
-    logo: "https://www.sidespace.app/favicon.svg",
-    publisher: null,
-    description:
-      "Your Vertical Tabs Manager for Organizing Browser. Tabs It allows you to have more control over your web browsing experience by effectively managing multiple tabs at once.",
-    image: "https://sidespace.app/preview.jpg",
-    title:
-      "Side Space | Your Vertical Tabs Manager for Organizing Browser Tabs",
-    domain: null,
-  },
-  {
-    link: "https://bookmark.style/",
-    title: "bookmark.style: stylish your visual web bookmark",
-    description:
-      "🪄 Turn any link into a stylish visual web bookmark, one-click to copy the beautiful web bookmark image.",
-    author: "",
-    publisher: "",
-    image: "https://bookmark.style/preview.png",
-    logo: "https://bookmark.style/favicon.svg",
-    domain: null,
-  },
-  {
-    link: "https://github.com/one-tab-group/chrome-web-bookmark",
-    author: "one-tab-group",
-    description:
-      "One-click turn any link into a visual web bookmark, and it looks Like Twitter cards or Notion web bookmark. - GitHub - one-tab-group/chrome-web-bookmark: One-click turn any link into a visual web b...",
-    image:
-      "https://opengraph.githubassets.com/605fbb412eff58955049a9011f1ef2e72ad345f1981937e2bc136bf6126ea1a1/one-tab-group/chrome-web-bookmark",
-    logo: "https://github.com/fluidicon.png",
-    publisher: "GitHub",
-    title:
-      "One-click turn any link into a visual web bookmark, and it looks Like Twitter cards or Notion web bookmark.",
-    domain: null,
-  },
-  {
-    link: "https://github.com/xiaoluoboding/vue-sonner",
-    author: "xiaoluoboding",
-    logo: "https://logo.clearbit.com/github.com",
-    publisher: "GitHub",
-    description: "🔔 An opinionated toast component for Vue.",
-    image:
-      "https://repository-images.githubusercontent.com/607054697/52a2e8ce-1178-4b81-87f3-a76fe8f5c290",
-    title: "🔔 An opinionated toast component for Vue.",
-    domain: null,
-  },
-  {
-    link: "https://github.com/xiaoluoboding/vue-command-palette",
-    author: "xiaoluoboding",
-    logo: "https://logo.clearbit.com/github.com",
-    publisher: "GitHub",
-    description:
-      "⌨️ A fast, composable, unstyled command palette interface for Vue.",
-    image:
-      "https://repository-images.githubusercontent.com/530924867/392a9c8e-1aaf-43ba-af9a-ca3765bbd9ac",
-    title: "⌨️ A fast, composable, unstyled command palette interface for Vue.",
-    domain: null,
-  },
-  {
-    link: "https://github.com/xiaoluoboding/nuxt3-starter",
-    author: "xiaoluoboding",
-    description: "💚 A Better Nuxt 3 Starter Template，generate by nuxi.",
-    image:
-      "https://opengraph.githubassets.com/2ebab3a39812c0aa320cf3232e5439eeba7e91865ea9025dab952acded6c8d2a/xiaoluoboding/nuxt3-starter",
-    logo: "https://github.com/fluidicon.png",
-    publisher: "GitHub",
-    title: "💚 A Better Nuxt 3 Starter Template，generate by nuxi.",
-    domain: null,
-  },
-  {
-    link: "https://github.com/nuxtbase/auth-ui-vue",
-    author: "nuxtbase",
-    logo: "https://logo.clearbit.com/github.com",
-    publisher: "GitHub",
-    description: "🔒 Pre-built Auth UI base on Supabase for Vue.",
-    image:
-      "https://repository-images.githubusercontent.com/672718739/237778ca-7e32-455c-8687-7f8b9ce8f66f",
-    title: "🔒 Pre-built Auth UI base on Supabase for Vue",
-    domain: null,
-  },
-]
-
-export default async function CollectionPage({
+export default function CollectionPage({
   params,
 }: {
   params: { slug: string }
 }) {
   const { slug } = params
-  const { collectionList, currentCollection } = await fetchData(slug)
+
+  const [isClient, setIsClient] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [openUpdateDrawer, setOpenUpdateDrawer] = useState(false)
+  const bookmarkStore = useBookmarkStore()
+  const bookmarkList = useBookmarkStore((state) => state.bookmarkList)
+  const collectionList = useBookmarkStore((state) => state.collectionList)
+  const [currentCollection, setCurrentCollection] = useState<Collection | null>(
+    null
+  )
+  const [currentBookmarkList, setCurrentBookmarkList] = useState<Bookmark[]>([])
+  const [selectedBookmark, setSelectedBookmark] = useState<Bookmark>(
+    {} as Bookmark
+  )
+
+  const handleInitialData = useCallback(async () => {
+    const currentCollection = collectionList.find(
+      (collection) => collection.slug === slug
+    )
+    currentCollection && setCurrentCollection(currentCollection)
+    const list = bookmarkList.filter((bookmark) => {
+      return bookmark.tag
+        .map((item) => item.name.toLowerCase().replace(/ /g, "-"))
+        .includes(slug)
+    })
+    list && setCurrentBookmarkList(list)
+  }, [slug])
+
+  const handleDeleteCard = async (id: string) => {
+    setIsLoading(true)
+    const res = await fetch(`/api/sdb/bookmark/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    if (res) {
+      toast.success("Bookmark deleted successfully")
+      setIsLoading(false)
+      handleInitialData()
+    }
+  }
+
+  const handleOpenDrawer = (bookmark: Bookmark) => {
+    setSelectedBookmark(bookmark)
+    setOpenUpdateDrawer(true)
+  }
+
+  const handleUpdateBookmarkByLink = async (link: string) => {
+    setIsLoading(true)
+    const res = await fetch(`https://metafy.vercel.app/api?url=${link}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    const data = (await res.json()) as Partial<Bookmark>
+    const newBookmark = {
+      ...selectedBookmark,
+      ...data,
+    }
+    const result = await fetch(`/api/sdb/bookmark/${selectedBookmark.id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newBookmark),
+    })
+    if (result) {
+      toast.success("Bookmark updated successfully")
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    setIsClient(true)
+    handleInitialData()
+  }, [])
 
   return (
-    <XScrollArea className="bg-grid scrollable-area">
-      <FloatingHeader
-        scrollTitle={currentCollection.title}
-        goBackLink="/bookmarks"
-        bookmarks={collectionList}
-        currentBookmark={currentCollection}
-      />
-      <div className="content-wrapper">
-        <div className="content @container">
-          <PageTitle title={currentCollection.title} />
-          <Suspense fallback={<LoadingSpinner />}>
-            {/* <!-- Masnory Layout for Bookmark Card --> */}
-            <div className="columns-1 lg:columns-2 lg:gap-4 [&>a:not(:first-child)]:mt-4">
-              {bookmarkList.map((bookmark, index) => {
-                const { origin } = new URL(bookmark.link)
-                // const urlInfo = parseUrl(origin)
-                const newBookmark: Bookmark = {
-                  ...bookmark,
-                  domain: origin,
-                }
+    <>
+      {isClient && (
+        <>
+          <XScrollArea className="bg-grid scrollable-area">
+            <FloatingHeader
+              scrollTitle={currentCollection?.title}
+              goBackLink="/bookmarks"
+              bookmarks={collectionList}
+              currentBookmark={currentCollection}
+            />
+            <div className="content-wrapper">
+              <div className="content @container">
+                <PageTitle title={currentCollection?.title || ""} />
+                <Suspense fallback={<LoadingSpinner />}>
+                  {/* <!-- Masnory Layout for Bookmark Card --> */}
+                  <div className="columns-1 lg:columns-2 2xl:columns-3 lg:gap-6 [&>div:not(:first-child)]:mt-6">
+                    {currentBookmarkList.map((bookmark, index) => {
+                      const { origin } = new URL(bookmark.link)
+                      // const urlInfo = parseUrl(origin)
+                      const newBookmark: Bookmark = {
+                        ...bookmark,
+                        domain: origin,
+                      }
 
-                return (
-                  <BookmarkCard
-                    key={bookmark.link}
-                    bookmark={newBookmark}
-                    order={index}
-                  />
-                )
-              })}
+                      return (
+                        <div key={bookmark.link} className="relative">
+                          <BookmarkCard bookmark={newBookmark} order={index} />
+                          <XButton
+                            className="absolute bottom-16 right-4"
+                            disabled={isLoading}
+                            onClick={() => handleOpenDrawer(bookmark)}
+                          >
+                            Update
+                          </XButton>
+                          <XButton
+                            className="absolute bottom-4 right-4"
+                            disabled={isLoading}
+                            onClick={() => handleDeleteCard(bookmark.id)}
+                          >
+                            Delete
+                          </XButton>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </Suspense>
+              </div>
             </div>
-          </Suspense>
-        </div>
-      </div>
-    </XScrollArea>
+          </XScrollArea>
+          <XDrawer
+            shouldScaleBackground={false}
+            open={openUpdateDrawer}
+            onOpenChange={setOpenUpdateDrawer}
+            direction="right"
+          >
+            <XButton variant="ghost" size="icon" title="Toggle drawer" asChild>
+              <XDrawerTrigger>
+                <CommandIcon size={16} />
+              </XDrawerTrigger>
+            </XButton>
+            <XDrawerPortal>
+              <XDrawerOverlay className="fixed inset-0 bg-black/40" />
+              <XDrawerContent className="fixed bottom-0 right-0 flex h-full w-2/5 flex-col rounded-l-lg bg-gray-100">
+                <div className="flex-1 overflow-y-auto rounded-l-lg bg-white">
+                  <XDrawerHeader className="font-semibold">
+                    Update Bookmark
+                  </XDrawerHeader>
+                  <div className="p-4 flex flex-col gap-4">
+                    <fieldset className="space-y-1">
+                      <label htmlFor="title" className="text-sm font-semibold">
+                        Title
+                      </label>
+                      <XInput value={selectedBookmark.title} />
+                    </fieldset>
+                    <fieldset className="space-y-1">
+                      <label htmlFor="link" className="text-sm font-semibold">
+                        Link
+                      </label>
+                      <XInput value={selectedBookmark.link} />
+                    </fieldset>
+                    <fieldset className="space-y-1">
+                      <label
+                        htmlFor="description"
+                        className="text-sm font-semibold"
+                      >
+                        Description
+                      </label>
+                      <XTextarea
+                        className="h-32"
+                        value={selectedBookmark.description}
+                      />
+                    </fieldset>
+                    <XButton
+                      className="mt-8"
+                      disabled={isLoading}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        handleUpdateBookmarkByLink(selectedBookmark.link)
+                      }}
+                    >
+                      Update
+                    </XButton>
+                  </div>
+                </div>
+              </XDrawerContent>
+            </XDrawerPortal>
+          </XDrawer>
+        </>
+      )}
+    </>
   )
 }
 

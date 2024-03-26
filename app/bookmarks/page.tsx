@@ -1,48 +1,33 @@
-import { Suspense } from "react"
+"use client"
+
+import { Suspense, useEffect, useState } from "react"
 import Link from "next/link"
 
 import { XScrollArea } from "@/components/ui/XScrollArea"
 import { LoadingSpinner } from "@/components/LoadingSpinner"
-// import { getBookmarks } from "@/lib/raindrop"
-import { sortByProperty } from "@/lib/utils"
 import { FloatingHeader } from "@/components/FloadingHeader"
+import { useBookmarkStore } from "@/store/bookmark"
 
-async function fetchData() {
-  const collectionList = [
-    {
-      _id: "1",
-      title: "SaaS",
-      slug: "saas",
-      count: 0,
-    },
-    {
-      _id: "2",
-      title: "AI",
-      slug: "ai",
-      count: 0,
-    },
-  ]
-  return {
-    bookmarks: sortByProperty(collectionList, "title"),
-  }
-}
-
-export default async function Writing() {
-  const { bookmarks } = await fetchData()
+export default function BookmarkPage() {
+  const bookmarkStore = useBookmarkStore()
+  const collectionList = useBookmarkStore((state) => state.collectionList)
+  const bookmarkList = useBookmarkStore((state) => state.bookmarkList)
 
   return (
     <XScrollArea className="lg:hidden">
-      <FloatingHeader title="Bookmarks" bookmarks={bookmarks} />
+      <FloatingHeader title="Bookmarks" bookmarks={bookmarkList} />
       <Suspense fallback={<LoadingSpinner />}>
-        {bookmarks?.map((bookmark) => {
+        {collectionList?.map((collection) => {
           return (
             <Link
-              key={bookmark._id}
-              href={`/bookmarks/${bookmark.slug}`}
+              key={collection.id}
+              href={`/bookmarks/${collection.slug}`}
               className="flex flex-col gap-1 border-b px-4 py-3 text-sm hover:bg-gray-100"
             >
-              <span className="font-medium">{bookmark.title}</span>
-              <span className="text-slate-500">{bookmark.count} bookmarks</span>
+              <span className="font-medium">{collection.title}</span>
+              <span className="text-slate-500">
+                {collection.count} bookmarks
+              </span>
             </Link>
           )
         })}

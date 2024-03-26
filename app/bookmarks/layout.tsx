@@ -1,61 +1,109 @@
-import { Suspense } from "react"
+"use client"
+
+import { Suspense, useEffect, useState } from "react"
 
 import { SideMenu } from "@/components/SideMenu"
 import { LoadingSpinner } from "@/components/LoadingSpinner"
 import { ListItem } from "@/components/ListItem"
-// import { getBookmarks } from "@/lib/raindrop"
 import { sortByProperty } from "@/lib/utils"
+
+import { groupBy, uniq } from "lodash-es"
+import { Bookmark } from "@/lib/types"
+import { useBookmarkStore } from "@/store/bookmark"
 
 // Revalidate all routes every 2 days
 export const revalidate = 60 * 60 * 24 * 2 // 2 days
 
 async function fetchData() {
-  const bookmarks = [
-    {
-      _id: "1",
-      title: "SaaS",
-      slug: "saas",
-      count: 0,
+  const res = await fetch("/api/sdb/bookmark", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
     },
-    {
-      _id: "2",
-      title: "AI",
-      slug: "ai",
-      count: 0,
-    },
-  ]
+  })
+  const bookmarkList = (await res.json()) as Bookmark[]
+
+  const groupedBookmarkList = groupBy(bookmarkList, (item) => {
+    return item.tag.map((tag) => tag.name)
+  })
+
+  const tagList = bookmarkList.map((item) => {
+    return item.tag.map((tag) => tag.name)
+  })
+  const uniqTagList = uniq(tagList.flat(1))
+
+  const collectionList = uniqTagList.map((tag) => {
+    let counter = 0
+
+    for (const group in groupedBookmarkList) {
+      if (group.includes(tag)) {
+        counter += groupedBookmarkList[group].length
+      }
+    }
+
+    return {
+      id: tag.toUpperCase(),
+      title: tag,
+      slug: tag.toLowerCase().replace(/ /g, "-"),
+      count: counter,
+    }
+  })
+
+  const sortedCollection = sortByProperty(collectionList, "title")
   return {
-    bookmarks: sortByProperty(bookmarks, "title"),
+    bookmarkList,
+    collectionList: sortedCollection,
   }
 }
 
-export default async function BookmarksLayout({
+export default function BookmarksLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const { bookmarks } = await fetchData()
+  const [isClient, setIsClient] = useState(false)
+  const bookmarkStore = useBookmarkStore()
+  const bookmarkList = useBookmarkStore((state) => state.bookmarkList)
+  const collectionList = useBookmarkStore((state) => state.collectionList)
 
+  const handleInitialData = async () => {
+    const res = await fetchData()
+    bookmarkStore.setCollectionList(res.collectionList)
+    bookmarkStore.setBookmarkList(res.bookmarkList)
+  }
+
+  useEffect(() => {
+    setIsClient(true)
+    handleInitialData()
+  }, [])
   return (
-    <div className="flex w-full">
-      <SideMenu title="Bookmarks" bookmarks={bookmarks} isInner>
-        <Suspense fallback={<LoadingSpinner />}>
-          <div className="flex flex-col gap-1 text-sm">
-            {bookmarks?.map((bookmark) => {
-              return (
-                <ListItem
-                  key={bookmark._id}
-                  path={`/bookmarks/${bookmark.slug}`}
-                  title={bookmark.title}
-                  description={`${bookmark.count} bookmarks`}
-                />
-              )
-            })}
-          </div>
-        </Suspense>
-      </SideMenu>
-      <div className="lg:bg-grid flex-1">{children}</div>
-    </div>
+    <>
+      {isClient && (
+        <div className="flex w-full">
+          <SideMenu
+            title={`Bookmarks (${bookmarkList.length})`}
+            bookmarks={collectionList}
+            isInner
+          >
+            <Suspense fallback={<LoadingSpinner />}>
+              <div className="flex flex-col gap-1 text-sm">
+                {collectionList?.map((collection) => {
+                  return (
+                    <ListItem
+                      key={collection.id}
+                      path={`/bookmarks/${collection.slug}`}
+                      title={collection.title}
+                      description={`${collection.count} bookmarks`}
+                    />
+                  )
+                })}
+              </div>
+            </Suspense>
+          </SideMenu>
+          <div className="lg:bg-grid flex-1">{children}</div>
+        </div>
+      )}
+    </>
   )
 }
 

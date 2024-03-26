@@ -52,7 +52,7 @@ export const BookmarkCard = ({ bookmark, order }: IProps) => {
             width={16}
             height={16}
           />
-          {bookmark.link}
+          {bookmark.domain}
         </span>
       </div>
     </a>
