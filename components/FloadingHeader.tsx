@@ -8,8 +8,8 @@ import { ArrowLeftIcon, RadioIcon } from "lucide-react"
 
 import { MobileDrawer } from "@/components/MobileDrawer/MoblieDrawer"
 import { XButton } from "@/components/ui/XButton"
-// import { SubmitBookmarkDrawer } from "@/components/submit-bookmark/drawer"
 import { SCROLL_AREA_ID, MOBILE_SCROLL_THRESHOLD } from "@/lib/constants"
+import { SubmitBookmarkDialog } from "./dialog/SubmitBookmarkDialog"
 
 interface IProps {
   scrollTitle?: string
@@ -123,12 +123,12 @@ export const FloatingHeader = memo(
                       </a>
                     </XButton>
                   )}
-                  {/* {isBookmarkPath && (
-                    <SubmitBookmarkDrawer
+                  {isBookmarksIndexPage && (
+                    <SubmitBookmarkDialog
                       bookmarks={bookmarks}
                       currentBookmark={currentBookmark}
                     />
-                  )} */}
+                  )}
                 </div>
               </div>
             </div>
