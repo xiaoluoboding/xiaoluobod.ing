@@ -98,7 +98,7 @@ export const MenuContent = () => {
       <div className="flex flex-col gap-4">
         <Link href="/" className="link-card inline-flex items-center gap-2 p-2">
           <NextImage
-            src="/me.png"
+            src="/assets/me.png"
             alt="Robert Shaw"
             width={40}
             height={40}
