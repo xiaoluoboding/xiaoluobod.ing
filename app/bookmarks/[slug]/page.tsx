@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/XDrawer"
 import { SquarePenIcon, XIcon } from "lucide-react"
 import { UpdateBookmarkForm } from "../modules/UpdateBookmarkForm"
-import { isProd } from "@/lib/utils"
+import { formatSlug, isProd } from "@/lib/utils"
 
 // export async function generateStaticParams() {
 //   return collectionList.map((collection: Collection) => ({
@@ -55,26 +55,41 @@ export default function CollectionPage({
       (collection) => collection.slug === slug
     )
     currentCollection && setCurrentCollection(currentCollection)
-    const list = bookmarkList.filter((bookmark) => {
-      return bookmark.tags
-        .map((item) => item.name.toLowerCase().replace(/ /g, "-"))
-        .includes(slug)
-    })
+    const list = bookmarkStore.isSearcing
+      ? bookmarkList
+      : bookmarkList.filter((bookmark) => {
+          return bookmark.tags
+            .map((item) => formatSlug(item.name))
+            .includes(slug)
+        })
     list && setCurrentBookmarkList(list)
-  }, [slug, bookmarkStore.bookmarkList, collectionList])
+  }, [
+    slug,
+    bookmarkStore.bookmarkList,
+    bookmarkStore.isSearcing,
+    collectionList,
+  ])
 
   const handleDeleteCard = async (id: string) => {
     setIsLoading(true)
-    const res = await fetch(`/api/sdb/bookmark/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    if (res) {
-      toast.success("Bookmark deleted successfully")
+    try {
+      const res = await fetch(`/api/sdb/bookmark/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      if (res) {
+        toast.success("Bookmark deleted successfully")
+        setIsLoading(false)
+        handleInitialData()
+      }
+    } catch (error) {
       setIsLoading(false)
-      handleInitialData()
+    } finally {
+      bookmarkStore.setBookmarkState({
+        isReRender: true,
+      })
     }
   }
 
@@ -85,7 +100,12 @@ export default function CollectionPage({
 
   useEffect(() => {
     handleInitialData()
-  }, [bookmarkStore.bookmarkList, collectionList])
+  }, [
+    slug,
+    bookmarkStore.bookmarkList,
+    bookmarkStore.isSearcing,
+    collectionList,
+  ])
   useEffect(() => {
     setIsClient(true)
     handleInitialData()

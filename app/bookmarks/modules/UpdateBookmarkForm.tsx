@@ -123,13 +123,19 @@ export function UpdateBookmarkForm({
       tags: form.getValues("tags"),
       updated_at: dayjs().valueOf(),
     }
-    const result = await fetch(`/api/sdb/bookmark/${bookmark.id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newBookmark),
-    })
+    try {
+      await fetch(`/api/sdb/bookmark/${bookmark.id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newBookmark),
+      })
+      setIsLoading(false)
+    } catch (error) {
+      console.log(error)
+      setIsLoading(false)
+    }
   }
 
   return (
