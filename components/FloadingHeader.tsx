@@ -49,10 +49,14 @@ export const FloatingHeader = memo(
 
         const opacity = Math.min(
           Math.max(
-            (scrollY -
-              MOBILE_SCROLL_THRESHOLD *
-                (MOBILE_SCROLL_THRESHOLD / (scrollY ** 2 / 100))) /
-              100,
+            Number(
+              (
+                (scrollY -
+                  MOBILE_SCROLL_THRESHOLD *
+                    (MOBILE_SCROLL_THRESHOLD / (scrollY ** 2 / 100))) /
+                100
+              ).toFixed(2)
+            ),
             0
           ),
           1
@@ -61,8 +65,8 @@ export const FloatingHeader = memo(
         setTransformValues({ translateY, opacity })
       }
 
-      if (scrollTitle) {
-        scrollAreaElem?.addEventListener("scroll", onScroll, {
+      if (scrollTitle && scrollAreaElem) {
+        scrollAreaElem.addEventListener("scroll", onScroll, {
           passive: true,
         })
       }
@@ -123,7 +127,7 @@ export const FloatingHeader = memo(
                       </a>
                     </XButton>
                   )}
-                  {isBookmarksIndexPage && (
+                  {isBookmarkPath && (
                     <SubmitBookmarkDialog
                       bookmarks={bookmarks}
                       currentBookmark={currentBookmark}
