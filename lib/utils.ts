@@ -3,6 +3,8 @@ import { cache } from "react"
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { NextResponse } from "next/server"
+import { Bookmark } from "./types"
+import { groupBy, uniq } from "lodash-es"
 
 export const isProd = process.env.NODE_ENV === "production"
 
@@ -57,4 +59,35 @@ export const tryCatchNextResponse = async <T>(
       status: error.status,
     })
   }
+}
+
+export const createCollectionList = (bookmarkList: Bookmark[]) => {
+  const groupedBookmarkList = groupBy(bookmarkList, (item) => {
+    return item.tags.map((tag) => tag.name)
+  })
+
+  const tagList = bookmarkList.map((item) => {
+    return item.tags.map((tag) => tag.name)
+  })
+  const uniqTagList = uniq(tagList.flat(1))
+
+  const collectionList = uniqTagList.map((tag) => {
+    let counter = 0
+
+    for (const group in groupedBookmarkList) {
+      if (group.includes(tag)) {
+        counter += groupedBookmarkList[group].length
+      }
+    }
+
+    return {
+      id: tag.toUpperCase(),
+      title: tag,
+      slug: formatSlug(tag),
+      count: counter,
+    }
+  })
+
+  const sortedCollection = sortByProperty(collectionList, "title")
+  return sortedCollection
 }

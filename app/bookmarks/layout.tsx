@@ -1,14 +1,14 @@
 "use client"
 
 import { Suspense, cache, useEffect, useState } from "react"
-import { cloneDeep, groupBy, isEmpty, uniq } from "lodash-es"
+import { cloneDeep, isEmpty } from "lodash-es"
 import Fuse from "fuse.js"
 import { useDebounceCallback } from "usehooks-ts"
 
 import { SideMenu } from "@/components/SideMenu"
 import { LoadingSpinner } from "@/components/LoadingSpinner"
 import { ListItem } from "@/components/ListItem"
-import { formatSlug, sortByProperty } from "@/lib/utils"
+import { createCollectionList, formatSlug } from "@/lib/utils"
 import { Bookmark } from "@/lib/types"
 import { useBookmarkStore } from "@/store/bookmark"
 import { XInput } from "@/components/ui/XInput"
@@ -23,37 +23,11 @@ async function fetchData() {
     },
   })
   const bookmarkList = (await res.json()) as Bookmark[]
+  const collectionList = createCollectionList(bookmarkList)
 
-  const groupedBookmarkList = groupBy(bookmarkList, (item) => {
-    return item.tags.map((tag) => tag.name)
-  })
-
-  const tagList = bookmarkList.map((item) => {
-    return item.tags.map((tag) => tag.name)
-  })
-  const uniqTagList = uniq(tagList.flat(1))
-
-  const collectionList = uniqTagList.map((tag) => {
-    let counter = 0
-
-    for (const group in groupedBookmarkList) {
-      if (group.includes(tag)) {
-        counter += groupedBookmarkList[group].length
-      }
-    }
-
-    return {
-      id: tag.toUpperCase(),
-      title: tag,
-      slug: formatSlug(tag),
-      count: counter,
-    }
-  })
-
-  const sortedCollection = sortByProperty(collectionList, "title")
   return {
     bookmarkList,
-    collectionList: sortedCollection,
+    collectionList,
   }
 }
 
