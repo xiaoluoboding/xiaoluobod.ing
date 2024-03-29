@@ -14,7 +14,7 @@ export default function BookmarkPage() {
   const bookmarkList = useBookmarkStore((state) => state.bookmarkList)
 
   return (
-    <XScrollArea className="lg:hidden">
+    <XScrollArea className="scrollable-area lg:hidden">
       <FloatingHeader title="Bookmarks" bookmarks={bookmarkList} />
       <Suspense fallback={<LoadingSpinner />}>
         {collectionList?.map((collection) => {
