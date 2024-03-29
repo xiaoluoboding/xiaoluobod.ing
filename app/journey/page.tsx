@@ -11,6 +11,15 @@ async function fetchData() {
   return {
     allLogbook: [
       {
+        year: 2024,
+        logs: [
+          {
+            title: "Migrate blog to Next",
+            description: "Rewrite blog using Next, and deployed it on Vercel.",
+          },
+        ],
+      },
+      {
         year: 2023,
         logs: [
           {
@@ -40,12 +49,21 @@ async function fetchData() {
         ],
       },
       {
+        year: 2020,
+        logs: [
+          {
+            title: "Migrate blog to Nuxt",
+            description: "Rewrite blog using Nuxt, and deployed it on Netlify.",
+          },
+        ],
+      },
+      {
         year: 2017,
         logs: [
           {
             title: "Join JD.com",
             description:
-              "I used Vue.js technology and found my first job as a frontend engineer.",
+              "I leveraged Vue.js tech stack to secure my initial position as a frontend engineer.",
           },
         ],
       },
@@ -53,9 +71,9 @@ async function fetchData() {
         year: 2016,
         logs: [
           {
-            title: "Ghost Blog",
+            title: "Migrate blog to Ghost",
             description:
-              "I migrated my WordPress blog to Ghost and created my own theme for the Ghost blog: kaldorei.",
+              "Migrated my WordPress blog to Ghost and created my own theme for the Ghost blog: kaldorei.",
           },
         ],
       },
@@ -74,7 +92,8 @@ async function fetchData() {
         logs: [
           {
             title: "First Blog",
-            description: "I create my first blog using WordPress.",
+            description:
+              "I create my first blog using WordPress and deploy it on Linode.",
           },
         ],
       },
