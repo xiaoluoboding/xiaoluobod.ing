@@ -2,10 +2,15 @@ interface IProps {
   title: string
   description: string
   icon: React.ReactNode
-  url: string
+  url?: string
 }
 
-export const OpenGraphImage = ({ title, description, icon, url }: IProps) => {
+export const OpenGraphImage = ({
+  title,
+  description,
+  icon,
+  url = "",
+}: IProps) => {
   return (
     <div
       style={{
@@ -40,7 +45,7 @@ export const OpenGraphImage = ({ title, description, icon, url }: IProps) => {
           borderRadius: 9999,
         }}
       >
-        {`xiaoluobod.ing${url ? `/${url}` : ""}`}
+        {`xiaoluobod.ing${url !== "" ? `/${url}` : ""}`}
       </div>
       <span
         style={{
