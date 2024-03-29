@@ -6,12 +6,44 @@ import "./globals.css"
 import { SideMenu } from "@/components/SideMenu"
 import { XToaster } from "@/components/ui/XToaster"
 import { MenuContent } from "@/components/SideMenu/MenuContent"
+import { sharedTitle, sharedDescription } from "@/app/shared-metadata"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Robert Shaw",
-  description: "My Personal Website",
+  metadataBase: new URL("https://xiaoluobod.ing"),
+  robots: {
+    index: true,
+    follow: true,
+  },
+  title: {
+    template: `%s — ${sharedTitle}`,
+    default: sharedTitle,
+  },
+  description: sharedDescription,
+  openGraph: {
+    title: {
+      template: `%s — ${sharedTitle}`,
+      default: sharedTitle,
+    },
+    description: sharedDescription,
+    // alt: sharedTitle,
+    type: "website",
+    url: "/",
+    siteName: sharedTitle,
+    locale: "zh_CN",
+  },
+  alternates: {
+    canonical: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: `@robert_shaw_x`,
+    creator: `@robert_shaw_x`,
+  },
+  other: {
+    pinterest: "nopin",
+  },
 }
 
 export default function RootLayout({

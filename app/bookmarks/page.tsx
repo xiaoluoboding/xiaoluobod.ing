@@ -36,13 +36,10 @@ export default function BookmarkPage() {
   )
 }
 
-// export async function generateMetadata() {
-//   const seoData = await getPageSeo("bookmarks")
-//   if (!seoData) return null
-
-//   const {
-//     seo: { title, description },
-//   } = seoData
+// export function generateMetadata() {
+//   const title = "Bookmarks"
+//   const description =
+//     "A curated selection of various handpicked bookmarks by Robert Shaw"
 //   const siteUrl = "/bookmarks"
 
 //   return {

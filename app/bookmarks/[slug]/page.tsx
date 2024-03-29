@@ -204,15 +204,12 @@ export default function CollectionPage({
   )
 }
 
-// export async function generateMetadata({ params }) {
+// export function generateMetadata({ params }: { params: { slug: string } }) {
 //   const { slug } = params
-//   const bookmarks = await getBookmarks()
-//   const currentBookmark = bookmarks.find((bookmark) => bookmark.slug === slug)
-//   if (!currentBookmark) return null
 
-//   const siteUrl = `/bookmarks/${currentBookmark.slug}`
-//   const seoTitle = `${currentBookmark.title} | Bookmarks`
-//   const seoDescription = `A curated selection of various handpicked ${currentBookmark.title.toLowerCase()} bookmarks by Onur Şuyalçınkaya`
+//   const siteUrl = `/bookmarks/${slug}`
+//   const seoTitle = `${slug.toLowerCase()} | Bookmarks`
+//   const seoDescription = `A curated selection of various handpicked ${slug.toLowerCase()} bookmarks by Robert Shaw`
 
 //   return {
 //     title: seoTitle,
