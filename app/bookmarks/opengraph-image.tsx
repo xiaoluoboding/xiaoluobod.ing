@@ -48,13 +48,13 @@ export default async function OGImage() {
       ...size,
       fonts: [
         {
-          name: "SF Pro",
+          name: "Roboto Condensed",
           data: mediumFontData,
           style: "normal",
           weight: 500,
         },
         {
-          name: "SF Pro",
+          name: "Roboto Condensed",
           data: boldFontData,
           style: "normal",
           weight: 600,

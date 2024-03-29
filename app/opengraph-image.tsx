@@ -2,35 +2,31 @@ import { ImageResponse } from "next/og"
 
 import { OpenGraphImage } from "@/components/OGImage"
 import { getMediumFont, getBoldFont } from "@/lib/fonts"
-import { sharedImage } from "@/app/shared-metadata"
+import {
+  sharedDescription,
+  sharedImage,
+  sharedTitle,
+} from "@/app/shared-metadata"
 
 export const runtime = "edge"
-export const alt = "Bookmarks"
+export const alt = sharedTitle
 export const size = {
   width: sharedImage.width,
   height: sharedImage.height,
 }
 export const contentType = sharedImage.type
 
-export default async function OGImage({
-  params,
-}: {
-  params: { slug: string }
-}) {
-  const { slug } = params
+export default async function OGImage() {
   const [mediumFontData, boldFontData] = await Promise.all([
     getMediumFont(),
     getBoldFont(),
   ])
 
-  const title = "Bookmarks"
-  const description = `A curated selection of various handpicked ${slug.toLowerCase()} bookmarks by Robert Shaw`
-
   return new ImageResponse(
     (
       <OpenGraphImage
-        title={title}
-        description={description}
+        title={sharedTitle}
+        description={sharedDescription}
         icon={
           <svg
             xmlns="http://www.w3.org/2000/svg"

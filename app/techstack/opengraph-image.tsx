@@ -5,32 +5,24 @@ import { getMediumFont, getBoldFont } from "@/lib/fonts"
 import { sharedImage } from "@/app/shared-metadata"
 
 export const runtime = "edge"
-export const alt = "Bookmarks"
+export const alt = "Tech Stack"
 export const size = {
   width: sharedImage.width,
   height: sharedImage.height,
 }
 export const contentType = sharedImage.type
 
-export default async function OGImage({
-  params,
-}: {
-  params: { slug: string }
-}) {
-  const { slug } = params
+export default async function OGImage() {
   const [mediumFontData, boldFontData] = await Promise.all([
     getMediumFont(),
     getBoldFont(),
   ])
 
-  const title = "Bookmarks"
-  const description = `A curated selection of various handpicked ${slug.toLowerCase()} bookmarks by Robert Shaw`
-
   return new ImageResponse(
     (
       <OpenGraphImage
-        title={title}
-        description={description}
+        title="Tech Stack"
+        description="Here is a list of my tech stack. I use these tools to build cool projects."
         icon={
           <svg
             xmlns="http://www.w3.org/2000/svg"

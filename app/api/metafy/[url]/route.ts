@@ -13,3 +13,5 @@ export async function GET(
     return json
   })
 }
+
+export const dynamic = "force-dynamic"

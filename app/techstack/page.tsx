@@ -225,7 +225,7 @@ export default function TechStackPage() {
           <PageTitle title={title} />
           <Suspense fallback={<LoadingSpinner />}>
             <p>
-              Here is a list of my tech stack. I use these tools to build my
+              Here is a list of my tech stack. I use these tools to build cool
               projects. I usually write <strong>React</strong> during the day
               while working and use <strong>Vue</strong> to write side projects
               at night.
