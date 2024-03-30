@@ -54,7 +54,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning className={inter.className}>
-        <main vaul-drawer-wrapper="" className="min-h-screen bg-white">
+        <main
+          vaul-drawer-wrapper=""
+          className="min-h-screen bg-white dark:bg-neutral-900"
+        >
           <div className="min-h-screen lg:flex">
             <SideMenu className="relative hidden lg:flex">
               <MenuContent />

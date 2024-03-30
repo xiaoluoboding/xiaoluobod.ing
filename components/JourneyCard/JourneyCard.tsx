@@ -1,4 +1,6 @@
-// import { MarkdownRenderer } from "@/components/markdown-renderer"
+"use client"
+
+import Markdown from "marked-react"
 
 interface IProps {
   title: string
@@ -18,8 +20,9 @@ export const JourneyCard = ({ title, description, image, index }: IProps) => {
     <div className="word-break-word flex flex-col">
       <span className="font-semibold tracking-tight">{title}</span>
       {description && (
-        <div>{description}</div>
-        // <MarkdownRenderer className="text-sm">{description}</MarkdownRenderer>
+        <div className="prose">
+          <Markdown>{description}</Markdown>
+        </div>
       )}
       {image?.url && (
         <div className="mt-2.5 overflow-hidden rounded-xl bg-white">

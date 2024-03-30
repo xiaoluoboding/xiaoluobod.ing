@@ -15,13 +15,19 @@ async function fetchData() {
         logs: [
           {
             title: "Migrate blog to Next",
-            description: "Rewrite blog using Next, and deployed it on Vercel.",
+            description:
+              "Rewrite blog using `Next`, and deployed it on `Vercel`.",
           },
         ],
       },
       {
         year: 2023,
         logs: [
+          {
+            title: "Join AI Startup",
+            description:
+              "I joined an AI startup company dedicated to revolutionizing the e-commerce landscape through the power of Generative AI as the lead developer.",
+          },
           {
             title: "Indie Hacker",
             description:
@@ -43,8 +49,9 @@ async function fetchData() {
         year: 2021,
         logs: [
           {
-            title: "Remote work",
-            description: "I left JD.com and started working remotely, WFH.",
+            title: "Join Bytebase",
+            description:
+              "I left JD.com and joined Bytebase. I started working remotely.",
           },
         ],
       },
@@ -53,7 +60,18 @@ async function fetchData() {
         logs: [
           {
             title: "Migrate blog to Nuxt",
-            description: "Rewrite blog using Nuxt, and deployed it on Netlify.",
+            description:
+              "Rewrite blog using `Nuxt`, and deployed it on `Netlify`.",
+          },
+        ],
+      },
+      {
+        year: 2018,
+        logs: [
+          {
+            title: "Migrate blog to Nuxt",
+            description:
+              "At JD.com, I have focused on data visualization and developed an open-source chart component library named [ve-charts](https://github.com/vueblocks/ve-charts)",
           },
         ],
       },
@@ -63,7 +81,7 @@ async function fetchData() {
           {
             title: "Join JD.com",
             description:
-              "I leveraged Vue.js tech stack to secure my initial position as a frontend engineer.",
+              "I self-taught front-end dev and found my first job in the field, marking the beginning of my career in web dev.",
           },
         ],
       },
@@ -71,9 +89,14 @@ async function fetchData() {
         year: 2016,
         logs: [
           {
+            title: "Learn React.js",
+            description:
+              "Due to work requirements, I started learning React.js from scratch. Eventually, I successfully completed the project delivery.",
+          },
+          {
             title: "Migrate blog to Ghost",
             description:
-              "Migrated my WordPress blog to Ghost and created my own theme for the Ghost blog: kaldorei.",
+              "Migrated my `WordPress` blog to `Ghost` and created my own theme for the Ghost blog: [Kaldorei](https://github.com/xiaoluoboding/ghost-theme-kaldorei).",
           },
         ],
       },
@@ -83,7 +106,7 @@ async function fetchData() {
           {
             title: "Learn Vue.js",
             description:
-              "I self-taught front-end tech stack, including Vue.js.",
+              "I self-taught front-end tech stack, including `Vue.js`.",
           },
         ],
       },
@@ -93,7 +116,17 @@ async function fetchData() {
           {
             title: "First Blog",
             description:
-              "I create my first blog using WordPress and deploy it on Linode.",
+              "I create my first blog using `WordPress` and deploy it on `Linode`.",
+          },
+        ],
+      },
+      {
+        year: 2011,
+        logs: [
+          {
+            title: "Got First Backend Job",
+            description:
+              "I studied software engineering at university and now work as a backend development engineer, primarily using `C` language and `SQL`.",
           },
         ],
       },

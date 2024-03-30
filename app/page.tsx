@@ -12,7 +12,7 @@ export default function Home() {
     <XScrollArea className="relative flex flex-col w-full scrollable-area">
       <FloatingHeader scrollTitle="Robert Shaw" />
       <div className="content-wrapper">
-        <div className="content space-y-2">
+        <div className="content space-y-2 text-primary">
           <PageTitle title="Home" className="lg:hidden" />
           <h1>Hey there, 👋 I&apos;m Robert Shaw</h1>
           <br />
