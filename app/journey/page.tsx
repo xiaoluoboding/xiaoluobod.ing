@@ -194,14 +194,6 @@ export default async function Journey() {
 }
 
 // export async function generateMetadata() {
-//   const seoData = await getPageSeo("journey")
-//   if (!seoData) return null
-
-//   const {
-//     seo: { title, description },
-//   } = seoData
-//   const siteUrl = "/journey"
-
 //   return {
 //     title,
 //     description,

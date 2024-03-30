@@ -100,7 +100,8 @@
 
   a,
   button {
-    @apply cursor-pointer outline-none;
+    @apply cursor-pointer;
+    outline: none;
   }
 
   a {
@@ -108,7 +109,7 @@
   }
 
   button:focus {
-    @apply outline-none;
+    outline: none;
   }
 
   button:disabled,

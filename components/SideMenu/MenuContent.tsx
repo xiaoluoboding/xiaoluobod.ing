@@ -77,7 +77,7 @@ export const LINKS = [
   },
   {
     href: "/dock",
-    label: "Macbook Dock",
+    label: "Dock",
     icon: <RiMacbookLine size={16} />,
   },
   {

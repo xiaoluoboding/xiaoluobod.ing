@@ -12,7 +12,7 @@ interface IProps {
 export const PageTitle = ({ title, subtitle, className, ...rest }: IProps) => {
   return (
     <div className={cn("mb-6", className)}>
-      <Balancer as="h1" {...rest}>
+      <Balancer as="h1" className={className} {...rest}>
         {title}
       </Balancer>
       {subtitle}

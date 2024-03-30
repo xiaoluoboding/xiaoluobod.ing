@@ -13,7 +13,7 @@ const keyCodePathnameMapping: Record<string, string> = {
   Digit1: "/",
   Digit2: "/writing",
   Digit3: "/journey",
-  Digit4: "/stack",
+  Digit4: "/techstack",
   Digit5: "/workspace",
   Digit6: "/bookmarks",
 }
