@@ -15,7 +15,7 @@ export default function DockLayout({
   return (
     <>
       {isClient && (
-        <div className="flex w-full relative p-2">
+        <div className="flex w-full relative">
           <div className="absolute top-0 right-0 inset-0 z-0 h-screen w-screen bg-white p-2 bg-[url('/assets/wallpaper-small.jpg')] bg-cover bg-center"></div>
           <div></div>
           <div className="flex-1">{children}</div>

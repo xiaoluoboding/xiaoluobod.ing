@@ -10,6 +10,7 @@ import { MobileDrawer } from "@/components/MobileDrawer/MoblieDrawer"
 import { XButton } from "@/components/ui/XButton"
 import { SCROLL_AREA_ID, MOBILE_SCROLL_THRESHOLD } from "@/lib/constants"
 import { SubmitBookmarkDialog } from "./dialog/SubmitBookmarkDialog"
+import { cn } from "@/lib/utils"
 
 interface IProps {
   scrollTitle?: string
@@ -38,6 +39,7 @@ export const FloatingHeader = memo(
     const isWritingPath = pathname.startsWith("/writing")
     const isBookmarksIndexPage = pathname === "/bookmarks"
     const isBookmarkPath = pathname.startsWith("/bookmarks")
+    const isDockIndexPage = pathname === "/dock"
 
     useEffect(() => {
       const scrollAreaElem = document.querySelector(`#${SCROLL_AREA_ID}`)
@@ -74,7 +76,14 @@ export const FloatingHeader = memo(
     }, [scrollTitle])
 
     return (
-      <header className="sticky inset-x-0 top-0 z-10 mx-auto flex h-12 w-full shrink-0 items-center overflow-hidden border-b bg-white text-sm font-medium lg:hidden">
+      <header
+        className={cn(
+          "sticky inset-x-0 top-0 z-10 mx-auto flex h-12 w-full shrink-0 items-center overflow-hidden border-b bg-white text-sm font-medium lg:hidden",
+          isDockIndexPage
+            ? "bg-white/10 text-white backdrop-blur-3xl border-none"
+            : ""
+        )}
+      >
         <div className="flex h-full w-full items-center px-3">
           <div className="flex w-full items-center justify-between gap-2">
             <div className="flex flex-1 items-center gap-1">

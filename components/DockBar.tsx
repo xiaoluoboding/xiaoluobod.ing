@@ -84,16 +84,16 @@ const DockItem = ({ app }: { app: App }) => {
   )
 }
 
-export function Dock({ apps }: { apps: App[] }) {
+export function DockBar({ apps }: { apps: App[] }) {
   return (
     <div className="relative">
       {/* Dock background */}
-      <div className="absolute bottom-0 left-0 right-0 h-[80px] max-w-screen-lg rounded-[22px] border border-gray-600/60 bg-gray-800/60" />
+      <div className="absolute bottom-0 left-0 right-0 h-[80px] max-w-full rounded-[22px] border border-gray-600/60 bg-gray-800/60" />
       {/* Scrollable container */}
       <ScrollArea.Root>
         <ScrollArea.Viewport>
-          <div className="overflow-hidden max-w-screen-lg">
-            <div className="fade-lr relative flex max-w-screen-lg flex-1 overflow-x-auto pt-4">
+          <div className="overflow-hidden max-w-full">
+            <div className="fade-lr relative flex max-w-full flex-1 overflow-x-auto pt-4">
               {apps.map((app) => (
                 <DockItem key={app.name} app={app} />
               ))}

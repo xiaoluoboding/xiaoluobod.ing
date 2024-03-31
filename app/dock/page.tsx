@@ -1,12 +1,19 @@
+"use client"
+
 import { Suspense } from "react"
+import Image from "next/image"
+import { usePathname } from "next/navigation"
 
 import { XScrollArea } from "@/components/ui/XScrollArea"
 import { FloatingHeader } from "@/components/FloadingHeader"
 import { LoadingSpinner } from "@/components/LoadingSpinner"
 import { PageTitle } from "@/components/PageTitle"
-import { Dock } from "@/components/Dock"
+import { DockBar } from "@/components/DockBar"
+import { cn } from "@/lib/utils"
 
-export default async function DockPage() {
+export default function DockPage() {
+  const pathname = usePathname()
+  const isDockIndexPage = pathname === "/dock"
   const appList = [
     {
       name: "Launchpad",
@@ -65,16 +72,49 @@ export default async function DockPage() {
   return (
     <XScrollArea className="scrollable-area w-full">
       <FloatingHeader scrollTitle="Journey" />
-      <div className="content-wrapper h-screen pb-12">
-        <div className="content h-full flex flex-col justify-between max-w-screen-lg">
-          <PageTitle title="Dock" className="text-white" />
-          <Suspense fallback={<LoadingSpinner />}>
-            <div className="flex flex-col h-full justify-end gap-12">
-              <div></div>
-              <Dock apps={appList} />
-            </div>
-          </Suspense>
+      <div
+        className={cn(
+          "relative flex w-full flex-col items-center justify-center h-[calc(100vh-48px)] lg:h-screen"
+        )}
+      >
+        <div className="flex flex-col items-center px-6 pb-20 md:px-20">
+          <Image
+            alt="Robert Shaw"
+            src="/assets/me.png"
+            width="150"
+            height="150"
+            decoding="async"
+            className="rounded-full bg-transparent"
+            loading="lazy"
+          />
+          <h1 className="mt-2 text-2xl text-white">Robert Shaw</h1>
+          <div className="mt-3 flex max-w-2xl flex-col gap-1 text-center leading-normal text-gray-300">
+            <p>Indie Hacker</p>
+          </div>
+          <div className="mt-2 flex gap-4">
+            <a
+              className="text-blue-400 hover:underline"
+              href="http://github.com/xiaoluoboding"
+              target="_blank"
+              rel="noreferrer"
+            >
+              GitHub
+            </a>
+            <a
+              className="text-blue-400 hover:underline"
+              href="https://twitter.com/robert_shaw_x"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Twitter
+            </a>
+          </div>
         </div>
+        <Suspense fallback={<LoadingSpinner />}>
+          <div className="absolute bottom-10 max-w-full px-4 lg:px-8">
+            <DockBar apps={appList} />
+          </div>
+        </Suspense>
       </div>
     </XScrollArea>
   )
