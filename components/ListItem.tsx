@@ -35,7 +35,9 @@ export const ListItem = ({ title, description, path }: IProps) => {
         {title}
       </span>
       {description && (
-        <span className={cn(isActive ? "text-slate-300" : "text-slate-500")}>
+        <span
+          className={cn(isActive ? "text-neutral-300" : "text-neutral-500")}
+        >
           {description}
         </span>
       )}

@@ -131,7 +131,7 @@ export const FloatingHeader = memo(
                         title="RSS feed"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-accent"
+                        className="text-accent-foreground hover:text-accent-foreground/80"
                       >
                         <RadioIcon size={16} className="mr-2" />
                         RSS feed

@@ -22,10 +22,12 @@ export default function BookmarkPage() {
             <Link
               key={collection.id}
               href={`/bookmarks/${collection.slug}`}
-              className="flex flex-col gap-1 border-b px-4 py-3 text-sm hover:bg-gray-100"
+              className="flex flex-col gap-1 border-b dark:border-accent px-4 py-3 text-sm hover:bg-gray-100"
             >
-              <span className="font-medium">{collection.title}</span>
-              <span className="text-slate-500">
+              <span className="font-medium text-accent-foreground">
+                {collection.title}
+              </span>
+              <span className="text-neutral-500">
                 {collection.count} bookmarks
               </span>
             </Link>
