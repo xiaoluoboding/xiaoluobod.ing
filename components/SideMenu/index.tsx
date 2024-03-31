@@ -72,6 +72,7 @@ export const SideMenu = ({
                     title="RSS feed"
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="text-accent-foreground"
                   >
                     <RadioIcon size={16} className="mr-2" />
                     RSS feed

@@ -11,6 +11,7 @@ import { XButton } from "@/components/ui/XButton"
 import { SCROLL_AREA_ID, MOBILE_SCROLL_THRESHOLD } from "@/lib/constants"
 import { SubmitBookmarkDialog } from "./dialog/SubmitBookmarkDialog"
 import { cn } from "@/lib/utils"
+import DarkmodeToggle from "./DarkmodeToggle"
 
 interface IProps {
   scrollTitle?: string
@@ -78,7 +79,7 @@ export const FloatingHeader = memo(
     return (
       <header
         className={cn(
-          "sticky inset-x-0 top-0 z-10 mx-auto flex h-12 w-full shrink-0 items-center overflow-hidden border-b bg-white text-sm font-medium lg:hidden",
+          "sticky inset-x-0 top-0 z-10 mx-auto flex h-12 w-full shrink-0 items-center overflow-hidden border-b bg-accent text-accent-foreground border-b-neutral-200 dark:border-b-accent text-sm font-medium lg:hidden",
           isDockIndexPage
             ? "bg-white/10 text-white backdrop-blur-3xl border-none"
             : ""
@@ -130,6 +131,7 @@ export const FloatingHeader = memo(
                         title="RSS feed"
                         target="_blank"
                         rel="noopener noreferrer"
+                        className="text-accent"
                       >
                         <RadioIcon size={16} className="mr-2" />
                         RSS feed
@@ -142,6 +144,7 @@ export const FloatingHeader = memo(
                       currentBookmark={currentBookmark}
                     />
                   )}
+                  <DarkmodeToggle />
                 </div>
               </div>
             </div>

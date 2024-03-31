@@ -18,7 +18,9 @@ export const MenuContent = () => {
             className="rounded-full border shadow-sm"
           />
           <div className="flex flex-col">
-            <span className="font-semibold tracking-tight">Robert Shaw</span>
+            <span className="font-semibold tracking-tight text-accent-foreground">
+              Robert Shaw
+            </span>
             <span className="text-gray-600">Software Engineer</span>
           </div>
         </Link>

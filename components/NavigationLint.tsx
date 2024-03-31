@@ -27,7 +27,9 @@ export const NavigationLink = memo(
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-between gap-2 rounded-lg p-2 hover:bg-gray-200"
+          className={cn(
+            "group flex items-center justify-between rounded-lg p-2 text-accent-foreground hover:bg-accent"
+          )}
         >
           <span className="inline-flex items-center gap-2 font-medium">
             {iconCmp} {label}
@@ -49,8 +51,10 @@ export const NavigationLink = memo(
         key={href}
         href={href}
         className={cn(
-          "group flex items-center justify-between rounded-lg p-2",
-          isActive ? "bg-black text-white" : "hover:bg-gray-200"
+          "group flex items-center justify-between rounded-lg p-2 text-accent-foreground",
+          isActive
+            ? "bg-black dark:bg-accent text-accent dark:text-accent-foreground"
+            : "hover:bg-accent"
         )}
       >
         <span className="flex items-center gap-2">
@@ -62,9 +66,9 @@ export const NavigationLink = memo(
         {shortcutNumber && (
           <span
             className={cn(
-              "hidden h-5 w-5 place-content-center rounded border border-gray-200 bg-gray-100 text-xs font-medium text-gray-500 transition-colors duration-200 group-hover:border-gray-300 lg:grid",
+              "hidden h-5 w-5 place-content-center rounded border border-neutral-200 bg-neutral-100 text-xs font-medium text-neutral-500 transition-colors duration-200 group-hover:border-neutral-300 lg:grid",
               isActive &&
-                "border-gray-600 bg-gray-700 text-gray-200 group-hover:border-gray-600"
+                "border-neutral-600 bg-neutral-700 text-neutral-200 group-hover:border-neutral-600"
             )}
             title={`Shortcut key: ${shortcutNumber}`}
           >

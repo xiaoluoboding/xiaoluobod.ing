@@ -7,6 +7,8 @@ import { SideMenu } from "@/components/SideMenu"
 import { XToaster } from "@/components/ui/XToaster"
 import { MenuContent } from "@/components/SideMenu/MenuContent"
 import { sharedTitle, sharedDescription } from "@/app/shared-metadata"
+import DarkmodeToggle from "@/components/DarkmodeToggle"
+import { ThemeProvider } from "@/components/ThemeProvider"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -54,23 +56,31 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning className={inter.className}>
-        <main
-          vaul-drawer-wrapper=""
-          className="min-h-screen bg-white dark:bg-neutral-900"
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
         >
-          <div className="min-h-screen lg:flex">
-            <SideMenu className="relative hidden lg:flex">
-              <MenuContent />
-            </SideMenu>
-            <div className="flex flex-1">{children}</div>
-          </div>
-        </main>
-        <XToaster
-          position="top-center"
-          toastOptions={{
-            duration: 3333,
-          }}
-        />
+          <main
+            vaul-drawer-wrapper=""
+            className="min-h-screen bg-white dark:bg-neutral-900"
+          >
+            <div className="min-h-screen lg:flex">
+              <SideMenu className="relative hidden lg:flex">
+                <MenuContent />
+              </SideMenu>
+              <div className="flex flex-1">{children}</div>
+            </div>
+          </main>
+          <XToaster
+            position="top-center"
+            toastOptions={{
+              duration: 3333,
+            }}
+          />
+        </ThemeProvider>
+
         <Script
           defer
           data-domain="xiaoluobod.ing"

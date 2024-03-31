@@ -1,8 +1,6 @@
 import Link from "next/link"
 import NextImage from "next/image"
 
-// import { PROFILES, LINKS } from "@/lib/constants"
-
 import { NavigationLink } from "../NavigationLint"
 import {
   RiBookmarkLine,
@@ -19,6 +17,7 @@ import {
   RiQuillPenLine,
   RiTwitterXLine,
 } from "@remixicon/react"
+import DarkmodeToggle from "../DarkmodeToggle"
 
 export const PROFILES = {
   twitter: {
@@ -96,20 +95,31 @@ export const MenuContent = () => {
   return (
     <div className="flex w-full flex-col text-sm">
       <div className="flex flex-col gap-4">
-        <Link href="/" className="link-card inline-flex items-center gap-2 p-2">
-          <NextImage
-            src="/assets/me.png"
-            alt="Robert Shaw"
-            width={40}
-            height={40}
-            loading="lazy"
-            className="rounded-full border shadow-sm"
-          />
-          <div className="flex flex-col">
-            <span className="font-semibold tracking-tight">Robert Shaw</span>
-            <span className="text-gray-600">Software Engineer</span>
-          </div>
-        </Link>
+        <div className="flex justify-between items-center">
+          <Link
+            href="/"
+            className="link-card inline-flex items-center gap-2 p-2 flex-1"
+          >
+            <NextImage
+              src="/assets/me.png"
+              alt="Robert Shaw"
+              width={40}
+              height={40}
+              loading="lazy"
+              className="rounded-full border shadow-sm"
+            />
+            <div className="flex flex-col">
+              <span className="font-semibold tracking-tight text-accent-foreground">
+                Robert Shaw
+              </span>
+              <span className="text-secondary-foreground">
+                Software Engineer
+              </span>
+            </div>
+          </Link>
+          <DarkmodeToggle />
+        </div>
+
         <div className="flex flex-col gap-1">
           {LINKS.map((link, linkIndex) => (
             <NavigationLink
