@@ -149,7 +149,7 @@ export default function BookmarksLayout({
               </div>
             </Suspense>
           </SideMenu>
-          <div className="lg:bg-grid flex-1">{children}</div>
+          <div className="lg:bg-grid flex-1 ">{children}</div>
         </div>
       )}
     </>

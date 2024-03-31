@@ -16,8 +16,12 @@ export default function JourneyLayout({
     <>
       {isClient && (
         <div className="flex w-full relative">
-          <div className="absolute top-0 z-0 h-full w-full bg-white">
-            <div className="absolute inset-0 z-0 h-screen w-screen bg-white bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]" />
+          <div className="absolute top-0 z-0 h-full w-full bg-white dark:bg-neutral-900">
+            <section className="gridient-bg absolute inset-0 z-0 h-screen w-screen">
+              <div className="polygon g-polygon-1 bg-gradient-to-br from-sky-500 to-sky-800"></div>
+              <div className="polygon g-polygon-2 bg-gradient-to-br from-pink-300 via-pink-500 to-pink-800"></div>
+              <div className="polygon g-polygon-3 bg-violet-500"></div>
+            </section>
           </div>
           <div></div>
           <div className="flex-1">{children}</div>

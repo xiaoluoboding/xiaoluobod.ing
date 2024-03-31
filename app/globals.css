@@ -199,6 +199,12 @@
     )::after {
     content: "" !important;
   }
+  .prose {
+    a,
+    code {
+      @apply dark:text-neutral-400;
+    }
+  }
 }
 
 @layer components {
@@ -232,6 +238,51 @@
     @apply h-full max-h-dynamic-screen min-h-dynamic-screen overflow-y-auto overflow-x-hidden;
   }
 
+  .gridient-bg {
+    will-change: auto;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    overflow: hidden;
+    filter: blur(160px);
+    .polygon {
+      position: absolute;
+      opacity: 0.45;
+      transition: all ease-out 0.5s;
+      transform: scale(1);
+    }
+    .g-polygon-1 {
+      bottom: 100px;
+      left: 25%;
+      /* transform: translate(-50%); */
+      width: 45vw;
+      height: 55vh;
+      clip-path: polygon(0 10%, 30% 0, 100% 40%, 70% 100%, 20% 90%);
+      animation: scale-in-middle 2.5s linear;
+    }
+    .g-polygon-2 {
+      bottom: 0;
+      left: 2%;
+      /* transform: translate(-50%); */
+      width: 65vw;
+      height: 50vh;
+      animation: scale-in-bottom 2.5s linear;
+      clip-path: polygon(10% 0, 100% 70%, 100% 100%, 5% 90%);
+    }
+    .g-polygon-3 {
+      bottom: 0;
+      left: 28%;
+      /* transform: translate(-50%); */
+      width: 65vw;
+      height: 50vh;
+      animation: scale-in-bottom 2.5s linear;
+      clip-path: polygon(80% 0, 100% 70%, 100% 100%, 20% 90%);
+    }
+  }
+
   pre code {
     counter-reset: sh-line-number;
   }
@@ -252,6 +303,43 @@
   }
 
   .bg-grid {
-    @apply bg-white bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px];
+    @apply bg-white dark:bg-neutral-900/80 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px];
+  }
+}
+
+@keyframes scale-in-middle {
+  0% {
+    transform: scale(0.25);
+    bottom: 150px;
+  }
+  40% {
+    transform: scale(1.15);
+    bottom: 140px;
+  }
+  100% {
+    transform: scale(1);
+    bottom: 100px;
+  }
+}
+@keyframes scale-in-bottom {
+  0% {
+    transform: scale(0.25);
+    bottom: 50px;
+  }
+  40% {
+    transform: scale(1.15);
+    bottom: 40px;
+  }
+  100% {
+    transform: scale(1);
+    bottom: 0;
+  }
+}
+
+.dark {
+  .thumbnail-shadow {
+    box-shadow: 0 0 0 0.5px #171717, 0 0 0 1px rgba(48, 48, 48, 0.5),
+      0 0 0 3px #404040, 0 0 0 3.5px #262626,
+      0 10px 15px -3px rgb(59 130 246/5%), 0 4px 6px -4px rgb(59 130 246/5%);
   }
 }

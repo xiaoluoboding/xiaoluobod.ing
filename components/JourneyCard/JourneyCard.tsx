@@ -18,9 +18,11 @@ interface IProps {
 export const JourneyCard = ({ title, description, image, index }: IProps) => {
   return (
     <div className="word-break-word flex flex-col">
-      <span className="font-semibold tracking-tight">{title}</span>
+      <span className="font-semibold tracking-tight text-accent-foreground">
+        {title}
+      </span>
       {description && (
-        <div className="prose">
+        <div className="prose dark:text-neutral-400">
           <Markdown>{description}</Markdown>
         </div>
       )}

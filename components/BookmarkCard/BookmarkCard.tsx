@@ -21,7 +21,7 @@ export const BookmarkCard = ({ bookmark, order }: IProps) => {
   return (
     <a
       key={bookmark.link}
-      className="thumbnail-shadow flex aspect-auto min-w-0 cursor-pointer flex-col gap-4 overflow-hidden rounded-xl bg-white p-4 transition-colors duration-300 hover:bg-neutral-100/80"
+      className="thumbnail-shadow flex aspect-auto min-w-0 cursor-pointer flex-col gap-4 overflow-hidden rounded-xl bg-white dark:bg-accent p-4 transition-colors duration-300 hover:bg-neutral-100/80"
       href={`${bookmark.link}?ref=xiaoluobo.ding`}
       target="_blank"
       rel="noopener noreferrer"
@@ -34,14 +34,14 @@ export const BookmarkCard = ({ bookmark, order }: IProps) => {
           width={1200}
           height={630}
           loading={order < 2 ? "eager" : "lazy"}
-          className="aspect-[1200/630] animate-reveal rounded-lg border bg-cover bg-center bg-no-repeat object-cover"
+          className="aspect-[1200/630] animate-reveal rounded-lg border dark:border-neutral-700/80 bg-cover bg-center bg-no-repeat object-cover"
         />
       </span>
       <div className="flex flex-col gap-1.5">
-        <h2 className="line-clamp-1 text-lg leading-snug font-semibold">
+        <h2 className="line-clamp-1 text-lg leading-snug font-semibold text-accent-foreground">
           {bookmark.title}
         </h2>
-        <span className="line-clamp-3 text-sm">
+        <span className="line-clamp-3 text-sm text-accent-foreground">
           {bookmark.description || bookmark.publisher}
         </span>
         <span className="line-clamp-1 truncate inline-flex items-center gap-1 text-xs text-neutral-500">
