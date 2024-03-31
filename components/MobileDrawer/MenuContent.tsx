@@ -2,9 +2,10 @@ import Link from "next/link"
 import NextImage from "next/image"
 
 import { NavigationLink } from "@/components/NavigationLint"
-import { LINKS, PROFILES } from "../SideMenu/MenuContent"
+import { useConstants } from "@/lib/useConstants"
 
 export const MenuContent = () => {
+  const { PROFILES, LINKS } = useConstants()
   return (
     <div className="flex w-full flex-col text-sm">
       <div className="flex flex-col gap-4">

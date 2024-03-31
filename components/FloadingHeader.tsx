@@ -11,7 +11,7 @@ import { XButton } from "@/components/ui/XButton"
 import { SCROLL_AREA_ID, MOBILE_SCROLL_THRESHOLD } from "@/lib/constants"
 import { SubmitBookmarkDialog } from "./dialog/SubmitBookmarkDialog"
 import { cn } from "@/lib/utils"
-import DarkmodeToggle from "./DarkmodeToggle"
+import { DarkmodeToggle } from "./DarkmodeToggle"
 
 interface IProps {
   scrollTitle?: string
@@ -144,7 +144,7 @@ export const FloatingHeader = memo(
                       currentBookmark={currentBookmark}
                     />
                   )}
-                  <DarkmodeToggle />
+                  <DarkmodeToggle accent={isDockIndexPage} />
                 </div>
               </div>
             </div>
