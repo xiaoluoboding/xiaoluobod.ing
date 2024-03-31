@@ -14,8 +14,9 @@ const keyCodePathnameMapping: Record<string, string> = {
   Digit2: "/writing",
   Digit3: "/journey",
   Digit4: "/techstack",
-  Digit5: "/workspace",
-  Digit6: "/bookmarks",
+  Digit5: "/dock",
+  Digit6: "/workspace",
+  Digit7: "/bookmarks",
 }
 
 interface IProps {
