@@ -44,7 +44,7 @@ const XInput = React.forwardRef<HTMLInputElement, InputProps>(
         )}
         <input
           className={
-            "h-full w-full px-2 flex-1 border-none bg-transparent outline-none placeholder:text-neutral-500 dark:placeholder:text-neutral-400 disabled:cursor-not-allowed disabled:text-neutral-500 disabled:bg-neutral-50 dark:disabled:bg-neutral-900"
+            "h-full w-full px-2 flex-1 border-none bg-transparent outline-none dark:text-neutral-200 placeholder:text-neutral-500 dark:placeholder:text-neutral-400 disabled:cursor-not-allowed disabled:text-neutral-500 disabled:bg-neutral-50 dark:disabled:bg-neutral-900"
           }
           ref={ref}
           {...props}
