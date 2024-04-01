@@ -84,7 +84,7 @@ export default function BookmarksLayout({
           count: bookmarkList.length,
         },
       ]
-      router.push(`/bookmarks/${formatSlug(text)}`)
+      router.push(`/bookmarks/${encodeURIComponent(formatSlug(text))}`)
       bookmarkStore.setCollectionList(collectionList)
       bookmarkStore.setBookmarkList(bookmarkList)
     } else {
