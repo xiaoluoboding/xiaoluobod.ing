@@ -32,7 +32,7 @@ async function fetchData() {
 }
 
 const fuseOptions = {
-  threshold: 0.3,
+  threshold: 0.2,
   keys: ["title", "link", "description"],
 }
 
