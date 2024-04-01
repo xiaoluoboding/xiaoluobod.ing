@@ -133,7 +133,9 @@ export function InsertBookmarkForm({
           name="link"
           render={({ field }) => (
             <XFormItem>
-              <XFormLabel>Website URL</XFormLabel>
+              <XFormLabel className="text-accent-foreground">
+                Website URL
+              </XFormLabel>
               <XFormControl>
                 <XInput placeholder="https://example.com" {...field} />
               </XFormControl>
@@ -146,7 +148,7 @@ export function InsertBookmarkForm({
           name="email"
           render={({ field }) => (
             <XFormItem>
-              <XFormLabel>Email</XFormLabel>
+              <XFormLabel className="text-accent-foreground">Email</XFormLabel>
               <XFormControl>
                 <XInput placeholder="johndoe@gmail.com" {...field} />
               </XFormControl>
@@ -159,13 +161,13 @@ export function InsertBookmarkForm({
           name="tags"
           render={({ field }) => (
             <XFormItem>
-              <XFormLabel>Tags</XFormLabel>
+              <XFormLabel className="text-accent-foreground">Tags</XFormLabel>
               <XSelect
                 onValueChange={field.onChange}
                 defaultValue={field.value}
               >
                 <XFormControl>
-                  <XSelectTrigger>
+                  <XSelectTrigger className="dark:text-neutral-200">
                     <XSelectValue placeholder="Select a bookmark tag" />
                   </XSelectTrigger>
                 </XFormControl>
