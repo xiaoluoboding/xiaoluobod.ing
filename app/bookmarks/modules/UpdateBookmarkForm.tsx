@@ -7,6 +7,8 @@ import dayjs from "dayjs"
 import { toast } from "sonner"
 import { ChangeEvent, useState } from "react"
 import { nanoid } from "nanoid"
+import { MinusIcon, PlusIcon } from "lucide-react"
+import { AnimatePresence, motion } from "framer-motion"
 
 import {
   XForm,
@@ -21,9 +23,7 @@ import { XButton } from "@/components/ui/XButton"
 import { XInput } from "@/components/ui/XInput"
 import { XTextarea } from "@/components/ui/XTextarea"
 import { Bookmark } from "@/lib/types"
-import { MinusIcon, PlusIcon } from "lucide-react"
 import { useBookmarkStore } from "@/store/bookmark"
-import { AnimatePresence, motion } from "framer-motion"
 
 const formSchema = z.object({
   title: z.string().min(0, {
@@ -159,7 +159,7 @@ export function UpdateBookmarkForm({
           name="title"
           render={({ field }) => (
             <XFormItem>
-              <XFormLabel>Title</XFormLabel>
+              <XFormLabel className="text-accent-foreground">Title</XFormLabel>
               <XFormControl>
                 <XInput placeholder="Please enter a title." {...field} />
               </XFormControl>
@@ -172,7 +172,9 @@ export function UpdateBookmarkForm({
           name="description"
           render={({ field }) => (
             <XFormItem>
-              <XFormLabel>Description</XFormLabel>
+              <XFormLabel className="text-accent-foreground">
+                Description
+              </XFormLabel>
               <XFormControl>
                 <XTextarea
                   className="h-32"
@@ -189,7 +191,7 @@ export function UpdateBookmarkForm({
           name="tags"
           render={({ field }) => (
             <XFormItem>
-              <XFormLabel className="flex justify-between items-center">
+              <XFormLabel className="flex justify-between items-center text-accent-foreground">
                 <span>Tags</span>
                 <XButton
                   variant={"ghost"}

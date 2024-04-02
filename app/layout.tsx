@@ -7,7 +7,6 @@ import { SideMenu } from "@/components/SideMenu"
 import { XToaster } from "@/components/ui/XToaster"
 import { MenuContent } from "@/components/SideMenu/MenuContent"
 import { sharedTitle, sharedDescription } from "@/app/shared-metadata"
-import { DarkmodeToggle } from "@/components/DarkmodeToggle"
 import { ThemeProvider } from "@/components/ThemeProvider"
 
 const inter = Inter({ subsets: ["latin"] })

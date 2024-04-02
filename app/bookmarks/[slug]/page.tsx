@@ -1,7 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 
 import { Suspense, useCallback, useEffect, useMemo, useState } from "react"
-import { notFound } from "next/navigation"
 import { toast } from "sonner"
 
 import { LoadingSpinner } from "@/components/LoadingSpinner"
@@ -175,16 +175,11 @@ export default function CollectionPage({
             onOpenChange={setOpenUpdateDrawer}
             direction="right"
           >
-            {/* <XButton variant="ghost" size="icon" title="Toggle drawer" asChild>
-              <XDrawerTrigger>
-                <CommandIcon size={16} />
-              </XDrawerTrigger>
-            </XButton> */}
             <XDrawerPortal>
               <XDrawerOverlay className="fixed inset-0 bg-black/40" />
               <XDrawerContent className="fixed bottom-0 right-0 flex h-full w-2/5 flex-col rounded-l-lg bg-gray-100">
-                <div className="flex-1 overflow-y-auto rounded-l-lg bg-white">
-                  <XDrawerHeader className="font-semibold text-xl">
+                <div className="flex-1 overflow-y-auto rounded-l-lg bg-background">
+                  <XDrawerHeader className="font-semibold text-xl text-accent-foreground">
                     Update Bookmark
                   </XDrawerHeader>
 
