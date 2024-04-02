@@ -20,7 +20,7 @@ export default function Home() {
               A web dev enthusiast with a passion for Vue.js.
             </p>
             <p className="my-0">
-              🖖 Vue.js fan / 🍎 Swift Learner / ☕️ Coffee lover / 🌵 agave
+              🖖 Vue.js fan / 🍎 SwiftUI Learner / ☕️ Coffee lover / 🌵 Agave
               guardian
             </p>
             <p className="my-0">
@@ -45,7 +45,7 @@ export default function Home() {
                     className="bg-transparent border-none"
                   />
                   <div>
-                    <h1 className="text-2xl font-semibold bg-gradient-to-b from-neutral-900 dark:from-white to-neutral-500 text-transparent bg-clip-text">
+                    <h1 className="text-2xl font-semibold bg-gradient-to-b from-neutral-900 to-neutral-500 dark:from-white dark:to-neutral-300 text-transparent bg-clip-text">
                       Side Space
                     </h1>
                     <div className="text-lg text-accent-foreground">
@@ -66,7 +66,7 @@ export default function Home() {
                     className="bg-transparent border-none"
                   />
                   <div>
-                    <h1 className="text-2xl font-semibold bg-gradient-to-b from-neutral-900 dark:from-white to-neutral-500 text-transparent bg-clip-text">
+                    <h1 className="text-2xl font-semibold bg-gradient-to-b from-neutral-900 to-neutral-500 dark:from-white dark:to-neutral-300 text-transparent bg-clip-text">
                       One Tab Group
                     </h1>
                     <div className="text-lg text-secondary-foreground">
@@ -87,7 +87,7 @@ export default function Home() {
                     className="bg-transparent border-none"
                   />
                   <div>
-                    <h1 className="text-2xl font-semibold bg-gradient-to-b from-neutral-900 dark:from-white to-neutral-500 text-transparent bg-clip-text">
+                    <h1 className="text-2xl font-semibold bg-gradient-to-b from-neutral-900 to-neutral-500 dark:from-white dark:to-neutral-300  text-transparent bg-clip-text">
                       Bookmark Style
                     </h1>
                     <div className="text-lg text-secondary-foreground">
