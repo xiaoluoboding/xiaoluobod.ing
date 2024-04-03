@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useMemo, useState } from "react"
 
 import Image from "next/image"
+import Link from "next/link"
 
 import { LoadingSpinner } from "@/components/LoadingSpinner"
 import { XScrollArea } from "@/components/ui/XScrollArea"
@@ -10,6 +11,8 @@ import { PageTitle } from "@/components/PageTitle"
 import { FloatingHeader } from "@/components/FloadingHeader"
 import { BookmarkCard } from "@/components/BookmarkCard/BookmarkCard"
 import { useBookmarkStore } from "@/store/bookmark"
+import { PROFILES } from "@/lib/useConstants"
+import { cn } from "@/lib/utils"
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false)
@@ -112,7 +115,7 @@ export default function Home() {
                     </div>
                   </section>
                   <section>
-                    <h2>My products</h2>
+                    <h2>My Products</h2>
                     <div className="columns-1 lg:columns-2 2xl:columns-2 lg:gap-6 [&>a:not(:first-child)]:mt-6 mt-8">
                       {ossList.map((bookmark, index) => (
                         <BookmarkCard
@@ -122,6 +125,29 @@ export default function Home() {
                         />
                       ))}
                     </div>
+                  </section>
+                  <section>
+                    <h2>Find me on</h2>
+                    <p className="flex flex-wrap gap-2 mt-4">
+                      {Object.values(PROFILES).map((link, linkIndex) => {
+                        return (
+                          <Link
+                            key={link.url}
+                            href={link.url}
+                            className={cn(
+                              "group flex items-center justify-between rounded-lg p-2 text-accent-foreground hover:underline"
+                            )}
+                          >
+                            <span className="flex items-center gap-2">
+                              {link.icon}
+                              <span className={cn("font-medium")}>
+                                {link.title}
+                              </span>
+                            </span>
+                          </Link>
+                        )
+                      })}
+                    </p>
                   </section>
                 </main>
               </Suspense>
