@@ -122,6 +122,7 @@ export default function Home() {
                           key={index}
                           bookmark={bookmark}
                           order={index}
+                          tidy
                         />
                       ))}
                     </div>

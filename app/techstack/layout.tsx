@@ -18,9 +18,9 @@ export default function TechstackLayout({
         <div className="flex w-full relative">
           <div className="absolute top-0 z-0 h-full w-full bg-white dark:bg-neutral-900">
             <section className="gridient-bg absolute inset-0 z-0 h-screen w-screen">
-              <div className="polygon g-polygon-1 bg-gradient-to-br from-emerald-300 via-emerald-500 to-emerald-700"></div>
-              <div className="polygon g-polygon-2 bg-gradient-to-br from-cyan-200 via-cyan-600 to-cyan-800"></div>
-              <div className="polygon g-polygon-3 bg-violet-500"></div>
+              <div className="polygon g-polygon-1 bg-gradient-to-br from-emerald-300/30 via-emerald-500/60 to-emerald-700/30"></div>
+              <div className="polygon g-polygon-2 bg-gradient-to-br from-cyan-200/60 via-cyan-600/60 to-cyan-800/60"></div>
+              <div className="polygon g-polygon-3 bg-violet-500/60"></div>
             </section>
           </div>
           <div></div>

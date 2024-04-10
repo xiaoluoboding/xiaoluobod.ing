@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { Bookmark } from "@/lib/types"
+import { cn } from "@/lib/utils"
 import { Link2Icon } from "lucide-react"
 
 // import { TweetCard } from "@/components/tweet-card/tweet-card"
@@ -9,9 +10,10 @@ import Image from "next/image"
 interface IProps {
   bookmark: Bookmark
   order: number
+  tidy?: boolean
 }
 
-export const BookmarkCard = ({ bookmark, order }: IProps) => {
+export const BookmarkCard = ({ bookmark, order, tidy = false }: IProps) => {
   // if (bookmark.link && bookmark.collectionId === TWEETS_COLLECTION_ID) {
   //   const match = bookmark.link.match(/\/status\/(\d+)/) ?? []
   //   const tweetId = match[1]
@@ -38,10 +40,20 @@ export const BookmarkCard = ({ bookmark, order }: IProps) => {
         />
       </span>
       <div className="flex flex-col gap-1.5">
-        <h2 className="line-clamp-1 text-lg leading-snug font-semibold text-accent-foreground">
+        <h2
+          className={cn(
+            "text-lg leading-snug font-semibold text-accent-foreground",
+            tidy ? "line-clamp-1" : "line-clamp-2"
+          )}
+        >
           {bookmark.title}
         </h2>
-        <span className="line-clamp-3 text-sm text-accent-foreground">
+        <span
+          className={cn(
+            "text-sm text-accent-foreground",
+            tidy ? "line-clamp-2" : "line-clamp-3"
+          )}
+        >
           {bookmark.description || bookmark.publisher}
         </span>
         <span className="line-clamp-1 truncate inline-flex items-center gap-1 text-xs text-neutral-500">
