@@ -109,7 +109,6 @@ export default function BookmarksLayout({
   useEffect(() => {
     setIsClient(true)
     handleInitialData()
-    router.push(`/bookmarks/ai`)
   }, [])
   return (
     <>
