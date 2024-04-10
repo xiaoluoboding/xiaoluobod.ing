@@ -34,7 +34,7 @@ export default function Home() {
       title: "Bookmark Style",
       description: "Turn any link into a stylish visual web bookmark",
       image: "/assets/bookmark-style.svg",
-      url: "https://sidespace.app?ref=xiaoluobod.ing",
+      url: "https://bookmark.style?ref=xiaoluobod.ing",
     },
   ]
 
