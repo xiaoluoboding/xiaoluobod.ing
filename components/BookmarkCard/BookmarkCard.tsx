@@ -24,7 +24,7 @@ export const BookmarkCard = ({ bookmark, order, tidy = false }: IProps) => {
     <a
       key={bookmark.link}
       className="thumbnail-shadow flex aspect-auto min-w-0 cursor-pointer flex-col gap-4 overflow-hidden rounded-xl bg-white dark:bg-accent p-4 transition-colors duration-300 hover:bg-neutral-100/80"
-      href={`${bookmark.link}?ref=xiaoluobo.ding`}
+      href={`${bookmark.link}?ref=robertshaw.id`}
       target="_blank"
       rel="noopener noreferrer"
       data-bookmark-order={order}

@@ -12,7 +12,7 @@ import { ThemeProvider } from "@/components/ThemeProvider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://xiaoluobod.ing"),
+  metadataBase: new URL("https://robertshaw.id"),
   robots: {
     index: true,
     follow: true,
@@ -82,7 +82,7 @@ export default function RootLayout({
 
         <Script
           defer
-          data-domain="xiaoluobod.ing"
+          data-domain="robertshaw.id"
           src="https://plausible.io/js/script.js"
         ></Script>
       </body>

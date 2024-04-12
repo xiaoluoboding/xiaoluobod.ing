@@ -22,19 +22,19 @@ export default function Home() {
       title: "Side Space",
       description: "AI-Powered browser tab group manager",
       image: "/assets/side-space.svg",
-      url: "https://sidespace.app?ref=xiaoluobod.ing",
+      url: "https://sidespace.app?ref=robertshaw.id",
     },
     {
       title: "One Tab Group",
       description: "Your all-in-one browser tab manager",
       image: "/assets/one-tab-group.svg",
-      url: "https://onetab.group?ref=xiaoluobod.ing",
+      url: "https://onetab.group?ref=robertshaw.id",
     },
     {
       title: "Bookmark Style",
       description: "Turn any link into a stylish visual web bookmark",
       image: "/assets/bookmark-style.svg",
-      url: "https://bookmark.style?ref=xiaoluobod.ing",
+      url: "https://bookmark.style?ref=robertshaw.id",
     },
   ]
 
