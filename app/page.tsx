@@ -115,7 +115,7 @@ export default function Home() {
                     </div>
                   </section>
                   <section>
-                    <h2>My Products</h2>
+                    <h2>OSS Works</h2>
                     <div className="columns-1 lg:columns-2 2xl:columns-2 lg:gap-6 [&>a:not(:first-child)]:mt-6 mt-8">
                       {ossList.map((bookmark, index) => (
                         <BookmarkCard

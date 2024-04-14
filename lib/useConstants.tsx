@@ -227,6 +227,18 @@ export const allLogbook = [
     year: 2024,
     logs: [
       {
+        title: "Indie hacking",
+        description: "As a solopreneur, I am working in the field of AI/AIGC.",
+      },
+      {
+        title: "OSS works",
+        description: `In recent years, I have contributed to several popular Vue.js projects in the open-source community, which has led to me being sponsored on GitHub.
+           [vue-sonner](https://github.com/xiaoluoboding/vue-sonner)
+          / [vue-command-palette](https://github.com/xiaoluoboding/vue-command-palette)
+          / [@nuxtbase/auth-ui-vue](https://github.com/nuxtbase/auth-ui-vue)
+          / [vue-color-wheel](https://github.com/xiaoluoboding/vue-color-wheel)`,
+      },
+      {
         title: "Migrate blog to Next",
         description: "Rewrite blog using `Next`, and deployed it on `Vercel`.",
       },
@@ -280,9 +292,14 @@ export const allLogbook = [
     year: 2018,
     logs: [
       {
-        title: "Migrate blog to Nuxt",
-        description:
-          "At JD.com, I have focused on data visualization and developed an open-source chart component library named [ve-charts](https://github.com/vueblocks/ve-charts)",
+        title: "Beyond works",
+        description: `At JD.com, I have focused on data visualization platforms and
+          at the same time I contribute to some open-source vue component library like:
+           [ve-charts](https://github.com/vueblocks/ve-charts)
+          / [vue-smart-widget](https://github.com/xiaoluoboding/vue-smart-widget)
+          / [vuex-stateshot](https://github.com/xiaoluoboding/vuex-stateshot)
+          / [@vueblock/vue-use-vuex](https://www.npmjs.com/package/@vueblocks/vue-use-vuex)
+        `,
       },
     ],
   },
