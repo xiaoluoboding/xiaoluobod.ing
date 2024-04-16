@@ -138,12 +138,12 @@ export const FloatingHeader = memo(
                       </a>
                     </XButton>
                   )}
-                  {isBookmarkPath && (
+                  {/* {isBookmarkPath && (
                     <SubmitBookmarkDialog
                       bookmarks={bookmarks}
                       currentBookmark={currentBookmark}
                     />
-                  )}
+                  )} */}
                   <DarkmodeToggle accent={isDockIndexPage} />
                 </div>
               </div>

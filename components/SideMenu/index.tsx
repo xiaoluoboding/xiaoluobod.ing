@@ -80,12 +80,12 @@ export const SideMenu = ({
                   </a>
                 </XButton>
               )}
-              {isBookmarksPath && (
+              {/* {isBookmarksPath && (
                 <SubmitBookmarkDialog
                   bookmarks={bookmarks}
                   currentBookmark={currentBookmark}
                 />
-              )}
+              )} */}
             </div>
           </div>
         </div>
