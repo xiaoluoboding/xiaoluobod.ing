@@ -10,7 +10,7 @@ import { MobileDrawer } from "@/components/MobileDrawer/MoblieDrawer"
 import { XButton } from "@/components/ui/XButton"
 import { SCROLL_AREA_ID, MOBILE_SCROLL_THRESHOLD } from "@/lib/constants"
 import { SubmitBookmarkDialog } from "./dialog/SubmitBookmarkDialog"
-import { cn } from "@/lib/utils"
+import { cn, isProd } from "@/lib/utils"
 import { DarkmodeToggle } from "./DarkmodeToggle"
 
 interface IProps {
@@ -138,12 +138,12 @@ export const FloatingHeader = memo(
                       </a>
                     </XButton>
                   )}
-                  {/* {isBookmarkPath && (
+                  {isBookmarkPath && !isProd && (
                     <SubmitBookmarkDialog
                       bookmarks={bookmarks}
                       currentBookmark={currentBookmark}
                     />
-                  )} */}
+                  )}
                   <DarkmodeToggle accent={isDockIndexPage} />
                 </div>
               </div>

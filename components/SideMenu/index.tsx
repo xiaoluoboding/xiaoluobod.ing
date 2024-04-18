@@ -5,7 +5,7 @@ import { RadioIcon } from "lucide-react"
 
 import { XScrollArea } from "@/components/ui/XScrollArea"
 import { useKeyPress } from "@/hooks/useKeyPress"
-import { cn } from "@/lib/utils"
+import { cn, isProd } from "@/lib/utils"
 import { XButton } from "@/components/ui/XButton"
 import { SubmitBookmarkDialog } from "../dialog/SubmitBookmarkDialog"
 
@@ -80,12 +80,12 @@ export const SideMenu = ({
                   </a>
                 </XButton>
               )}
-              {/* {isBookmarksPath && (
+              {isBookmarksPath && !isProd && (
                 <SubmitBookmarkDialog
                   bookmarks={bookmarks}
                   currentBookmark={currentBookmark}
                 />
-              )} */}
+              )}
             </div>
           </div>
         </div>

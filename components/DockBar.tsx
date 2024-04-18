@@ -29,7 +29,7 @@ const DockItem = ({ app }: { app: App }) => {
   return (
     <XTooltip>
       <XTooltipTrigger>
-        <Link href={`/apps/${app.name}`}>
+        <Link href={`#`}>
           <motion.div
             variants={variants}
             whileHover="hover"
