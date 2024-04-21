@@ -1,7 +1,7 @@
 import { Drawer } from "vaul"
 import { CommandIcon } from "lucide-react"
 
-import { MenuContent } from "./MenuContent"
+import { MobileMenuContent } from "./MobileMenuContent"
 import { XButton } from "@/components/ui/XButton"
 
 function MobileDrawer() {
@@ -20,7 +20,7 @@ function MobileDrawer() {
               <div className="h-1.5 w-12 shrink-0 rounded-full bg-neutral-300 dark:bg-neutral-700" />
             </div>
             <div className="p-4 bg-white dark:bg-black">
-              <MenuContent />
+              <MobileMenuContent />
             </div>
           </div>
         </Drawer.Content>

@@ -102,6 +102,7 @@ export function InsertBookmarkForm({
     }
     const newBookmark = {
       ...data,
+      id: nanoid().slice(0, 16),
       link: form.getValues("link"),
       tags: [
         {

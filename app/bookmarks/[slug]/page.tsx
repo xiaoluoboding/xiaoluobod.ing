@@ -137,29 +137,30 @@ export default function CollectionPage({
                       }
 
                       return (
-                        <div key={bookmark.link} className="relative">
+                        <div
+                          key={bookmark.link + bookmark.id}
+                          className="relative"
+                        >
                           <BookmarkCard bookmark={newBookmark} order={index} />
                           {!isProd && (
-                            <>
+                            <div className="absolute top-6 right-6 flex items-center gap-2">
                               <XButton
-                                className="absolute bottom-2 right-12"
                                 disabled={isLoading}
-                                variant={"ghost"}
+                                variant={"outline"}
                                 size="icon"
                                 onClick={() => handleOpenDrawer(bookmark)}
                               >
                                 <SquarePenIcon className="w-4 h-4" />
                               </XButton>
                               <XButton
-                                className="absolute bottom-2 right-4"
                                 disabled={isLoading}
-                                variant={"ghost"}
+                                variant={"outline"}
                                 size="icon"
                                 onClick={() => handleDeleteCard(bookmark.id)}
                               >
                                 <XIcon className="w-4 h-4" />
                               </XButton>
-                            </>
+                            </div>
                           )}
                         </div>
                       )

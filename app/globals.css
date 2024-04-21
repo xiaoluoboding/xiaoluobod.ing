@@ -209,7 +209,7 @@
 
 @layer components {
   .link-card {
-    @apply -mx-1.5 -my-1 rounded bg-transparent px-1.5 py-1 transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-accent;
+    @apply -mx-1.5 -my-1 rounded bg-transparent px-1.5 py-1 transition-colors duration-300;
   }
 
   .content-wrapper {

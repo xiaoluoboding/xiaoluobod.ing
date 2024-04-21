@@ -4,7 +4,7 @@ import NextImage from "next/image"
 import { NavigationLink } from "@/components/NavigationLint"
 import { useConstants } from "@/lib/useConstants"
 
-export const MenuContent = () => {
+export const MobileMenuContent = () => {
   const { PROFILES, LINKS } = useConstants()
   return (
     <div className="flex w-full flex-col text-sm">
