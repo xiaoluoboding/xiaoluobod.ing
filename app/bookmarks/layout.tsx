@@ -70,7 +70,7 @@ export default function BookmarksLayout({
   const handleFilterList = useDebounceCallback((text: string) => {
     if (!isEmpty(text)) {
       bookmarkStore.setBookmarkState({
-        isSearcing: true,
+        isSearching: true,
       })
       const bookmarkList = fuse()
         .search(text)
@@ -89,7 +89,7 @@ export default function BookmarksLayout({
       bookmarkStore.setBookmarkList(bookmarkList)
     } else {
       bookmarkStore.setBookmarkState({
-        isSearcing: false,
+        isSearching: false,
       })
       router.push(`/bookmarks/ai`)
       bookmarkStore.setCollectionList(cloneCollectionList)
@@ -148,7 +148,7 @@ export default function BookmarksLayout({
               </div>
             </Suspense>
           </SideMenu>
-          <div className="lg:bg-grid flex-1 ">{children}</div>
+          <div className="lg:bg-grid flex-1 relative">{children}</div>
         </div>
       )}
     </>

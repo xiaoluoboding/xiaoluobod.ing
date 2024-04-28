@@ -6,7 +6,7 @@ import { Bookmark, Collection } from "@/lib/types"
 
 export interface BookmarkState {
   isReRender: boolean
-  isSearcing: boolean
+  isSearching: boolean
   bookmarkList: Bookmark[]
   collectionList: Collection[]
   getState: () => BookmarkState
@@ -20,7 +20,7 @@ export const useBookmarkStore = create<BookmarkState>()(
     persist(
       (set, get) => ({
         isReRender: false,
-        isSearcing: false,
+        isSearching: false,
         bookmarkList: [],
         collectionList: [],
         getState: () => get(),

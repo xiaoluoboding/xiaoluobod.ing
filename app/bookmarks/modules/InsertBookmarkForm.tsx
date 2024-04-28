@@ -35,9 +35,9 @@ const formSchema = z.object({
   link: z.string().url({
     message: "Invalid URL.",
   }),
-  email: z.string().email({
-    message: "Invalid email address.",
-  }),
+  // email: z.string().email({
+  //   message: "Invalid email address.",
+  // }),
   tags: z.string().optional(),
 })
 
@@ -60,7 +60,7 @@ export function InsertBookmarkForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       link: "",
-      email: "",
+      // email: "",
       tags: currentBookmark?.title ?? "",
     },
   })
@@ -144,7 +144,7 @@ export function InsertBookmarkForm({
             </XFormItem>
           )}
         />
-        <XFormField
+        {/* <XFormField
           control={form.control}
           name="email"
           render={({ field }) => (
@@ -156,7 +156,7 @@ export function InsertBookmarkForm({
               <XFormMessage />
             </XFormItem>
           )}
-        />
+        /> */}
         <XFormField
           control={form.control}
           name="tags"

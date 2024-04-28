@@ -3,6 +3,8 @@
 
 import { Suspense, useCallback, useEffect, useMemo, useState } from "react"
 import { toast } from "sonner"
+import { motion, useMotionTemplate, useMotionValue } from "framer-motion"
+import { SquarePenIcon, XIcon } from "lucide-react"
 
 import { LoadingSpinner } from "@/components/LoadingSpinner"
 import { XScrollArea } from "@/components/ui/XScrollArea"
@@ -19,7 +21,6 @@ import {
   XDrawerOverlay,
   XDrawerPortal,
 } from "@/components/ui/XDrawer"
-import { SquarePenIcon, XIcon } from "lucide-react"
 import { UpdateBookmarkForm } from "../modules/UpdateBookmarkForm"
 import { formatSlug, isProd } from "@/lib/utils"
 
@@ -36,6 +37,9 @@ export default function CollectionPage({
 }) {
   const { slug } = params
 
+  let mouseX = useMotionValue(0)
+  let mouseY = useMotionValue(0)
+
   const [isClient, setIsClient] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [openUpdateDrawer, setOpenUpdateDrawer] = useState(false)
@@ -50,12 +54,20 @@ export default function CollectionPage({
     {} as Bookmark
   )
 
+  function onMouseMove({ currentTarget, clientX, clientY }: any) {
+    let { left, top } = currentTarget.getBoundingClientRect()
+    mouseX.set(clientX - left - 80)
+    mouseY.set(clientY - top - 80)
+  }
+
+  const motionStyle = useMotionTemplate`translate3d(${mouseX}px, ${mouseY}px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`
+
   const handleInitialData = useCallback(async () => {
     const currentCollection = collectionList.find(
       (collection) => collection.slug === slug
     )
     currentCollection && setCurrentCollection(currentCollection)
-    const list = bookmarkStore.isSearcing
+    const list = bookmarkStore.isSearching
       ? bookmarkList
       : bookmarkList.filter((bookmark) => {
           return bookmark.tags
@@ -66,7 +78,7 @@ export default function CollectionPage({
   }, [
     slug,
     bookmarkStore.bookmarkList,
-    bookmarkStore.isSearcing,
+    bookmarkStore.isSearching,
     collectionList,
   ])
 
@@ -103,7 +115,7 @@ export default function CollectionPage({
   }, [
     slug,
     bookmarkStore.bookmarkList,
-    bookmarkStore.isSearcing,
+    bookmarkStore.isSearching,
     collectionList,
   ])
   useEffect(() => {
@@ -115,12 +127,21 @@ export default function CollectionPage({
     <>
       {isClient && (
         <>
-          <XScrollArea className="bg-grid scrollable-area">
+          <XScrollArea
+            className="bg-grid scrollable-area group/spotlight"
+            onMouseMove={onMouseMove}
+          >
             <FloatingHeader
               scrollTitle={currentCollection?.title}
               goBackLink="/bookmarks"
               bookmarks={collectionList}
               currentBookmark={currentCollection}
+            />
+            <motion.div
+              style={{
+                transform: motionStyle,
+              }}
+              className="spotlight opacity-0 group-hover/spotlight:opacity-100 will-change-transform bg-white/20 absolute top-0 left-0 right-auto w-40 h-40 inset-0 transform-gpu blur-3xl"
             />
             <div className="content-wrapper">
               <div className="content @container">
