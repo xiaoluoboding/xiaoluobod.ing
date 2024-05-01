@@ -23,7 +23,10 @@ export default async function OGImage({
     getBoldFont(),
   ])
 
-  const title = "Bookmarks"
+  const title = slug
+    .split("-")
+    .map((item) => item.toUpperCase())
+    .join(" ")
   const description = `A curated selection of various handpicked ${slug.toLowerCase()} bookmarks by Robert Shaw`
 
   return new ImageResponse(
@@ -46,7 +49,7 @@ export default async function OGImage({
             <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z" />
           </svg>
         }
-        url="bookmarks"
+        url={`bookmarks/${slug}`}
       />
     ),
     {
