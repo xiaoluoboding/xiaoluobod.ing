@@ -8,9 +8,17 @@ export async function GET(
   const { url } = params
 
   return tryCatchNextResponse<any>(async () => {
-    const res = await fetch(`https://metafy.vercel.app/api?url=${url}`)
+    // const res = await fetch(`https://metafy.vercel.app/api?url=${url}`)
+    const res = await fetch(
+      `https://metafy.indiehacker.workers.dev/?url=${url}`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.METAFY_API_KEY}`,
+        },
+      }
+    )
     const json = await res.json()
-    return json
+    return json.data
   })
 }
 

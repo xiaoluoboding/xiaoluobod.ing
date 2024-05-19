@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import dayjs from "dayjs"
 import { nanoid } from "nanoid"
 import { useState } from "react"
+import { pick } from "lodash-es"
 
 import { XButton } from "@/components/ui/XButton"
 import {
@@ -96,12 +97,20 @@ export function InsertBookmarkForm({
         },
       })
       data = (await res.json()) as Partial<Bookmark>
+      console.log(data)
     } catch (error) {
       console.log(error)
       setIsLoading(false)
     }
     const newBookmark = {
-      ...data,
+      ...pick(data, [
+        "title",
+        "description",
+        "image",
+        "logo",
+        "author",
+        "publisher",
+      ]),
       id: nanoid().slice(0, 16),
       link: form.getValues("link"),
       tags: [
@@ -114,7 +123,7 @@ export function InsertBookmarkForm({
       created_at: dayjs().valueOf(),
       updated_at: dayjs().valueOf(),
     }
-    const result = await fetch(`/api/sdb/bookmark`, {
+    await fetch(`/api/sdb/bookmark`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

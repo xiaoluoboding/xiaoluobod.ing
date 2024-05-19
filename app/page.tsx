@@ -44,6 +44,8 @@ export default function Home() {
       "https://github.com/xiaoluoboding/vue-sonner",
       "https://github.com/xiaoluoboding/vue-command-palette",
       "https://github.com/nuxtbase/auth-ui-vue",
+      "https://img2txt2audio.vercel.app/",
+      "https://coolshapes-vue.vercel.app/",
     ]
     return bookmarkList
       .filter((bookmark) => ossLinkList.includes(bookmark.link))
@@ -54,6 +56,7 @@ export default function Home() {
           domain: origin,
         }
       })
+      .sort((a, b) => b.created_at!!.localeCompare(a.created_at!!))
   }, [bookmarkList])
 
   useEffect(() => {
