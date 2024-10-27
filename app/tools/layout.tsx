@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 
-export default function WorkspaceLayout({
+export default function ToolsLayout({
   children,
 }: {
   children: React.ReactNode

@@ -43,7 +43,7 @@ export default function Home() {
       "https://github.com/xiaoluoboding/vue-color-wheel",
       "https://github.com/xiaoluoboding/vue-sonner",
       "https://github.com/xiaoluoboding/vue-command-palette",
-      "https://github.com/nuxtbase/auth-ui-vue",
+      "https://github.com/supa-kit/auth-ui-vue",
       "https://img2txt2audio.vercel.app/",
       "https://coolshapes-vue.vercel.app/",
     ]

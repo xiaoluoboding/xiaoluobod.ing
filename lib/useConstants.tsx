@@ -43,6 +43,11 @@ import {
   GreenSock,
   Vite,
 } from "@/components/icons"
+import {
+  FramerLogoIcon,
+  NotionLogoIcon,
+  TwitterLogoIcon,
+} from "@radix-ui/react-icons"
 
 export const stackList = {
   Language: [
@@ -429,8 +434,8 @@ export const LINKS = [
     icon: <RiMacbookLine size={16} />,
   },
   {
-    href: "/workspace",
-    label: "Workspace",
+    href: "/tools",
+    label: "Tools",
     icon: <RiMacLine size={16} />,
   },
   {
@@ -439,6 +444,171 @@ export const LINKS = [
     icon: <RiBookmarkLine size={16} />,
   },
 ]
+
+export const toolList = {
+  Development: [
+    {
+      title: "GitHub",
+      icon: <GitHub className="w-5 h-5" />,
+      link: "https://github.com",
+      price: "Free",
+    },
+    {
+      title: "Vercel",
+      icon: <Vercel className="w-5 h-5" />,
+      link: "https://vercel.com",
+      price: 20,
+    },
+    {
+      title: "VSCode",
+      icon: <VSCode className="w-5 h-5" />,
+      link: "https://code.visualstudio.com/",
+      price: "Free",
+    },
+    {
+      title: "Cursor",
+      icon: <VSCode className="w-5 h-5" />,
+      link: "https://www.cursor.com/",
+      price: 20,
+    },
+    {
+      title: "Warp",
+      icon: <VSCode className="w-5 h-5" />,
+      link: "https://www.warp.dev/",
+      price: "Free",
+    },
+    {
+      title: "Supabase",
+      icon: <Supabase className="w-5 h-5" />,
+      link: "https://supabase.com/",
+      price: 25,
+    },
+    {
+      title: "Rapid API",
+      icon: <Supabase className="w-5 h-5" />,
+      link: "https://rapidapi.com/",
+      price: "Free",
+    },
+  ],
+  Productivity: [
+    {
+      title: "Notion",
+      icon: <NotionLogoIcon className="w-5 h-5" />,
+      link: "https://www.notion.so/",
+      price: "Free",
+    },
+    {
+      title: "Linear",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://linear.app/",
+      price: "Free",
+    },
+    {
+      title: "Raycast",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://www.raycast.com/",
+      price: "Free",
+    },
+    {
+      title: "Readwise",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://readwise.io/",
+      price: 8,
+    },
+  ],
+  Design: [
+    {
+      title: "Figma",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://www.figma.com",
+      price: "Free",
+    },
+    {
+      title: "Framer",
+      icon: <FramerLogoIcon className="w-5 h5" />,
+      link: "https://www.framer.com/",
+      price: "Free",
+    },
+  ],
+  Marketing: [
+    {
+      title: "Plausible",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://plausible.io/",
+      price: 9,
+    },
+    {
+      title: "Typefully",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://typefully.com/",
+      price: 10,
+    },
+    {
+      title: "Twitter Blue",
+      icon: <TwitterLogoIcon className="w-5 h-5" />,
+      link: "https://x.com/home",
+      price: 14,
+    },
+  ],
+  SetApp: [
+    {
+      title: "SetApp",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://www.setapp.com/",
+      price: 12,
+    },
+    {
+      title: "TablePlus",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://tableplus.com/",
+      price: "SetApp",
+    },
+    {
+      title: "Popclip",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://www.popclip.app/",
+      price: "SetApp",
+    },
+  ],
+  "AI Product": [
+    {
+      title: "OpenAI",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://www.openai.com/",
+      price: 20,
+    },
+    {
+      title: "Perplexity",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://www.perplexity.ai/",
+      price: "Free",
+    },
+    {
+      title: "Groq",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://groq.com/",
+      price: "Free",
+    },
+    {
+      title: "Midjourney",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://www.midjourney.com/",
+      price: 8,
+    },
+    {
+      title: "Jan AI",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://jan.ai/",
+      price: "Free",
+    },
+    {
+      title: "Ollama",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://ollama.com/",
+      price: "Free",
+    },
+  ],
+}
 
 export const useConstants = () => {
   return {
