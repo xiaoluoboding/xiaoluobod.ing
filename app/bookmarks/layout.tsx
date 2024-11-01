@@ -8,28 +8,12 @@ import { useDebounceCallback } from "usehooks-ts"
 import { SideMenu } from "@/components/SideMenu"
 import { LoadingSpinner } from "@/components/LoadingSpinner"
 import { ListItem } from "@/components/ListItem"
-import { createCollectionList, formatSlug } from "@/lib/utils"
-import { Bookmark } from "@/lib/types"
+import { formatSlug } from "@/lib/utils"
 import { useBookmarkStore } from "@/store/bookmark"
 import { XInput } from "@/components/ui/XInput"
 import { useRouter } from "next/navigation"
 import { SearchIcon } from "lucide-react"
-
-async function fetchData() {
-  const res = await fetch("/api/sdb/bookmark", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-  const bookmarkList = (await res.json()) as Bookmark[]
-  const collectionList = createCollectionList(bookmarkList)
-
-  return {
-    bookmarkList,
-    collectionList,
-  }
-}
+import { fetchBookmarkList } from "@/app/actions/bookmark"
 
 const fuseOptions = {
   threshold: 0.2,
@@ -60,7 +44,7 @@ export default function BookmarksLayout({
   })
 
   const handleInitialData = async () => {
-    const res = await fetchData()
+    const res = await fetchBookmarkList()
     bookmarkStore.setCollectionList(res.collectionList)
     bookmarkStore.setBookmarkList(res.bookmarkList)
     setCloneCollectionList(cloneDeep(res.collectionList))

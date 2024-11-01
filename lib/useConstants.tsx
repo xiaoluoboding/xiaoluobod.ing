@@ -8,7 +8,6 @@ import {
   RiHomeLine,
   RiMacLine,
   RiMacbookLine,
-  RiMessage2Line,
   RiProductHuntLine,
   RiQuillPenLine,
   RiTwitterXLine,
@@ -380,11 +379,6 @@ export const PROFILES = {
     url: "https://twitter.com/intent/user?screen_name=robert_shaw_x",
     icon: <RiTwitterXLine size={16} />,
   },
-  dm: {
-    title: "DMs on X",
-    url: "https://dm.new/robert",
-    icon: <RiMessage2Line size={16} />,
-  },
   github: {
     title: "GitHub",
     url: "https://github.com/xiaoluoboding",
@@ -446,6 +440,62 @@ export const LINKS = [
 ]
 
 export const toolList = {
+  Productivity: [
+    {
+      title: "Notion",
+      icon: <NotionLogoIcon className="w-5 h-5" />,
+      link: "https://www.notion.so/",
+      price: 10,
+    },
+    {
+      title: "Linear",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://linear.app/",
+      price: "Free",
+    },
+    {
+      title: "Raycast",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://www.raycast.com/",
+      price: "Free",
+    },
+    {
+      title: "Readwise",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://readwise.io/",
+      price: 8,
+    },
+    {
+      title: "SetApp",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://www.setapp.com/",
+      price: 12,
+    },
+    {
+      title: "Popclip",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://www.popclip.app/",
+      price: "SetApp",
+    },
+    {
+      title: "CleanShot X",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://cleanshot.com/",
+      price: "SetApp",
+    },
+    {
+      title: "Notchnook",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://lo.cafe/notchnook",
+      price: "SetApp",
+    },
+    {
+      title: "MindNode",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://mindnode.com/",
+      price: "SetApp",
+    },
+  ],
   Development: [
     {
       title: "GitHub",
@@ -489,31 +539,11 @@ export const toolList = {
       link: "https://rapidapi.com/",
       price: "Free",
     },
-  ],
-  Productivity: [
     {
-      title: "Notion",
-      icon: <NotionLogoIcon className="w-5 h-5" />,
-      link: "https://www.notion.so/",
-      price: "Free",
-    },
-    {
-      title: "Linear",
+      title: "TablePlus",
       icon: <Figma className="w-5 h-5" />,
-      link: "https://linear.app/",
-      price: "Free",
-    },
-    {
-      title: "Raycast",
-      icon: <Figma className="w-5 h-5" />,
-      link: "https://www.raycast.com/",
-      price: "Free",
-    },
-    {
-      title: "Readwise",
-      icon: <Figma className="w-5 h-5" />,
-      link: "https://readwise.io/",
-      price: 8,
+      link: "https://tableplus.com/",
+      price: "SetApp",
     },
   ],
   Design: [
@@ -546,28 +576,8 @@ export const toolList = {
     {
       title: "Twitter Blue",
       icon: <TwitterLogoIcon className="w-5 h-5" />,
-      link: "https://x.com/home",
+      link: "https://x.com",
       price: 14,
-    },
-  ],
-  SetApp: [
-    {
-      title: "SetApp",
-      icon: <Figma className="w-5 h-5" />,
-      link: "https://www.setapp.com/",
-      price: 12,
-    },
-    {
-      title: "TablePlus",
-      icon: <Figma className="w-5 h-5" />,
-      link: "https://tableplus.com/",
-      price: "SetApp",
-    },
-    {
-      title: "Popclip",
-      icon: <Figma className="w-5 h-5" />,
-      link: "https://www.popclip.app/",
-      price: "SetApp",
     },
   ],
   "AI Product": [
@@ -581,6 +591,12 @@ export const toolList = {
       title: "Perplexity",
       icon: <Figma className="w-5 h-5" />,
       link: "https://www.perplexity.ai/",
+      price: "Free",
+    },
+    {
+      title: "Claude",
+      icon: <Figma className="w-5 h-5" />,
+      link: "https://www.anthropic.com/",
       price: "Free",
     },
     {

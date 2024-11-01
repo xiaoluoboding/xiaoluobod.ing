@@ -1,6 +1,6 @@
 import { create } from "zustand"
 import { persist, devtools } from "zustand/middleware"
-import { merge, cloneDeep } from "lodash-es"
+import { merge } from "lodash-es"
 
 import { Bookmark, Collection } from "@/lib/types"
 

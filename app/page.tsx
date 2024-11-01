@@ -1,22 +1,23 @@
 "use client"
 
-import { Suspense, useEffect, useMemo, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 
 import Image from "next/image"
 import Link from "next/link"
 
+// components
 import { LoadingSpinner } from "@/components/LoadingSpinner"
 import { XScrollArea } from "@/components/ui/XScrollArea"
 import { PageTitle } from "@/components/PageTitle"
 import { FloatingHeader } from "@/components/FloadingHeader"
-import { BookmarkCard } from "@/components/BookmarkCard/BookmarkCard"
-import { useBookmarkStore } from "@/store/bookmark"
+import OssWorkList from "@/components/OssWorkList"
+
+// lib
 import { PROFILES } from "@/lib/useConstants"
 import { cn } from "@/lib/utils"
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false)
-  const bookmarkList = useBookmarkStore((state) => state.bookmarkList)
   const productList = [
     {
       title: "Side Space",
@@ -37,27 +38,6 @@ export default function Home() {
       url: "https://bookmark.style?ref=robertshaw.id",
     },
   ]
-
-  const ossList = useMemo(() => {
-    const ossLinkList = [
-      "https://github.com/xiaoluoboding/vue-color-wheel",
-      "https://github.com/xiaoluoboding/vue-sonner",
-      "https://github.com/xiaoluoboding/vue-command-palette",
-      "https://github.com/supa-kit/auth-ui-vue",
-      "https://img2txt2audio.vercel.app/",
-      "https://coolshapes-vue.vercel.app/",
-    ]
-    return bookmarkList
-      .filter((bookmark) => ossLinkList.includes(bookmark.link))
-      .map((item) => {
-        const { origin } = new URL(item.link)
-        return {
-          ...item,
-          domain: origin,
-        }
-      })
-      .sort((a, b) => b.created_at!!.localeCompare(a.created_at!!))
-  }, [bookmarkList])
 
   useEffect(() => {
     setIsClient(true)
@@ -120,14 +100,7 @@ export default function Home() {
                   <section>
                     <h2>OSS Works</h2>
                     <div className="columns-1 lg:columns-2 2xl:columns-2 lg:gap-6 [&>a:not(:first-child)]:mt-6 mt-8">
-                      {ossList.map((bookmark, index) => (
-                        <BookmarkCard
-                          key={index}
-                          bookmark={bookmark}
-                          order={index}
-                          tidy
-                        />
-                      ))}
+                      <OssWorkList />
                     </div>
                   </section>
                   <section>

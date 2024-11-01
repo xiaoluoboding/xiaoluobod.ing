@@ -91,3 +91,11 @@ export const createCollectionList = (bookmarkList: Bookmark[]) => {
   const sortedCollection = sortByProperty(collectionList, "title")
   return sortedCollection
 }
+
+// Helper function to get the base URL
+export function getBaseUrl() {
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`
+  }
+  return `http://localhost:${process.env.PORT || 5173}`
+}

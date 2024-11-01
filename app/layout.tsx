@@ -2,12 +2,13 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import Script from "next/script"
 
-import "./globals.css"
+import { sharedDescription, sharedTitle } from "@/app/shared-metadata"
 import { SideMenu } from "@/components/SideMenu"
-import { XToaster } from "@/components/ui/XToaster"
 import { MenuContent } from "@/components/SideMenu/MenuContent"
-import { sharedTitle, sharedDescription } from "@/app/shared-metadata"
 import { ThemeProvider } from "@/components/ThemeProvider"
+import { XToaster } from "@/components/ui/XToaster"
+
+import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"] })
 

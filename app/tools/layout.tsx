@@ -2,12 +2,26 @@
 
 import { useEffect, useState } from "react"
 
+import { fetchBookmarkList } from "@/app/actions/bookmark"
+import { useBookmarkStore } from "@/store/bookmark"
+
 export default function ToolsLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   const [isClient, setIsClient] = useState(false)
+
+  const bookmarkStore = useBookmarkStore()
+  const handleInitialData = async () => {
+    const res = await fetchBookmarkList()
+    bookmarkStore.setCollectionList(res.collectionList)
+    bookmarkStore.setBookmarkList(res.bookmarkList)
+  }
+
+  useEffect(() => {
+    handleInitialData()
+  }, [])
 
   useEffect(() => {
     setIsClient(true)
