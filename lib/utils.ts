@@ -94,8 +94,23 @@ export const createCollectionList = (bookmarkList: Bookmark[]) => {
 
 // Helper function to get the base URL
 export function getBaseUrl() {
-  if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`
+  if (typeof window !== "undefined") {
+    // Browser should use relative URL
+    return ""
   }
+
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    // Use custom environment variable if set
+    return process.env.NEXT_PUBLIC_API_URL
+  }
+
+  // Use Vercel environment variables
+  // Note: VERCEL_URL includes the path prefix (`https://your-domain.vercel.app`)
+  // This handles preview deployments as well
+  if (process.env.NEXT_PUBLIC_VERCEL_URL) {
+    return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+  }
+
+  // Default to localhost in development
   return `http://localhost:${process.env.PORT || 5173}`
 }
