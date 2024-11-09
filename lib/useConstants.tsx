@@ -457,7 +457,7 @@ export const toolList = {
       title: "Raycast",
       icon: <Figma className="w-5 h-5" />,
       link: "https://www.raycast.com/",
-      price: "Free",
+      price: 8,
     },
     {
       title: "Readwise",
@@ -468,7 +468,7 @@ export const toolList = {
     {
       title: "SetApp",
       icon: <Figma className="w-5 h-5" />,
-      link: "https://www.setapp.com/",
+      link: "https://setapp.com",
       price: 12,
     },
     {
@@ -531,7 +531,7 @@ export const toolList = {
       title: "Supabase",
       icon: <Supabase className="w-5 h-5" />,
       link: "https://supabase.com/",
-      price: 25,
+      price: 45,
     },
     {
       title: "Rapid API",

@@ -30,8 +30,12 @@ export default function ToolsLayout({
     <>
       {isClient && (
         <div className="flex w-full relative">
-          <div className="absolute top-0 z-0 h-full w-full bg-white dark:bg-accent">
-            <div className="absolute top-0 z-0 h-screen w-screen bg-white dark:bg-accent bg-[radial-gradient(100%_50%_at_50%_0%,rgba(120,119,198,0.3)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]" />
+          <div className="absolute top-0 z-0 h-full w-full bg-white dark:bg-neutral-900">
+            <section className="gridient-bg absolute inset-0 z-0 h-screen w-screen">
+              <div className="polygon g-polygon-1 bg-gradient-to-br from-sky-500/60 to-sky-800/60"></div>
+              <div className="polygon g-polygon-2 bg-gradient-to-br from-violet-300/60 via-violet-500/60 to-violet-800/60"></div>
+              <div className="polygon g-polygon-3 bg-blue-500/60"></div>
+            </section>
           </div>
           <div></div>
           <div className="flex-1">{children}</div>

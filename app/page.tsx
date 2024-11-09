@@ -21,7 +21,7 @@ export default function Home() {
   const productList = [
     {
       title: "Side Space",
-      description: "AI-Powered browser tab group manager",
+      description: "Your AI-powered vertical tabs manager for browsing",
       image: "/assets/side-space.svg",
       url: "https://sidespace.app?ref=robertshaw.id",
     },
@@ -36,6 +36,19 @@ export default function Home() {
       description: "Turn any link into a stylish visual web bookmark",
       image: "/assets/bookmark-style.svg",
       url: "https://bookmark.style?ref=robertshaw.id",
+    },
+    {
+      title: "Stunning UI",
+      description: "Create Stunning Websites That Stand Out",
+      image: "/assets/stunning-ui.svg",
+      url: "https://stunningui.design?ref=robertshaw.id",
+    },
+    {
+      title: "Repo Gallery",
+      description:
+        "Explore the Variety of Information in Open Source Repositories",
+      image: "/assets/repo-gallery.svg",
+      url: "https://www.repo.gallery/?ref=robertshaw.id",
     },
   ]
 
