@@ -26,10 +26,10 @@ export default function Home() {
       url: "https://sidespace.app?ref=robertshaw.id",
     },
     {
-      title: "One Tab Group",
-      description: "Your all-in-one browser tab manager",
+      title: "Tab Deck",
+      description: "Your all-in-one browser tab/tab group manager",
       image: "/assets/one-tab-group.svg",
-      url: "https://onetab.group?ref=robertshaw.id",
+      url: "https://tabdeck.co?ref=robertshaw.id",
     },
     {
       title: "Bookmark Style",
