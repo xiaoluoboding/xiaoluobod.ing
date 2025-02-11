@@ -44,6 +44,13 @@ export default function Home() {
       url: "https://stunningui.design?ref=robertshaw.id",
     },
     {
+      title: "UltraShot",
+      description:
+        "Image to text to Image, reimagine, ultra-fast, high-quality.",
+      image: "/assets/ultrashot.svg",
+      url: "https://ultrashot.pics?ref=robertshaw.id",
+    },
+    {
       title: "Repo Gallery",
       description:
         "Explore the Variety of Information in Open Source Repositories",
