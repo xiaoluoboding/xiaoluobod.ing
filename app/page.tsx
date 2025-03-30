@@ -55,7 +55,7 @@ export default function Home() {
       description:
         "Explore the Variety of Information in Open Source Repositories",
       image: "/assets/repo-gallery.svg",
-      url: "https://www.repo.gallery/?ref=robertshaw.id",
+      url: "https://repo-gallery.vercel.app/?ref=robertshaw.id",
     },
   ]
 
