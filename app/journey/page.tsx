@@ -8,8 +8,8 @@ import { LoadingSpinner } from "@/components/LoadingSpinner"
 import { PageTitle } from "@/components/PageTitle"
 import { useConstants } from "@/lib/useConstants"
 
-export default async function Journey() {
-  const { allLogbook } = await useConstants()
+export default function Journey() {
+  const { allLogbook } = useConstants()
 
   return (
     <XScrollArea className="scrollable-area w-full">

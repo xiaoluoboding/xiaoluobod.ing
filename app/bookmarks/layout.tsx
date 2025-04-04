@@ -88,12 +88,12 @@ export default function BookmarksLayout({
       })
       handleInitialData()
     }
-  }, [bookmarkStore.isReRender])
+  }, [bookmarkStore.isReRender, bookmarkStore, handleInitialData])
 
   useEffect(() => {
     setIsClient(true)
     handleInitialData()
-  }, [])
+  }, [handleInitialData])
   return (
     <>
       {isClient && (

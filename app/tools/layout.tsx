@@ -25,7 +25,8 @@ export default function ToolsLayout({
 
   useEffect(() => {
     setIsClient(true)
-  }, [])
+    handleInitialData()
+  }, [handleInitialData])
   return (
     <>
       {isClient && (

@@ -1,6 +1,7 @@
 "use client"
 
 import Markdown from "marked-react"
+import Image from "next/image"
 
 interface IProps {
   title: string
@@ -28,13 +29,12 @@ export const JourneyCard = ({ title, description, image, index }: IProps) => {
       )}
       {image?.url && (
         <div className="mt-2.5 overflow-hidden rounded-xl bg-white">
-          <img
-            src={image.url}
-            alt={image.title || image.description}
-            width={image.width}
-            height={image.height}
-            loading={index < 1 ? "eager" : "lazy"}
-            className="animate-reveal"
+          <Image
+            src={image.url || ""}
+            alt={image.title || image.description || ""}
+            width={500}
+            height={300}
+            className="w-full h-auto rounded-lg"
           />
         </div>
       )}

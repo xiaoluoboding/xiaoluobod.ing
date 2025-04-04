@@ -1,19 +1,21 @@
 "use client"
-import { useEffect, useMemo } from "react"
+import { useEffect, useMemo, useState, useCallback } from "react"
 
 import { fetchBookmarkList } from "@/app/actions/bookmark"
 import { useBookmarkStore } from "@/store/bookmark"
 import { BookmarkCard } from "./BookmarkCard/BookmarkCard"
 
-const OssWorkList = () => {
+export default function OssWorkList() {
+  const [isClient, setIsClient] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const bookmarkStore = useBookmarkStore()
   const bookmarkList = useBookmarkStore((state) => state.bookmarkList)
 
-  const handleInitialData = async () => {
+  const handleInitialData = useCallback(async () => {
     const res = await fetchBookmarkList()
     bookmarkStore.setCollectionList(res.collectionList)
     bookmarkStore.setBookmarkList(res.bookmarkList)
-  }
+  }, [bookmarkStore])
 
   const ossList = useMemo(() => {
     const ossLinkList = [
@@ -37,8 +39,9 @@ const OssWorkList = () => {
   }, [bookmarkList])
 
   useEffect(() => {
+    setIsClient(true)
     handleInitialData()
-  }, [])
+  }, [handleInitialData])
   return (
     <>
       {ossList.map((bookmark, index) => (
@@ -47,5 +50,3 @@ const OssWorkList = () => {
     </>
   )
 }
-
-export default OssWorkList
