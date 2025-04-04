@@ -93,7 +93,7 @@ export default function BookmarksLayout({
   useEffect(() => {
     setIsClient(true)
     handleInitialData()
-  }, [handleInitialData])
+  }, [])
   return (
     <>
       {isClient && (
