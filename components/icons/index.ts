@@ -25,7 +25,7 @@ import VueUse from "./VueUse"
 import Git from "./Git"
 import Paw from "./Paw"
 import Zustand from "./Zustand"
-
+import Windsurf from "./Windsurf"
 export {
   CSS,
   Figma,
@@ -54,4 +54,5 @@ export {
   Vue,
   VueUse,
   Zustand,
+  Windsurf,
 }
