@@ -29,7 +29,7 @@ export default function Home() {
       title: "Tab Deck",
       description: "Your all-in-one browser tab/tab group manager",
       image: "/assets/one-tab-group.svg",
-      url: "https://tabdeck.co?ref=robertshaw.id",
+      url: "https://tabdeck.so?ref=robertshaw.id",
     },
     {
       title: "Bookmark Style",

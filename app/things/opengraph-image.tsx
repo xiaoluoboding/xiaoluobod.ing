@@ -5,7 +5,7 @@ import { getMediumFont, getBoldFont } from "@/lib/fonts"
 import { sharedImage } from "@/app/shared-metadata"
 
 export const runtime = "edge"
-export const alt = "Tools"
+export const alt = "Things"
 export const size = {
   width: sharedImage.width,
   height: sharedImage.height,

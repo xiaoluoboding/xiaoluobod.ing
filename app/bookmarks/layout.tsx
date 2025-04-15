@@ -93,6 +93,9 @@ export default function BookmarksLayout({
   useEffect(() => {
     setIsClient(true)
     handleInitialData()
+    requestAnimationFrame(() => {
+      router.push(`/bookmarks/ai`)
+    })
   }, [])
   return (
     <>

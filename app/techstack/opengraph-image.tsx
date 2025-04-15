@@ -22,7 +22,7 @@ export default async function OGImage() {
     (
       <OpenGraphImage
         title="Tech Stack"
-        description="Here is a list of my tech stack. I use these tools to build projects."
+        description="Here is a list of my tech stack. I use these things to build projects."
         icon={
           <svg
             xmlns="http://www.w3.org/2000/svg"

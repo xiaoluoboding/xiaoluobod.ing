@@ -55,7 +55,9 @@ const ToolCard = ({ bookmark }: ToolCardProps) => {
               )}
             >
               {isNumber(bookmark.price)
-                ? `$${bookmark.price}/mo`
+                ? `$${bookmark.price}/${
+                    bookmark.priceType === "Subscription" ? "mo" : "LTD"
+                  }`
                 : `${bookmark.price}`}
             </span>
           </div>
@@ -69,7 +71,7 @@ const ToolCard = ({ bookmark }: ToolCardProps) => {
 }
 
 export default function ToolsPage() {
-  const title = "Tools"
+  const title = "Things"
 
   const [mode, setMode] = useState<"category" | "pricing">("category")
 
@@ -110,7 +112,8 @@ export default function ToolsPage() {
 
   const sortedToolBookmarkListByPricing = useMemo(() => {
     const pricingGroups: Record<string, (typeof toolBookmarkList)[string]> = {
-      Paid: [],
+      Subscription: [],
+      LTD: [],
       SetApp: [],
       Free: [],
     }
@@ -121,7 +124,11 @@ export default function ToolsPage() {
         if (tool.price === "Free") {
           pricingGroups.Free.push(tool)
         } else if (isNumber(tool.price)) {
-          pricingGroups.Paid.push(tool)
+          if (tool.priceType === "LTD") {
+            pricingGroups.LTD.push(tool)
+          } else {
+            pricingGroups.Subscription.push(tool)
+          }
         } else {
           pricingGroups.SetApp.push(tool)
         }
@@ -154,7 +161,7 @@ export default function ToolsPage() {
           </div>
           <Suspense fallback={<LoadingSpinner />}>
             <p className="dark:text-secondary-foreground">
-              Here is a list of tools I use to build projects.
+              Here is a list of things I use to build projects.
             </p>
 
             <div className="max-w-5xl mx-auto py-4 lg:py-8 z-10 space-y-8">
@@ -188,7 +195,7 @@ export default function ToolsPage() {
                     <fieldset className="p-0 m-0 z-10" key={key}>
                       <figcaption className="p-0 m-0 text-lg font-semibold dark:text-accent-foreground flex items-center gap-2 justify-between">
                         <span>{key}</span>
-                        {key === "Paid" && (
+                        {key === "Subscription" && (
                           <span className="text-sm text-sky-500 font-semibold">
                             $
                             {sortedToolBookmarkListByPricing[key].reduce(
@@ -202,6 +209,22 @@ export default function ToolsPage() {
                               0
                             )}
                             /mo
+                          </span>
+                        )}
+                        {key === "LTD" && (
+                          <span className="text-sm text-sky-500 font-semibold">
+                            $
+                            {sortedToolBookmarkListByPricing[key].reduce(
+                              (sum, tool) => {
+                                const price =
+                                  typeof tool.price === "number"
+                                    ? tool.price
+                                    : 0
+                                return sum + price
+                              },
+                              0
+                            )}
+                            /Total
                           </span>
                         )}
                       </figcaption>
