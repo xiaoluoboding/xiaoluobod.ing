@@ -75,11 +75,11 @@ export default function Home() {
               <br />
               <section className="flex flex-col">
                 <p className="my-0">
-                  A web dev enthusiast with a passion for Vue.js.
+                  A Self-thought Front-end Product Engineer, Indie Maker/hacker.
                 </p>
                 <p className="my-0">
-                  🖖 Vue.js fan / 🍎 SwiftUI Learner / ☕️ Coffee lover / 🌵
-                  Agave guardian
+                  🖖 Vue.js fan / ☕️ Coffee lover / 🌵 Agave guardian / ✨
+                  AI/AIGC enthusiast
                 </p>
                 <p className="my-0">
                   Passionate about bringing ideas to life. Explore all of my

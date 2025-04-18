@@ -21,8 +21,8 @@ export default async function OGImage() {
   return new ImageResponse(
     (
       <OpenGraphImage
-        title="Tools"
-        description="Here is a list of tools I use to build projects."
+        title="Things"
+        description="Here is a list of things I use to build projects."
         icon={
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +42,7 @@ export default async function OGImage() {
             <path d="M18 11.66V22a4 4 0 0 0 4-4V6" />
           </svg>
         }
-        url="tools"
+        url="things"
       />
     ),
     {
