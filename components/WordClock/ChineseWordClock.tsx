@@ -113,11 +113,11 @@ const CHINESE_SPECIAL_WORDS = {
   ],
 
   // 分钟
-  零: [[3, 7]],
+  零: [[6, 8]],
   零五分: [
-    [3, 7],
-    [3, 8],
-    [3, 9],
+    [6, 8],
+    [6, 9],
+    [6, 10],
   ],
   五分: [
     [2, 9],
@@ -128,22 +128,21 @@ const CHINESE_SPECIAL_WORDS = {
     [2, 9],
   ],
   十五分: [
-    [3, 3],
-    [3, 4],
-    [3, 5],
+    [7, 6],
+    [7, 7],
+    [7, 8],
   ],
   二十分: [
-    [4, 1],
-    [4, 2],
-    [4, 3],
-    [4, 4],
+    [8, 8],
+    [8, 9],
+    [8, 10],
   ],
   二十五分: [
-    [4, 1],
-    [4, 2],
-    [4, 3],
-    [4, 4],
-    [4, 5],
+    [7, 6],
+    [7, 7],
+    [7, 8],
+    [7, 9],
+    [7, 10],
   ],
   三十分: [
     [6, 4],
@@ -155,6 +154,7 @@ const CHINESE_SPECIAL_WORDS = {
     [9, 7],
     [9, 8],
     [9, 9],
+    [9, 10],
   ],
   四十分: [
     [3, 0],
@@ -162,10 +162,78 @@ const CHINESE_SPECIAL_WORDS = {
     [3, 2],
   ],
   四十五分: [
-    [9, 2],
-    [9, 3],
-    [9, 4],
-    [9, 5],
+    [8, 1],
+    [8, 2],
+    [8, 3],
+    [8, 4],
+  ],
+  五十分: [
+    [4, 8],
+    [4, 9],
+    [4, 10],
+  ],
+  五十五分: [
+    [7, 2],
+    [7, 3],
+    [7, 4],
+    [7, 5],
+  ],
+}
+
+// 分钟类型和位置映射
+const MINUTE_POSITIONS = {
+  零五分: [
+    [6, 8],
+    [6, 9],
+    [6, 10],
+  ],
+  五分: [
+    [2, 9],
+    [2, 10],
+  ],
+  十分: [
+    [2, 8],
+    [2, 9],
+  ],
+  十五分: [
+    [7, 6],
+    [7, 7],
+    [7, 8],
+  ],
+  二十分: [
+    [8, 8],
+    [8, 9],
+    [8, 10],
+  ],
+  二十五分: [
+    [7, 6],
+    [7, 7],
+    [7, 8],
+    [7, 9],
+    [7, 10],
+  ],
+  三十分: [
+    [6, 4],
+    [6, 5],
+    [6, 6],
+  ],
+  三十五分: [
+    [9, 6],
+    [9, 7],
+    [9, 8],
+    [9, 9],
+    [9, 10],
+  ],
+  四十分: [
+    [9, 6],
+    [9, 7],
+    [9, 8],
+  ],
+  四十五分: [
+    [8, 1],
+    [8, 2],
+    [8, 3],
+    [8, 4],
   ],
   五十分: [
     [8, 5],
@@ -180,14 +248,107 @@ const CHINESE_SPECIAL_WORDS = {
   ],
 }
 
+// 获取小时在网格中的位置
+function getHourRowPosition(hour: number): number {
+  switch (hour) {
+    case 1:
+      return 1 // 一点在第1行
+    case 2:
+      return 9 // 二点在第9行
+    case 3:
+      return 5 // 三点在第5行
+    case 4:
+      return 1 // 四点在第1行
+    case 5:
+      return 1 // 五点在第1行
+    case 6:
+      return 5 // 六点在第5行
+    case 7:
+      return 2 // 七点在第2行
+    case 8:
+      return 6 // 八点在第6行
+    case 9:
+      return 2 // 九点在第2行
+    case 10:
+      return 6 // 十点在第6行
+    case 11:
+      return 1 // 十一点在第1行
+    case 12:
+      return 5 // 十二点在第5行
+    default:
+      return 0
+  }
+}
+
+// 根据小时选择合适的分钟显示位置
+function getMinuteWords(hour: number, minute: number): string {
+  if (minute === 0) {
+    return "整"
+  } else if (minute === 30) {
+    return "半"
+  } else if (
+    minute === 5 ||
+    (minute > 0 && minute < 10 && Math.round(minute / 5) * 5 === 5)
+  ) {
+    return "零五分"
+  } else if (
+    minute === 10 ||
+    (minute > 5 && minute < 15 && Math.round(minute / 5) * 5 === 10)
+  ) {
+    return "十分"
+  } else if (
+    minute === 15 ||
+    (minute > 10 && minute < 20 && Math.round(minute / 5) * 5 === 15)
+  ) {
+    return "十五分"
+  } else if (
+    minute === 20 ||
+    (minute > 15 && minute < 25 && Math.round(minute / 5) * 5 === 20)
+  ) {
+    return "二十分"
+  } else if (
+    minute === 25 ||
+    (minute > 20 && minute < 30 && Math.round(minute / 5) * 5 === 25)
+  ) {
+    return "二十五分"
+  } else if (
+    minute === 35 ||
+    (minute > 30 && minute < 40 && Math.round(minute / 5) * 5 === 35)
+  ) {
+    return "三十五分"
+  } else if (
+    minute === 40 ||
+    (minute > 35 && minute < 45 && Math.round(minute / 5) * 5 === 40)
+  ) {
+    return "四十分"
+  } else if (
+    minute === 45 ||
+    (minute > 40 && minute < 50 && Math.round(minute / 5) * 5 === 45)
+  ) {
+    return "四十五分"
+  } else if (
+    minute === 50 ||
+    (minute > 45 && minute < 55 && Math.round(minute / 5) * 5 === 50)
+  ) {
+    return "五十分"
+  } else if (
+    minute === 55 ||
+    (minute > 50 && minute < 60 && Math.round(minute / 5) * 5 === 55)
+  ) {
+    return "五十五分"
+  }
+
+  return ""
+}
+
 // Helper function to get Chinese time words
-function getChineseTimeWords() {
-  const now = new Date()
+function getChineseTimeWords(testDate?: Date) {
+  const now = testDate || new Date()
   let hour = now.getHours()
   const minute = now.getMinutes()
 
   // Period of day
-  const words = ["現在", "是", "時間"]
+  const words = ["現在", "是"]
 
   // Add AM/PM
   if (hour >= 0 && hour < 12) {
@@ -217,45 +378,9 @@ function getChineseTimeWords() {
   else if (hour === 12) words.push("十二點")
 
   // Add minutes
-  if (minute === 0) {
-    words.push("整")
-  } else if (minute === 30) {
-    words.push("半")
-  } else if (minute === 5) {
-    words.push("零五分")
-  } else if (minute === 10) {
-    words.push("十分")
-  } else if (minute === 15) {
-    words.push("十五分")
-  } else if (minute === 20) {
-    words.push("二十分")
-  } else if (minute === 25) {
-    words.push("二十五分")
-  } else if (minute === 35) {
-    words.push("三十五分")
-  } else if (minute === 40) {
-    words.push("四十分")
-  } else if (minute === 45) {
-    words.push("四十五分")
-  } else if (minute === 50) {
-    words.push("五十分")
-  } else if (minute === 55) {
-    words.push("五十五分")
-  } else if (minute > 0 && minute < 30) {
-    // For other minutes, we'll use the closest 5-minute interval
-    const roundedMinute = Math.round(minute / 5) * 5
-    if (roundedMinute === 5) words.push("零五分")
-    else if (roundedMinute === 10) words.push("十分")
-    else if (roundedMinute === 15) words.push("十五分")
-    else if (roundedMinute === 20) words.push("二十分")
-    else if (roundedMinute === 25) words.push("二十五分")
-  } else if (minute > 30) {
-    const roundedMinute = Math.round(minute / 5) * 5
-    if (roundedMinute === 35) words.push("三十五分")
-    else if (roundedMinute === 40) words.push("四十分")
-    else if (roundedMinute === 45) words.push("四十五分")
-    else if (roundedMinute === 50) words.push("五十分")
-    else if (roundedMinute === 55) words.push("五十五分")
+  const minuteWord = getMinuteWords(hour, minute)
+  if (minuteWord) {
+    words.push(minuteWord)
   }
 
   return { words, exactMinutes: minute }
@@ -267,34 +392,95 @@ function getChineseMinuteDots(exactMinutes: number) {
   return exactMinutes % 5
 }
 
+// Full day time testing function
+function runFullDayTest() {
+  const testTimes = []
+  const baseDate = new Date()
+
+  // Create test cases for every hour with different minute values
+  for (let hour = 0; hour < 24; hour++) {
+    // Test cases with common minute values: 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55
+    const minuteValues = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+
+    // Also add some non-standard minutes to test rounding (2, 13, 27, 33, 49, 58)
+    const nonStandardMinutes = [2, 13, 27, 33, 49, 58]
+
+    for (const minute of [...minuteValues, ...nonStandardMinutes]) {
+      const testDate = new Date(baseDate)
+      testDate.setHours(hour, minute, 0, 0)
+
+      const { words, exactMinutes } = getChineseTimeWords(testDate)
+      const minuteDots = getChineseMinuteDots(exactMinutes)
+
+      testTimes.push({
+        time: testDate.toLocaleTimeString("en-US"),
+        words,
+        minuteDots,
+        formattedTime: `${hour}:${minute.toString().padStart(2, "0")}`,
+      })
+    }
+  }
+
+  return testTimes
+}
+
 const ChineseWordClock: React.FC = () => {
   const [activeWords, setActiveWords] = useState<string[]>([])
   const [minuteDotCount, setMinuteDotCount] = useState(0)
   const [neonColor, setNeonColor] = useState<string>("#FFFF00") // Default yellow
   const [autoChangeEnabled, setAutoChangeEnabled] = useState(true)
+  const [testMode, setTestMode] = useState(false)
+  const [testTimeIndex, setTestTimeIndex] = useState(0)
+  const [testTimes, setTestTimes] = useState<
+    Array<{
+      time: string
+      words: string[]
+      minuteDots: number
+      formattedTime: string
+    }>
+  >([])
   const isMobile = useIsMobile()
 
   const colorOptions = useMemo(() => {
     return COLOR_OPTIONS
   }, [])
 
+  // Initialize test times
+  useEffect(() => {
+    if (testMode && testTimes.length === 0) {
+      setTestTimes(runFullDayTest())
+    }
+  }, [testMode, testTimes.length])
+
   useEffect(() => {
     const updateTime = () => {
-      const { words, exactMinutes } = getChineseTimeWords()
-      setActiveWords(words)
-      setMinuteDotCount(getChineseMinuteDots(exactMinutes))
+      if (testMode && testTimes.length > 0) {
+        const currentTest = testTimes[testTimeIndex]
+        setActiveWords(currentTest.words)
+        setMinuteDotCount(currentTest.minuteDots)
+      } else {
+        const { words, exactMinutes } = getChineseTimeWords()
+        setActiveWords(words)
+        setMinuteDotCount(getChineseMinuteDots(exactMinutes))
+      }
     }
 
     updateTime()
 
-    const interval = setInterval(updateTime, 1000)
+    // Only set interval if not in test mode
+    let interval: NodeJS.Timeout | null = null
+    if (!testMode) {
+      interval = setInterval(updateTime, 1000)
+    }
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => {
+      if (interval) clearInterval(interval)
+    }
+  }, [testMode, testTimes, testTimeIndex])
 
   // Auto change color every 5 minutes
   useEffect(() => {
-    if (!autoChangeEnabled) return
+    if (!autoChangeEnabled || testMode) return
 
     const changeColor = () => {
       const randomIndex = Math.floor(Math.random() * colorOptions.length)
@@ -316,13 +502,25 @@ const ChineseWordClock: React.FC = () => {
     }, secondsRemaining * 1000)
 
     return () => clearTimeout(initialTimeout)
-  }, [autoChangeEnabled, colorOptions])
+  }, [autoChangeEnabled, colorOptions, testMode])
 
   const isHighlighted = (rowIndex: number, colIndex: number): boolean => {
     for (const word of activeWords) {
+      // 处理常规词汇
       if (CHINESE_SPECIAL_WORDS[word as keyof typeof CHINESE_SPECIAL_WORDS]) {
         for (const [r, c] of CHINESE_SPECIAL_WORDS[
           word as keyof typeof CHINESE_SPECIAL_WORDS
+        ]) {
+          if (r === rowIndex && c === colIndex) {
+            return true
+          }
+        }
+      }
+
+      // 处理分钟词汇 - 使用动态位置
+      if (MINUTE_POSITIONS[word as keyof typeof MINUTE_POSITIONS]) {
+        for (const [r, c] of MINUTE_POSITIONS[
+          word as keyof typeof MINUTE_POSITIONS
         ]) {
           if (r === rowIndex && c === colIndex) {
             return true
@@ -360,6 +558,24 @@ const ChineseWordClock: React.FC = () => {
     return {
       boxShadow: `0 0 15px ${colorWithOpacity}, 0 0 25px ${colorWithOpacity}`,
       border: `2px solid ${colorWithOpacity}`,
+    }
+  }
+
+  // Test mode handlers
+  const toggleTestMode = () => {
+    setTestMode(!testMode)
+    setTestTimeIndex(0)
+  }
+
+  const goToNextTestTime = () => {
+    if (testTimes.length > 0) {
+      setTestTimeIndex((prev) => (prev + 1) % testTimes.length)
+    }
+  }
+
+  const goToPrevTestTime = () => {
+    if (testTimes.length > 0) {
+      setTestTimeIndex((prev) => (prev === 0 ? testTimes.length - 1 : prev - 1))
     }
   }
 
@@ -435,6 +651,59 @@ const ChineseWordClock: React.FC = () => {
           />
         </div>
       </div>
+
+      <div className="pt-6 border-t border-neutral-700">
+        <h4 className="font-medium text-neutral-100 mb-3">時間測試模式</h4>
+        <div className="flex items-center justify-between mb-4">
+          <span className="text-neutral-300">開啟測試模式</span>
+          <div className="relative inline-flex h-6 w-11 items-center rounded-full border-transparent transition-colors bg-neutral-700 focus:outline-none">
+            <input
+              type="checkbox"
+              className="peer sr-only"
+              checked={testMode}
+              onChange={toggleTestMode}
+              id="test-mode"
+            />
+            <span
+              className={`${
+                testMode
+                  ? "translate-x-6 bg-white"
+                  : "translate-x-1 bg-neutral-400"
+              } inline-block h-4 w-4 transform rounded-full transition-transform`}
+            />
+            <label
+              htmlFor="test-mode"
+              className="absolute inset-0 cursor-pointer rounded-full"
+            />
+          </div>
+        </div>
+
+        {testMode && testTimes.length > 0 && (
+          <div className="space-y-3">
+            <div className="text-center text-white font-medium">
+              {testTimes[testTimeIndex].formattedTime} -{" "}
+              {testTimes[testTimeIndex].words.join(" ")}
+            </div>
+            <div className="flex justify-between gap-2">
+              <button
+                onClick={goToPrevTestTime}
+                className="bg-neutral-700 hover:bg-neutral-600 text-white py-1 px-3 rounded flex-1"
+              >
+                上一個
+              </button>
+              <button
+                onClick={goToNextTestTime}
+                className="bg-neutral-700 hover:bg-neutral-600 text-white py-1 px-3 rounded flex-1"
+              >
+                下一個
+              </button>
+            </div>
+            <div className="text-neutral-400 text-xs text-center">
+              測試進度: {testTimeIndex + 1} / {testTimes.length}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   )
 
@@ -492,6 +761,9 @@ const ChineseWordClock: React.FC = () => {
       <div className="text-primary mt-8 text-center">
         <p className="text-xs mt-2 text-neutral-400">
           當前時間=表盤上時間+亮起的圓點個數（每個圓點表示1分鐘）
+          {testMode && testTimes.length > 0 && (
+            <> | 測試模式：{testTimes[testTimeIndex].formattedTime}</>
+          )}
         </p>
       </div>
     </div>
