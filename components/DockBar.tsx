@@ -91,7 +91,7 @@ export function DockBar({ apps }: { apps: App[] }) {
   // Add back button as the first app in the list
   const backApp = {
     name: "Robert Shaw",
-    iconUrl: "/assets/me.png",
+    iconUrl: "/assets/me.webp",
   }
 
   const allApps = [backApp, ...apps]

@@ -16,7 +16,7 @@ export const MenuContent = () => {
             className="link-card inline-flex items-center gap-2 p-2 flex-1"
           >
             <NextImage
-              src="/assets/me.png"
+              src="/assets/me.webp"
               alt="Robert Shaw"
               width={40}
               height={40}

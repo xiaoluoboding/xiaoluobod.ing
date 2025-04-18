@@ -28,24 +28,16 @@ export default function DockPage() {
       iconUrl: "/assets/launchpad.webp",
     },
     {
-      name: "SpaceDrive",
-      iconUrl: "/assets/spaced-drive.webp",
+      name: "Spotify",
+      iconUrl: "/assets/spotify.webp",
     },
     {
-      name: "Arc",
-      iconUrl: "/assets/arc.webp",
-    },
-    {
-      name: "Chrome",
-      iconUrl: "/assets/chrome.webp",
+      name: "Chrome Canary",
+      iconUrl: "/assets/chrome-canary.webp",
     },
     {
       name: "Spark",
       iconUrl: "/assets/spark.webp",
-    },
-    {
-      name: "Spotify",
-      iconUrl: "/assets/spotify.webp",
     },
     {
       name: "Notion",
@@ -56,12 +48,20 @@ export default function DockPage() {
       iconUrl: "/assets/telegram.webp",
     },
     {
-      name: "VSCode",
-      iconUrl: "/assets/vscode.webp",
+      name: "Discord",
+      iconUrl: "/assets/discord.webp",
     },
     {
-      name: "iTerm2",
-      iconUrl: "/assets/iterm.webp",
+      name: "Warp",
+      iconUrl: "/assets/warp.webp",
+    },
+    {
+      name: "Cursor",
+      iconUrl: "/assets/cursor.webp",
+    },
+    {
+      name: "Docker",
+      iconUrl: "/assets/docker.webp",
     },
     {
       name: "GitHub Desktop",
@@ -71,7 +71,6 @@ export default function DockPage() {
       name: "Figma",
       iconUrl: "/assets/figma.webp",
     },
-
     {
       name: "Linear",
       iconUrl: "/assets/linear.webp",
@@ -88,7 +87,7 @@ export default function DockPage() {
         <div className="flex flex-col items-center px-6 pb-20 md:px-20">
           <Image
             alt="Robert Shaw"
-            src="/assets/me.png"
+            src="/assets/me.webp"
             width="128"
             height="128"
             decoding="async"
