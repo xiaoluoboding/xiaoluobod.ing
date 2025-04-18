@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
   title: {
     template: `%s — ${sharedTitle}`,
-    default: sharedTitle,
+    default: `${sharedTitle} | ${sharedDescription}`,
   },
   description: sharedDescription,
   openGraph: {
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     siteName: sharedTitle,
-    locale: "zh_CN",
+    locale: "en",
   },
   alternates: {
     canonical: "/",

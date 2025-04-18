@@ -22,7 +22,7 @@ export const MobileMenuContent = () => {
             <span className="font-semibold tracking-tight text-accent-foreground">
               Robert Shaw
             </span>
-            <span className="text-gray-600">Software Engineer</span>
+            <span className="text-gray-600">Indie Maker/Hacker</span>
           </div>
         </Link>
         <div className="flex flex-col gap-1">

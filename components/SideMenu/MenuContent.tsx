@@ -28,7 +28,7 @@ export const MenuContent = () => {
                 Robert Shaw
               </span>
               <span className="text-secondary-foreground">
-                Software Engineer
+                Indie Maker/Hacker
               </span>
             </div>
           </Link>

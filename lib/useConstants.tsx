@@ -631,6 +631,13 @@ export const toolList = {
       price: 14,
       priceType: "Subscription",
     },
+    {
+      title: "Domain Service",
+      icon: <TwitterLogoIcon className="w-5 h-5" />,
+      link: "https://www.namecheap.com/",
+      price: 156,
+      priceType: "Subscription",
+    },
   ],
   AI: [
     {
