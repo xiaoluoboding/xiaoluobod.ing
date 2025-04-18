@@ -30,11 +30,11 @@ const CHINESE_SPECIAL_WORDS = {
     [0, 0],
     [0, 1],
   ],
-  // 是: [[0, 2]],
-  時間: [
-    [0, 3],
-    [0, 4],
-  ],
+  是: [[0, 2]],
+  // 時間: [
+  //   [0, 3],
+  //   [0, 4],
+  // ],
   書: [[0, 5]],
 
   // 时段
@@ -168,9 +168,9 @@ const CHINESE_SPECIAL_WORDS = {
     [8, 4],
   ],
   五十分: [
-    [4, 8],
-    [4, 9],
-    [4, 10],
+    [8, 5],
+    [8, 6],
+    [8, 7],
   ],
   五十五分: [
     [7, 2],
@@ -225,9 +225,9 @@ const MINUTE_POSITIONS = {
     [9, 10],
   ],
   四十分: [
-    [9, 6],
-    [9, 7],
-    [9, 8],
+    [3, 0],
+    [3, 1],
+    [3, 2],
   ],
   四十五分: [
     [8, 1],
@@ -282,60 +282,35 @@ function getHourRowPosition(hour: number): number {
 
 // 根据小时选择合适的分钟显示位置
 function getMinuteWords(hour: number, minute: number): string {
-  if (minute === 0) {
+  // Round minutes to the nearest 5
+  const roundedMinutes = Math.round(minute / 5) * 5
+
+  if (roundedMinutes === 0) {
     return "整"
-  } else if (minute === 30) {
+  } else if (roundedMinutes === 30) {
     return "半"
-  } else if (
-    minute === 5 ||
-    (minute > 0 && minute < 10 && Math.round(minute / 5) * 5 === 5)
-  ) {
+  } else if (roundedMinutes === 5) {
     return "零五分"
-  } else if (
-    minute === 10 ||
-    (minute > 5 && minute < 15 && Math.round(minute / 5) * 5 === 10)
-  ) {
+  } else if (roundedMinutes === 10) {
     return "十分"
-  } else if (
-    minute === 15 ||
-    (minute > 10 && minute < 20 && Math.round(minute / 5) * 5 === 15)
-  ) {
+  } else if (roundedMinutes === 15) {
     return "十五分"
-  } else if (
-    minute === 20 ||
-    (minute > 15 && minute < 25 && Math.round(minute / 5) * 5 === 20)
-  ) {
+  } else if (roundedMinutes === 20) {
     return "二十分"
-  } else if (
-    minute === 25 ||
-    (minute > 20 && minute < 30 && Math.round(minute / 5) * 5 === 25)
-  ) {
+  } else if (roundedMinutes === 25) {
     return "二十五分"
-  } else if (
-    minute === 35 ||
-    (minute > 30 && minute < 40 && Math.round(minute / 5) * 5 === 35)
-  ) {
+  } else if (roundedMinutes === 35) {
     return "三十五分"
-  } else if (
-    minute === 40 ||
-    (minute > 35 && minute < 45 && Math.round(minute / 5) * 5 === 40)
-  ) {
+  } else if (roundedMinutes === 40) {
     return "四十分"
-  } else if (
-    minute === 45 ||
-    (minute > 40 && minute < 50 && Math.round(minute / 5) * 5 === 45)
-  ) {
+  } else if (roundedMinutes === 45) {
     return "四十五分"
-  } else if (
-    minute === 50 ||
-    (minute > 45 && minute < 55 && Math.round(minute / 5) * 5 === 50)
-  ) {
+  } else if (roundedMinutes === 50) {
     return "五十分"
-  } else if (
-    minute === 55 ||
-    (minute > 50 && minute < 60 && Math.round(minute / 5) * 5 === 55)
-  ) {
+  } else if (roundedMinutes === 55) {
     return "五十五分"
+  } else if (roundedMinutes === 60) {
+    return "整"
   }
 
   return ""
@@ -348,7 +323,7 @@ function getChineseTimeWords(testDate?: Date) {
   const minute = now.getMinutes()
 
   // Period of day
-  const words = ["現在", "是"]
+  const words = ["現在", "是", "時間"]
 
   // Add AM/PM
   if (hour >= 0 && hour < 12) {
@@ -427,7 +402,7 @@ function runFullDayTest() {
 const ChineseWordClock: React.FC = () => {
   const [activeWords, setActiveWords] = useState<string[]>([])
   const [minuteDotCount, setMinuteDotCount] = useState(0)
-  const [neonColor, setNeonColor] = useState<string>("#FFFF00") // Default yellow
+  const [neonColor, setNeonColor] = useState<string>("#1EAEDB") // Default ocean blue
   const [autoChangeEnabled, setAutoChangeEnabled] = useState(true)
   const [testMode, setTestMode] = useState(false)
   const [testTimeIndex, setTestTimeIndex] = useState(0)
