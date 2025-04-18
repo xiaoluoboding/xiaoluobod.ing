@@ -26,7 +26,7 @@ export default function Journey() {
                 >
                   <div className="flex items-center">
                     <h2>{item.year}</h2>
-                    <hr className="my-0 ml-4 flex-1 border-dashed border-gray-200" />
+                    <hr className="my-0 ml-4 flex-1 border-dashed border-neutral-200" />
                   </div>
                   <section>
                     {item.logs.map((log, logIndex) => (
@@ -36,7 +36,7 @@ export default function Journey() {
                       >
                         {logIndex !== item.logs.length - 1 && (
                           <div className="absolute inset-0 flex w-6 items-center justify-center">
-                            <div className="pointer-events-none h-full w-px border-l-[1px] border-gray-200"></div>
+                            <div className="pointer-events-none h-full w-px border-l-[1px] border-neutral-200"></div>
                           </div>
                         )}
                         <div className="z-0 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-black dark:bg-white align-middle text-white dark:text-black">

@@ -49,7 +49,7 @@ export const MenuContent = () => {
       </div>
       <hr />
       <div className="flex flex-col gap-2 text-sm">
-        <span className="px-2 text-xs font-medium leading-relaxed text-gray-600">
+        <span className="px-2 text-xs font-medium leading-relaxed text-neutral-600">
           Online
         </span>
         <div className="flex flex-col gap-1">

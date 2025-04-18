@@ -95,7 +95,7 @@ export default function DockPage() {
             loading="lazy"
           />
           <h1 className="mt-2 text-2xl text-white">Robert Shaw</h1>
-          <div className="mt-3 flex max-w-2xl flex-col gap-1 text-center leading-normal text-gray-300">
+          <div className="mt-3 flex max-w-2xl flex-col gap-1 text-center leading-normal text-neutral-300">
             <p>Indie Maker/Hacker</p>
           </div>
           <div className="mt-2 flex gap-4">

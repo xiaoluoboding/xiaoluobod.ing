@@ -11,6 +11,7 @@ import {
   RiMacbookLine,
   RiProductHuntLine,
   RiQuillPenLine,
+  RiTestTubeLine,
   RiTwitterXLine,
 } from "@remixicon/react"
 
@@ -455,6 +456,11 @@ export const LINKS = [
     href: "/things",
     label: "Things",
     icon: <RiAsterisk size={16} />,
+  },
+  {
+    href: "/playground",
+    label: "Playground",
+    icon: <RiTestTubeLine size={16} />,
   },
   {
     href: "/bookmarks",

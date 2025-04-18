@@ -22,7 +22,7 @@ export const MobileMenuContent = () => {
             <span className="font-semibold tracking-tight text-accent-foreground">
               Robert Shaw
             </span>
-            <span className="text-gray-600">Indie Maker/Hacker</span>
+            <span className="text-neutral-600">Indie Maker/Hacker</span>
           </div>
         </Link>
         <div className="flex flex-col gap-1">
@@ -39,7 +39,7 @@ export const MobileMenuContent = () => {
       </div>
       <hr />
       <div className="flex flex-col gap-2 text-sm">
-        <span className="px-2 text-xs font-medium leading-relaxed text-gray-600">
+        <span className="px-2 text-xs font-medium leading-relaxed text-neutral-600">
           Online
         </span>
         <div className="flex flex-col gap-1">

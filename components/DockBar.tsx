@@ -105,7 +105,7 @@ export function DockBar({ apps }: { apps: App[] }) {
   return (
     <div className="relative">
       {/* Dock background */}
-      <div className="absolute bottom-0 left-0 right-0 h-[80px] max-w-full rounded-[22px] border border-gray-600/60 bg-gray-800/60" />
+      <div className="absolute bottom-0 left-0 right-0 h-[80px] max-w-full rounded-[22px] border border-neutral-600/60 bg-neutral-800/60" />
       {/* Scrollable container */}
       <ScrollArea.Root>
         <ScrollArea.Viewport>
