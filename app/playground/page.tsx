@@ -51,16 +51,16 @@ export default function PlaygroundPage() {
                 <CardHeader>
                   <CardTitle>中文字刻时钟</CardTitle>
                   <CardDescription>
-                    Chinese Word Clock with elegant styling
+                    显示当前时间的中文字刻时钟，灵感来自 QLOCKTWO®
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <p className="text-neutral-400">
-                    显示当前时间的中文字刻时钟，尽显优雅设计。
+                    一个用文字而非数字显示当前时间的优雅装置。
                   </p>
                 </CardContent>
                 <CardFooter className="text-xs text-neutral-500">
-                  互动 • 可自定义
+                  可互动 • 可自定义
                 </CardFooter>
               </Card>
             </Link>
