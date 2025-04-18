@@ -11,7 +11,7 @@ import MinuteDots from "./MinuteDots"
 
 // Chinese grid layout based on the provided image (11x10 grid)
 const CHINESE_GRID = [
-  ["現", "在", "是", "時", "間", "書", "上", "午", "下", "午", "夜"],
+  ["現", "在", "是", "凌", "晨", "書", "上", "午", "下", "午", "夜"],
   ["十", "一", "點", "半", "四", "點", "五", "點", "半", "六", "八"],
   ["七", "點", "半", "一", "九", "點", "半", "四", "十", "五", "分"],
   ["四", "十", "分", "三", "十", "五", "分", "零", "五", "分", "七"],
@@ -31,10 +31,12 @@ const CHINESE_SPECIAL_WORDS = {
     [0, 1],
   ],
   是: [[0, 2]],
-  // 時間: [
-  //   [0, 3],
-  //   [0, 4],
-  // ],
+
+  // 时段
+  凌晨: [
+    [0, 3],
+    [0, 4],
+  ],
   書: [[0, 5]],
 
   // 时段
@@ -323,10 +325,12 @@ function getChineseTimeWords(testDate?: Date) {
   const minute = now.getMinutes()
 
   // Period of day
-  const words = ["現在", "是", "時間"]
+  const words = ["現在", "是"]
 
-  // Add AM/PM
-  if (hour >= 0 && hour < 12) {
+  // Add time period
+  if (hour >= 0 && hour < 6) {
+    words.push("凌晨")
+  } else if (hour >= 6 && hour < 12) {
     words.push("上午")
   } else if (hour >= 12 && hour < 18) {
     words.push("下午")
@@ -480,7 +484,96 @@ const ChineseWordClock: React.FC = () => {
   }, [autoChangeEnabled, colorOptions, testMode])
 
   const isHighlighted = (rowIndex: number, colIndex: number): boolean => {
+    // Special handling for "半" (half) character
+    if (CHINESE_GRID[rowIndex][colIndex] === "半") {
+      // Only process "半" if it's in the activeWords
+      if (activeWords.includes("半")) {
+        // Get the current hour (1-12) from activeWords
+        let currentHour = 0
+        for (const word of activeWords) {
+          if (word.endsWith("點")) {
+            switch (word) {
+              case "一點":
+                currentHour = 1
+                break
+              case "二點":
+                currentHour = 2
+                break
+              case "三點":
+                currentHour = 3
+                break
+              case "四點":
+                currentHour = 4
+                break
+              case "五點":
+                currentHour = 5
+                break
+              case "六點":
+                currentHour = 6
+                break
+              case "七點":
+                currentHour = 7
+                break
+              case "八點":
+                currentHour = 8
+                break
+              case "九點":
+                currentHour = 9
+                break
+              case "十點":
+                currentHour = 10
+                break
+              case "十一點":
+                currentHour = 11
+                break
+              case "十二點":
+                currentHour = 12
+                break
+            }
+            break
+          }
+        }
+
+        if (currentHour > 0) {
+          // Find the "半" position closest to the current hour row
+          const hourRow = getHourRowPosition(currentHour)
+
+          // Map of half positions
+          const halfPositions = [
+            [1, 3],
+            [1, 8],
+            [2, 2],
+            [2, 6],
+            [5, 3],
+            [5, 9],
+          ]
+
+          // Find the closest "半" to the current hour's row
+          let closestHalfPos = halfPositions[0]
+          let minDistance = Math.abs(hourRow - closestHalfPos[0])
+
+          for (const pos of halfPositions) {
+            const distance = Math.abs(hourRow - pos[0])
+            if (distance < minDistance) {
+              minDistance = distance
+              closestHalfPos = pos
+            }
+          }
+
+          // Only highlight if this is the closest "半" to the hour
+          return (
+            closestHalfPos[0] === rowIndex && closestHalfPos[1] === colIndex
+          )
+        }
+      }
+      return false
+    }
+
+    // Normal processing for other characters
     for (const word of activeWords) {
+      // Skip "半" as we handled it specially above
+      if (word === "半") continue
+
       // 处理常规词汇
       if (CHINESE_SPECIAL_WORDS[word as keyof typeof CHINESE_SPECIAL_WORDS]) {
         for (const [r, c] of CHINESE_SPECIAL_WORDS[
