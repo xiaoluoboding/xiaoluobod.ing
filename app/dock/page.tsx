@@ -1,6 +1,6 @@
 "use client"
 
-import { Suspense } from "react"
+import { Suspense, useEffect } from "react"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 
@@ -10,10 +10,18 @@ import { LoadingSpinner } from "@/components/LoadingSpinner"
 import { PageTitle } from "@/components/PageTitle"
 import { DockBar } from "@/components/DockBar"
 import { cn } from "@/lib/utils"
+import { useSidebarStore } from "@/store/sidebar"
 
 export default function DockPage() {
   const pathname = usePathname()
   const isDockIndexPage = pathname === "/dock"
+  const { hideSidebar } = useSidebarStore()
+
+  // Hide sidebar when dock page is displayed
+  useEffect(() => {
+    hideSidebar()
+  }, [hideSidebar])
+
   const appList = [
     {
       name: "Launchpad",
@@ -81,15 +89,15 @@ export default function DockPage() {
           <Image
             alt="Robert Shaw"
             src="/assets/me.png"
-            width="150"
-            height="150"
+            width="128"
+            height="128"
             decoding="async"
             className="rounded-full bg-transparent"
             loading="lazy"
           />
           <h1 className="mt-2 text-2xl text-white">Robert Shaw</h1>
           <div className="mt-3 flex max-w-2xl flex-col gap-1 text-center leading-normal text-gray-300">
-            <p>Indie Hacker</p>
+            <p>Indie Maker/Hacker</p>
           </div>
           <div className="mt-2 flex gap-4">
             <a

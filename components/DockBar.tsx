@@ -5,6 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import * as ScrollArea from "@radix-ui/react-scroll-area"
 import { XTooltip, XTooltipContent, XTooltipTrigger } from "./ui/XTooltip"
+import { useSidebarStore } from "@/store/sidebar"
 
 interface App {
   name: string
@@ -14,7 +15,7 @@ interface App {
 const DockImage = motion(Image)
 const placeholderImageUrl = "/assets/placeholder.png"
 
-const DockItem = ({ app }: { app: App }) => {
+const DockItem = ({ app, onClick }: { app: App; onClick?: () => void }) => {
   const variants = {
     hover: {
       width: 92,
@@ -29,12 +30,12 @@ const DockItem = ({ app }: { app: App }) => {
   return (
     <XTooltip>
       <XTooltipTrigger>
-        <Link href={`#`}>
+        <Link href={`#`} onClick={onClick}>
           <motion.div
             variants={variants}
             whileHover="hover"
             initial="initial"
-            className="dockItem h-[60px]"
+            className="dockItem flex items-center justify-center"
             transition={{
               type: "spring",
               damping: 60,
@@ -52,8 +53,8 @@ const DockItem = ({ app }: { app: App }) => {
                   y: -12,
                 },
                 initial: {
-                  width: 80,
-                  height: 80,
+                  width: app.name === "Robert Shaw" ? 64 : 80,
+                  height: app.name === "Robert Shaw" ? 64 : 80,
                 },
               }}
               transition={{
@@ -85,6 +86,22 @@ const DockItem = ({ app }: { app: App }) => {
 }
 
 export function DockBar({ apps }: { apps: App[] }) {
+  const { showSidebar } = useSidebarStore()
+
+  // Add back button as the first app in the list
+  const backApp = {
+    name: "Robert Shaw",
+    iconUrl: "/assets/me.png",
+  }
+
+  const allApps = [backApp, ...apps]
+
+  const handleDockItemClick = (app: App) => {
+    if (app.name === "Robert Shaw") {
+      showSidebar()
+    }
+  }
+
   return (
     <div className="relative">
       {/* Dock background */}
@@ -94,8 +111,12 @@ export function DockBar({ apps }: { apps: App[] }) {
         <ScrollArea.Viewport>
           <div className="overflow-hidden max-w-full">
             <div className="fade-lr relative flex max-w-full flex-1 overflow-x-auto pt-4">
-              {apps.map((app) => (
-                <DockItem key={app.name} app={app} />
+              {allApps.map((app) => (
+                <DockItem
+                  key={app.name}
+                  app={app}
+                  onClick={() => handleDockItemClick(app)}
+                />
               ))}
             </div>
           </div>

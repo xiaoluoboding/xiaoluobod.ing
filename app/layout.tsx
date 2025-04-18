@@ -3,10 +3,9 @@ import { Inter } from "next/font/google"
 import Script from "next/script"
 
 import { sharedDescription, sharedTitle } from "@/app/shared-metadata"
-import { SideMenu } from "@/components/SideMenu"
-import { MenuContent } from "@/components/SideMenu/MenuContent"
 import { ThemeProvider } from "@/components/ThemeProvider"
 import { XToaster } from "@/components/ui/XToaster"
+import { SidebarProvider } from "@/components/SidebarProvider"
 
 import "./globals.css"
 
@@ -67,10 +66,9 @@ export default function RootLayout({
             className="min-h-screen bg-white dark:bg-neutral-900"
           >
             <div className="min-h-screen lg:flex">
-              <SideMenu className="relative hidden lg:flex">
-                <MenuContent />
-              </SideMenu>
-              <div className="flex flex-1">{children}</div>
+              <SidebarProvider>
+                <div className="flex flex-1">{children}</div>
+              </SidebarProvider>
             </div>
           </main>
           <XToaster
