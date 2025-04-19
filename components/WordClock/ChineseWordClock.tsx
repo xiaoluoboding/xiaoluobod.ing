@@ -1013,7 +1013,7 @@ const ChineseWordClock: React.FC = () => {
   )
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-neutral-900 p-4 z-10">
+    <div className="flex flex-col items-center justify-center h-[calc(100vh-48px)] sm:h-screen bg-neutral-900 p-4 z-10">
       <style jsx global>{`
         @keyframes pulse {
           0% {

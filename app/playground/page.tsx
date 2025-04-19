@@ -21,7 +21,7 @@ export default function PlaygroundPage() {
       <FloatingHeader scrollTitle={title} />
       <div className="content-wrapper">
         <div className="content">
-          <h1 className="text-2xl font-semibold text-neutral-100 mb-6">
+          <h1 className="text-2xl font-semibold text-primary mb-6">
             Playground
           </h1>
 
@@ -46,7 +46,7 @@ export default function PlaygroundPage() {
               </Card>
             </Link>
 
-            <Link href="/playground/chineseclock" className="block">
+            <Link href="/playground/chinese-wordclock" className="block">
               <Card className="h-full hover:bg-neutral-800/50 transition-colors">
                 <CardHeader>
                   <CardTitle>中文字刻时钟</CardTitle>
@@ -79,6 +79,26 @@ export default function PlaygroundPage() {
                 </CardContent>
                 <CardFooter className="text-xs text-neutral-500">
                   Interactive • Real-time
+                </CardFooter>
+              </Card>
+            </Link>
+
+            <Link href="/playground/digit-wheel-clock" className="block">
+              <Card className="h-full hover:bg-neutral-800/50 transition-colors">
+                <CardHeader>
+                  <CardTitle>Digit Wheel Clock</CardTitle>
+                  <CardDescription>
+                    Animated digital clock with rolling digits
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-neutral-400">
+                    A modern digital clock with smooth vertical transitions for
+                    each digit, creating a satisfying rolling animation effect.
+                  </p>
+                </CardContent>
+                <CardFooter className="text-xs text-neutral-500">
+                  Interactive • Themeable
                 </CardFooter>
               </Card>
             </Link>

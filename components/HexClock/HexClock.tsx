@@ -45,7 +45,7 @@ const HexClock = () => {
       onMouseLeave={() => setIsHovering(false)}
     >
       <motion.div
-        className="w-full h-screen flex flex-col items-center justify-center transition-colors duration-500 shadow-xl"
+        className="w-full h-[calc(100vh-48px)] sm:h-screen flex flex-col items-center justify-center transition-colors duration-500 shadow-xl"
         style={{ backgroundColor: hexColor }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

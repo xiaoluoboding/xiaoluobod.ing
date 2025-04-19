@@ -41,6 +41,12 @@ export default function ToolsLayout({
                   title="Hex Clock"
                   description="Time as hexadecimal colors"
                 />
+                <ListItem
+                  key="digit-wheel-clock"
+                  path="/playground/digit-wheel-clock"
+                  title="Digit Wheel Clock"
+                  description="Animated digital clock with rolling digits"
+                />
               </div>
             </Suspense>
           </SideMenu>
