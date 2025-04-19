@@ -19,13 +19,7 @@ export default function ToolsLayout({
     <>
       {isClient && (
         <div className="flex w-full relative">
-          <div className="absolute top-0 z-0 h-full w-full bg-white dark:bg-neutral-900">
-            {/* <section className="gridient-bg absolute inset-0 z-0 h-screen w-screen">
-              <div className="polygon g-polygon-1 bg-gradient-to-br from-sky-500/60 to-sky-800/60"></div>
-              <div className="polygon g-polygon-2 bg-gradient-to-br from-violet-300/60 via-violet-500/60 to-violet-800/60"></div>
-              <div className="polygon g-polygon-3 bg-blue-500/60"></div>
-            </section> */}
-          </div>
+          <div className="absolute top-0 z-0 h-full w-full bg-white dark:bg-neutral-900"></div>
           <SideMenu title="Playground" isInner>
             <Suspense fallback={<LoadingSpinner />}>
               <div className="flex flex-col gap-1 text-sm">

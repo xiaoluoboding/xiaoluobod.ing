@@ -4,18 +4,16 @@ import React, { useState, useEffect, useMemo } from "react"
 import MinuteDots from "./MinuteDots"
 import { XInput } from "../ui/XInput"
 import { XLabel } from "../ui/XLabel"
-import { XDialog, XDialogContent, XDialogTrigger } from "../ui/XDialog"
 import { Sheet, SheetContent, SheetTrigger } from "../ui/XSheet"
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/XHoverCard"
 import { RadioGroup, RadioGroupItem } from "../ui/XRadioGroup"
 import { COLOR_OPTIONS, GRID, SPECIAL_WORDS, WordPositions } from "./constants"
 
 const WordClock: React.FC = () => {
   const [activeWords, setActiveWords] = useState<string[]>([])
   const [minuteDotCount, setMinuteDotCount] = useState(0)
-  const [neonColor, setNeonColor] = useState<string>("#1EAEDB") // Default blue
+  const [neonColor, setNeonColor] = useState<string>("#4DF5FF") // Default blue
   const [autoChangeEnabled, setAutoChangeEnabled] = useState(true)
-  const [colorPickerOpen, setColorPickerOpen] = useState(false)
+  const [isHovering, setIsHovering] = useState(false) // State for entire clock face hover
   const isMobile = useIsMobile()
 
   const colorOptions = useMemo(() => {
@@ -63,6 +61,11 @@ const WordClock: React.FC = () => {
   }, [autoChangeEnabled, colorOptions])
 
   const isHighlighted = (rowIndex: number, colIndex: number): boolean => {
+    // Special case for the "A" toggle button at position [0, 5]
+    if (rowIndex === 0 && colIndex === 5 && isHovering) {
+      return true
+    }
+
     for (const word of activeWords) {
       if (word === "FIVE") {
         if (activeWords.includes("PAST") || activeWords.includes("TO")) {
@@ -116,6 +119,25 @@ const WordClock: React.FC = () => {
       `,
       filter: "brightness(1.5)",
       fontWeight: "bold",
+    }
+  }
+
+  // Style for the A letter when clock face is hovered
+  const getAPulseStyle = () => {
+    if (!isHovering) return {}
+
+    return {
+      color: neonColor,
+      textShadow: `
+        0 0 5px ${neonColor},
+        0 0 10px ${neonColor},
+        0 0 15px ${neonColor},
+        0 0 20px ${neonColor}
+      `,
+      filter: "brightness(1.5)",
+      fontWeight: "bold",
+      animation: "pulse 1.5s infinite ease-in-out",
+      cursor: "pointer",
     }
   }
 
@@ -212,55 +234,88 @@ const WordClock: React.FC = () => {
     <div
       className="w-full sm:max-w-lg lg:max-w-2xl aspect-square bg-black rounded-lg shadow-2xl overflow-hidden relative"
       style={getNeonBorderStyle()}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
     >
       <div className="grid grid-rows-10 grid-cols-11 gap-1 h-full p-6">
         {GRID.map((row, rowIndex) =>
           row.map((letter, colIndex) => {
             const highlighted = isHighlighted(rowIndex, colIndex)
+            const isAToggle = rowIndex === 0 && colIndex === 5
+
             return (
               <div
                 key={`${rowIndex}-${colIndex}`}
                 className={`flex items-center justify-center text-sm sm:text-base md:text-xl lg:text-2xl text-glow-transition ${
                   highlighted ? "" : "text-neutral-700"
-                }`}
-                style={getNeonStyle(highlighted)}
+                } ${isAToggle ? "cursor-pointer z-20 relative" : ""}`}
+                style={isAToggle ? getAPulseStyle() : getNeonStyle(highlighted)}
               >
-                {letter}
+                {isAToggle ? (
+                  <Sheet>
+                    <SheetTrigger asChild>
+                      <button
+                        className={`w-full h-full flex items-center justify-center ${
+                          isHovering ? "pulse-animation" : ""
+                        }`}
+                        aria-label="Open color picker"
+                      >
+                        {letter}
+                      </button>
+                    </SheetTrigger>
+                    <SheetContent
+                      side="right"
+                      className="bg-neutral-800 border-l-neutral-700"
+                    >
+                      <ColorPickerContent />
+                    </SheetContent>
+                  </Sheet>
+                ) : (
+                  letter
+                )}
               </div>
             )
           })
         )}
       </div>
       <MinuteDots count={minuteDotCount} color={neonColor} />
-
-      <Sheet>
-        <SheetTrigger asChild>
-          <button
-            className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex items-center justify-center w-6 h-6 rounded-full bg-black/60 border border-neutral-800 hover:border-neutral-600 cursor-pointer z-20"
-            aria-label="Open color picker"
-          >
-            <div
-              className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: neonColor }}
-            />
-          </button>
-        </SheetTrigger>
-        <SheetContent
-          side="right"
-          className="bg-neutral-800 border-t-neutral-700"
-        >
-          <ColorPickerContent />
-        </SheetContent>
-      </Sheet>
     </div>
   )
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-neutral-900 p-4 z-10">
+      <style jsx global>{`
+        @keyframes pulse {
+          0% {
+            opacity: 1;
+            filter: brightness(1.5);
+          }
+          50% {
+            opacity: 0.7;
+            filter: brightness(1);
+          }
+          100% {
+            opacity: 1;
+            filter: brightness(1.5);
+          }
+        }
+
+        .pulse-animation {
+          animation: pulse 1.5s infinite ease-in-out;
+        }
+      `}</style>
       {clockFace}
 
       <div className="text-primary mt-8 text-center">
-        <p className="text-sm">Word Clock inspired by QLOCKTWO®</p>
+        <p className="text-xs mt-2 text-neutral-400">
+          Current time = clock face time + number of lit{" "}
+          <span className="text-primary">dots</span>
+          (each dot represents 1 minute). Hover over the clock to reveal the{" "}
+          <span className="text-primary">A</span> button for color settings.
+        </p>
+        <p className="text-xs mt-2 text-neutral-400">
+          Word Clock inspired by QLOCKTWO®
+        </p>
       </div>
     </div>
   )

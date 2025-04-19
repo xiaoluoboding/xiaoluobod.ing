@@ -3,14 +3,23 @@ export interface ColorOption {
   label: string
 }
 
+/**
+ * Birthstone colors for the word clock
+ */
+
 export const COLOR_OPTIONS: ColorOption[] = [
-  { value: "#1EAEDB", label: "Ocean Blue" },
-  { value: "#8B5CF6", label: "Violet" },
-  { value: "#D946EF", label: "Magenta" },
-  { value: "#FFD700", label: "Gold" },
-  { value: "#F97316", label: "Orange" },
-  { value: "#10B981", label: "Emerald" },
-  { value: "#be123c", label: "Rose" },
+  { value: "#8B0206", label: "Garnet" },
+  { value: "#694F91", label: "Amethyst" },
+  { value: "#7FC7F3", label: "Aquamarine" },
+  { value: "#F1F9FF", label: "Diamond" },
+  { value: "#04A24F", label: "Emerald" },
+  { value: "#5D9094", label: "Alexandrite" },
+  { value: "#F70004", label: "Ruby" },
+  { value: "#B1E347", label: "Peridot" },
+  { value: "#2345B9", label: "Sapphire" },
+  { value: "#FC5191", label: "Tourmaline" },
+  { value: "#F98603", label: "Topaz" },
+  { value: "#4DF5FF", label: "Turquoise" },
 ]
 
 export type WordPositions = Record<string, number[][]>

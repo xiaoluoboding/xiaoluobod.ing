@@ -4,11 +4,10 @@ import { useIsMobile } from "@/hooks/use-mobile"
 import React, { useState, useEffect, useMemo } from "react"
 import { XInput } from "../ui/XInput"
 import { XLabel } from "../ui/XLabel"
-import { Sheet, SheetClose, SheetContent, SheetTrigger } from "../ui/XSheet"
+import { Sheet, SheetContent, SheetTrigger } from "../ui/XSheet"
 import { RadioGroup, RadioGroupItem } from "../ui/XRadioGroup"
 import { COLOR_OPTIONS } from "./constants"
 import MinuteDots from "./MinuteDots"
-import { RiCloseLine } from "@remixicon/react"
 
 // Chinese grid layout based on the provided image (11x10 grid)
 const CHINESE_GRID = [
@@ -637,7 +636,7 @@ function runFullDayTest() {
 const ChineseWordClock: React.FC = () => {
   const [activeWords, setActiveWords] = useState<string[]>([])
   const [minuteDotCount, setMinuteDotCount] = useState(0)
-  const [neonColor, setNeonColor] = useState<string>("#1EAEDB") // Default ocean blue
+  const [neonColor, setNeonColor] = useState<string>("#4DF5FF") // Default ocean blue
   const [autoChangeEnabled, setAutoChangeEnabled] = useState(true)
   const [testMode, setTestMode] = useState(false)
   const [testTimeIndex, setTestTimeIndex] = useState(0)
@@ -901,7 +900,7 @@ const ChineseWordClock: React.FC = () => {
         </div>
       </div>
 
-      <div className="pt-6 border-t border-neutral-700">
+      {/* <div className="pt-6 border-t border-neutral-700">
         <h4 className="font-medium text-neutral-100 mb-3">時間測試模式</h4>
         <div className="flex items-center justify-between mb-4">
           <span className="text-neutral-300">開啟測試模式</span>
@@ -952,7 +951,7 @@ const ChineseWordClock: React.FC = () => {
             </div>
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   )
 
@@ -1045,6 +1044,9 @@ const ChineseWordClock: React.FC = () => {
           {testMode && testTimes.length > 0 && (
             <> | 測試模式：{testTimes[testTimeIndex].formattedTime}</>
           )}
+        </p>
+        <p className="text-xs text-neutral-400">
+          中文字刻時鐘，靈感來自 QLOCKTWO®
         </p>
       </div>
     </div>
