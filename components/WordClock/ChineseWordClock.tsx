@@ -21,7 +21,7 @@ const CHINESE_GRID = [
   ["十", "點", "八", "點", "三", "十", "分", "一", "零", "五", "分"],
   ["六", "三", "五", "十", "五", "分", "二", "十", "五", "分", "整"],
   ["三", "四", "十", "五", "分", "五", "十", "分", "二", "十", "分"],
-  ["二", "十", "分", "八", "四", "十", "分", "三", "十", "五", "分"],
+  ["二", "十", "分", "半", "四", "十", "分", "三", "十", "五", "分"],
 ]
 
 // Define special word positions based on the image
@@ -63,7 +63,6 @@ const CHINESE_SPECIAL_WORDS = {
   三點: [
     [5, 1],
     [5, 2],
-    [5, 3],
   ],
   四點: [
     [1, 4],
@@ -106,140 +105,289 @@ const CHINESE_SPECIAL_WORDS = {
 
   // 特殊时间标记
   整: [[7, 10]],
-  半: [
-    [1, 3],
-    [1, 8],
-    [2, 2],
-    [2, 6],
-    [5, 3],
-    [5, 9],
-  ],
+}
 
-  // 分钟
-  零: [[6, 8]],
-  零五分: [
-    [6, 8],
-    [6, 9],
-    [6, 10],
+// 分钟类型和位置映射
+const MINUTE_POSITIONS = {
+  // 整 (on the hour) - common position for all hours
+  整: [[7, 10]],
+
+  // Half (半) positions for each hour row
+  半_1: [[2, 6]], // 适用于 1, 4, 5, 11 点（第1行）
+  半_2: [[2, 6]], // 适用于 7, 9 点（第2行）
+  半_5: [[5, 9]], // 适用于 3, 6, 12 点（第5行）
+  半_6: [[9, 3]], // 适用于 8, 10 点（第6行）
+  半_9: [[5, 9]], // 适用于 2 点（第9行）
+
+  // Group 1: For hours in row 1 (一点(1), 四点(4), 五点(5), 十一点(11))
+  零五分_1: [
+    [3, 7],
+    [3, 8],
+    [3, 9],
   ],
-  五分: [
-    [2, 9],
-    [2, 10],
+  十分_1: [
+    [4, 9],
+    [4, 10],
   ],
-  十分: [
-    [2, 8],
-    [2, 10],
+  十五分_1: [
+    [3, 4],
+    [3, 5],
+    [3, 6],
   ],
-  十五分: [
-    [7, 7],
-    [7, 8],
-    [7, 9],
+  二十分_1: [
+    [4, 5],
+    [4, 6],
+    [4, 7],
   ],
-  二十分: [
-    [8, 8],
-    [8, 9],
-    [8, 10],
+  二十五分_1: [
+    [4, 1],
+    [4, 2],
+    [4, 3],
+    [4, 4],
   ],
-  二十五分: [
-    [7, 6],
-    [7, 7],
-    [7, 8],
-    [7, 9],
+  三十五分_1: [
+    [3, 3],
+    [3, 4],
+    [3, 5],
+    [3, 6],
   ],
-  三十分: [
-    [6, 4],
-    [6, 5],
-    [6, 6],
-  ],
-  三十五分: [
-    [9, 7],
-    [9, 8],
-    [9, 9],
-    [9, 10],
-  ],
-  四十分: [
+  四十分_1: [
     [3, 0],
     [3, 1],
     [3, 2],
   ],
-  四十五分: [
-    [8, 1],
-    [8, 2],
-    [8, 3],
-    [8, 4],
+  四十五分_1: [
+    [2, 7],
+    [2, 8],
+    [2, 9],
+    [2, 10],
   ],
-  五十分: [
-    [8, 5],
-    [8, 6],
-    [8, 7],
+  五十分_1: [
+    [4, 8],
+    [4, 9],
+    [4, 10],
   ],
-  五十五分: [
+  五十五分_1: [
     [7, 2],
     [7, 3],
     [7, 4],
     [7, 5],
   ],
-}
 
-// 分钟类型和位置映射
-const MINUTE_POSITIONS = {
-  零五分: [
+  // Group 2: For hours in row 2 (七点(7), 九点(9))
+  五分_2: [
+    [3, 7],
+    [3, 8],
+    [3, 9],
+  ],
+  十分_2: [
+    [4, 9],
+    [4, 10],
+  ],
+  十五分_2: [
+    [3, 4],
+    [3, 5],
+    [3, 6],
+  ],
+  二十分_2: [
+    [4, 5],
+    [4, 6],
+    [4, 7],
+  ],
+  二十五分_2: [
+    [4, 1],
+    [4, 2],
+    [4, 3],
+    [4, 4],
+  ],
+  三十五分_2: [
+    [3, 3],
+    [3, 4],
+    [3, 5],
+    [3, 6],
+  ],
+  四十分_2: [
+    [3, 0],
+    [3, 1],
+    [3, 2],
+  ],
+  四十五分_2: [
+    [3, 3],
+    [3, 4],
+    [3, 5],
+    [3, 6],
+  ],
+  五十分_2: [
+    [4, 8],
+    [4, 9],
+    [4, 10],
+  ],
+  五十五分_2: [
+    [7, 2],
+    [7, 3],
+    [7, 4],
+    [7, 5],
+  ],
+
+  // Group 3: For hours in row 5 (三点(3), 六点(6), 十二点(12))
+  零五分_5: [
     [6, 8],
     [6, 9],
     [6, 10],
   ],
-  五分: [
-    [2, 9],
-    [2, 10],
+  十分_5: [
+    [6, 5],
+    [6, 6],
   ],
-  十分: [
-    [2, 8],
-    [2, 10],
-  ],
-  十五分: [
+  十五分_5: [
     [7, 7],
     [7, 8],
     [7, 9],
   ],
-  二十分: [
+  二十分_5: [
     [8, 8],
     [8, 9],
     [8, 10],
   ],
-  二十五分: [
+  二十五分_5: [
     [7, 6],
     [7, 7],
     [7, 8],
     [7, 9],
   ],
-  三十分: [
-    [6, 4],
-    [6, 5],
-    [6, 6],
-  ],
-  三十五分: [
+  三十五分_5: [
     [9, 7],
     [9, 8],
     [9, 9],
     [9, 10],
   ],
-  四十分: [
-    [3, 0],
-    [3, 1],
-    [3, 2],
+  四十分_5: [
+    [9, 4],
+    [9, 5],
+    [9, 6],
   ],
-  四十五分: [
+  四十五分_5: [
     [8, 1],
     [8, 2],
     [8, 3],
     [8, 4],
   ],
-  五十分: [
+  五十分_5: [
     [8, 5],
     [8, 6],
     [8, 7],
   ],
-  五十五分: [
+  五十五分_5: [
+    [7, 2],
+    [7, 3],
+    [7, 4],
+    [7, 5],
+  ],
+
+  // Group 4: For hours in row 6 (八点(8), 十点(10))
+  零五分_6: [
+    [6, 8],
+    [6, 9],
+    [6, 10],
+  ],
+  十分_6: [
+    [8, 9],
+    [8, 10],
+  ],
+  十五分_6: [
+    [7, 7],
+    [7, 8],
+    [7, 9],
+  ],
+  二十分_6: [
+    [8, 8],
+    [8, 9],
+    [8, 10],
+  ],
+  二十五分_6: [
+    [7, 6],
+    [7, 7],
+    [7, 8],
+    [7, 9],
+  ],
+  三十五分_6: [
+    [9, 7],
+    [9, 8],
+    [9, 9],
+    [9, 10],
+  ],
+  四十分_6: [
+    [9, 4],
+    [9, 5],
+    [9, 6],
+  ],
+  四十五分_6: [
+    [8, 1],
+    [8, 2],
+    [8, 3],
+    [8, 4],
+  ],
+  五十分_6: [
+    [8, 5],
+    [8, 6],
+    [8, 7],
+  ],
+  五十五分_6: [
+    [7, 2],
+    [7, 3],
+    [7, 4],
+    [7, 5],
+  ],
+
+  // Group 5: For hours in row 9 (二点(2))
+  零五分_9: [
+    [6, 8],
+    [6, 9],
+    [6, 10],
+  ],
+  十分_9: [
+    [9, 5],
+    [9, 6],
+  ],
+  十五分_9: [
+    [8, 2],
+    [8, 3],
+    [8, 4],
+  ],
+  二十分_9: [
+    [8, 8],
+    [8, 9],
+    [8, 10],
+  ],
+  二十五分_9: [
+    [7, 6],
+    [7, 7],
+    [7, 8],
+    [7, 9],
+  ],
+  三十五分_9: [
+    [9, 7],
+    [9, 8],
+    [9, 9],
+    [9, 10],
+  ],
+  四十分_9: [
+    [9, 6],
+    [9, 4],
+    [9, 5],
+  ],
+  四十五分_9: [
+    [8, 1],
+    [8, 2],
+    [8, 3],
+    [8, 4],
+  ],
+  五十分_9: [
+    [8, 5],
+    [8, 6],
+    [8, 7],
+  ],
+  五十五分_9: [
     [7, 2],
     [7, 3],
     [7, 4],
@@ -283,34 +431,109 @@ function getHourRowPosition(hour: number): number {
 function getMinuteWords(hour: number, minute: number): string {
   // Round minutes to the nearest 5
   const roundedMinutes = Math.round(minute / 5) * 5
+  const hourRow = getHourRowPosition(hour)
 
   if (roundedMinutes === 0) {
     return "整"
   } else if (roundedMinutes === 30) {
-    return "半"
-  } else if (roundedMinutes === 5) {
-    return "零五分"
-  } else if (roundedMinutes === 10) {
-    return "十分"
-  } else if (roundedMinutes === 15) {
-    return "十五分"
-  } else if (roundedMinutes === 20) {
-    return "二十分"
-  } else if (roundedMinutes === 25) {
-    return "二十五分"
-  } else if (roundedMinutes === 35) {
-    return "三十五分"
-  } else if (roundedMinutes === 40) {
-    return "四十分"
-  } else if (roundedMinutes === 45) {
-    return "四十五分"
-  } else if (roundedMinutes === 50) {
-    return "五十分"
-  } else if (roundedMinutes === 55) {
-    return "五十五分"
-  } else if (roundedMinutes === 60) {
-    return "整"
+    // 返回与小时行匹配的"半"字位置
+    switch (hourRow) {
+      case 1: // 一点(1), 四点(4), 五点(5), 十一点(11) 在第1行
+        return "半_1"
+      case 2: // 七点(7), 九点(9) 在第2行
+        return "半_2"
+      case 5: // 三点(3), 六点(6), 十二点(12) 在第5行
+        return "半_5"
+      case 6: // 八点(8), 十点(10) 在第6行
+        return "半_6"
+      case 9: // 二点(2) 在第9行
+        return "半_9"
+      default:
+        return "半_1" // 默认使用第1行的"半"
+    }
+  } else {
+    // 为不同的小时位置选择合适的分钟表示
+    // 所有分钟显示应位于小时之下的行
+    switch (hourRow) {
+      case 1: // 一点(1), 四点(4), 五点(5), 十一点(11) 在第1行
+        if (roundedMinutes === 5) return "零五分_1"
+        if (roundedMinutes === 10) return "十分_1"
+        if (roundedMinutes === 15) return "十五分_1"
+        if (roundedMinutes === 20) return "二十分_1"
+        if (roundedMinutes === 25) return "二十五分_1"
+        if (roundedMinutes === 35) return "三十五分_1"
+        if (roundedMinutes === 40) return "四十分_1"
+        if (roundedMinutes === 45) return "四十五分_1"
+        if (roundedMinutes === 50) return "五十分_1"
+        if (roundedMinutes === 55) return "五十五分_1"
+        break
+
+      case 2: // 七点(7), 九点(9) 在第2行
+        if (roundedMinutes === 5) return "五分_2"
+        if (roundedMinutes === 10) return "十分_2"
+        if (roundedMinutes === 15) return "十五分_2"
+        if (roundedMinutes === 20) return "二十分_2"
+        if (roundedMinutes === 25) return "二十五分_2"
+        if (roundedMinutes === 35) return "三十五分_2"
+        if (roundedMinutes === 40) return "四十分_2"
+        if (roundedMinutes === 45) return "四十五分_2"
+        if (roundedMinutes === 50) return "五十分_2"
+        if (roundedMinutes === 55) return "五十五分_2"
+        break
+
+      case 5: // 三点(3), 六点(6), 十二点(12) 在第5行
+        if (roundedMinutes === 5) return "零五分_5"
+        if (roundedMinutes === 10) return "十分_5"
+        if (roundedMinutes === 15) return "十五分_5"
+        if (roundedMinutes === 20) return "二十分_5"
+        if (roundedMinutes === 25) return "二十五分_5"
+        if (roundedMinutes === 35) return "三十五分_5"
+        if (roundedMinutes === 40) return "四十分_5"
+        if (roundedMinutes === 45) return "四十五分_5"
+        if (roundedMinutes === 50) return "五十分_5"
+        if (roundedMinutes === 55) return "五十五分_5"
+        break
+
+      case 6: // 八点(8), 十点(10) 在第6行
+        if (roundedMinutes === 5) return "零五分_6"
+        if (roundedMinutes === 10) return "十分_6"
+        if (roundedMinutes === 15) return "十五分_6"
+        if (roundedMinutes === 20) return "二十分_6"
+        if (roundedMinutes === 25) return "二十五分_6"
+        if (roundedMinutes === 35) return "三十五分_6"
+        if (roundedMinutes === 40) return "四十分_6"
+        if (roundedMinutes === 45) return "四十五分_6"
+        if (roundedMinutes === 50) return "五十分_6"
+        if (roundedMinutes === 55) return "五十五分_6"
+        break
+
+      case 9: // 二点(2) 在第9行
+        if (roundedMinutes === 5) return "零五分_9"
+        if (roundedMinutes === 10) return "十分_9"
+        if (roundedMinutes === 15) return "十五分_9"
+        if (roundedMinutes === 20) return "二十分_9"
+        if (roundedMinutes === 25) return "二十五分_9"
+        if (roundedMinutes === 35) return "三十五分_9"
+        if (roundedMinutes === 40) return "四十分_9"
+        if (roundedMinutes === 45) return "四十五分_9"
+        if (roundedMinutes === 50) return "五十分_9"
+        if (roundedMinutes === 55) return "五十五分_9"
+        break
+    }
   }
+
+  // 如果没有特殊规则匹配，使用默认的分钟表示
+  if (roundedMinutes === 5) return "零五分_1"
+  if (roundedMinutes === 10) return "十分_1"
+  if (roundedMinutes === 15) return "十五分_1"
+  if (roundedMinutes === 20) return "二十分_1"
+  if (roundedMinutes === 25) return "二十五分_1"
+  if (roundedMinutes === 35) return "三十五分_1"
+  if (roundedMinutes === 40) return "四十分_1"
+  if (roundedMinutes === 45) return "四十五分_1"
+  if (roundedMinutes === 50) return "五十分_1"
+  if (roundedMinutes === 55) return "五十五分_1"
+  if (roundedMinutes === 60) return "整"
 
   return ""
 }
@@ -487,96 +710,8 @@ const ChineseWordClock: React.FC = () => {
       return true
     }
 
-    // Special handling for "半" (half) character
-    if (CHINESE_GRID[rowIndex][colIndex] === "半") {
-      // Only process "半" if it's in the activeWords
-      if (activeWords.includes("半")) {
-        // Get the current hour (1-12) from activeWords
-        let currentHour = 0
-        for (const word of activeWords) {
-          if (word.endsWith("點")) {
-            switch (word) {
-              case "一點":
-                currentHour = 1
-                break
-              case "二點":
-                currentHour = 2
-                break
-              case "三點":
-                currentHour = 3
-                break
-              case "四點":
-                currentHour = 4
-                break
-              case "五點":
-                currentHour = 5
-                break
-              case "六點":
-                currentHour = 6
-                break
-              case "七點":
-                currentHour = 7
-                break
-              case "八點":
-                currentHour = 8
-                break
-              case "九點":
-                currentHour = 9
-                break
-              case "十點":
-                currentHour = 10
-                break
-              case "十一點":
-                currentHour = 11
-                break
-              case "十二點":
-                currentHour = 12
-                break
-            }
-            break
-          }
-        }
-
-        if (currentHour > 0) {
-          // Find the "半" position closest to the current hour row
-          const hourRow = getHourRowPosition(currentHour)
-
-          // Map of half positions
-          const halfPositions = [
-            [1, 3],
-            [1, 8],
-            [2, 2],
-            [2, 6],
-            [5, 3],
-            [5, 9],
-          ]
-
-          // Find the closest "半" to the current hour's row
-          let closestHalfPos = halfPositions[0]
-          let minDistance = Math.abs(hourRow - closestHalfPos[0])
-
-          for (const pos of halfPositions) {
-            const distance = Math.abs(hourRow - pos[0])
-            if (distance < minDistance) {
-              minDistance = distance
-              closestHalfPos = pos
-            }
-          }
-
-          // Only highlight if this is the closest "半" to the hour
-          return (
-            closestHalfPos[0] === rowIndex && closestHalfPos[1] === colIndex
-          )
-        }
-      }
-      return false
-    }
-
-    // Normal processing for other characters
+    // Normal processing for all characters
     for (const word of activeWords) {
-      // Skip "半" as we handled it specially above
-      if (word === "半") continue
-
       // 处理常规词汇
       if (CHINESE_SPECIAL_WORDS[word as keyof typeof CHINESE_SPECIAL_WORDS]) {
         for (const [r, c] of CHINESE_SPECIAL_WORDS[
@@ -589,7 +724,21 @@ const ChineseWordClock: React.FC = () => {
       }
 
       // 处理分钟词汇 - 使用动态位置
-      if (MINUTE_POSITIONS[word as keyof typeof MINUTE_POSITIONS]) {
+      // 先检查是否有带后缀的分钟词
+      const minuteWithSuffix = Object.keys(MINUTE_POSITIONS).find(
+        (key) => key.startsWith(word) && (key === word || key.includes("_"))
+      )
+
+      if (minuteWithSuffix) {
+        for (const [r, c] of MINUTE_POSITIONS[
+          minuteWithSuffix as keyof typeof MINUTE_POSITIONS
+        ]) {
+          if (r === rowIndex && c === colIndex) {
+            return true
+          }
+        }
+      } else if (MINUTE_POSITIONS[word as keyof typeof MINUTE_POSITIONS]) {
+        // 如果没有找到带后缀的，则尝试直接匹配
         for (const [r, c] of MINUTE_POSITIONS[
           word as keyof typeof MINUTE_POSITIONS
         ]) {
