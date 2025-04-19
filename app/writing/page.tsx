@@ -6,7 +6,7 @@ import { FloatingHeader } from "@/components/FloadingHeader"
 import { PageTitle } from "@/components/PageTitle"
 import { LoadingSpinner } from "@/components/LoadingSpinner"
 import { XScrollArea } from "@/components/ui/XScrollArea"
-import { TweetCard } from "@/components/TweetCard/TweetCard"
+import { ClientTweetCard } from "@/components/TweetCard"
 import { tweets, getAllCategories } from "@/lib/data/tweets"
 
 export default function WritingPage() {
@@ -92,7 +92,7 @@ export default function WritingPage() {
                           {tweet.title}
                         </h3>
                       )}
-                      <TweetCard id={tweet.id} />
+                      <ClientTweetCard id={tweet.id} />
                       <div className="mt-3 flex items-center justify-between text-sm text-muted-foreground">
                         <time dateTime={tweet.date}>
                           {new Date(tweet.date).toLocaleDateString("en-US", {
