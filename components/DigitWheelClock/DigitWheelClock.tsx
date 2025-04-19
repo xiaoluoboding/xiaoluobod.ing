@@ -18,6 +18,14 @@ const DigitWheel: React.FC<DigitWheelProps> = ({
 
   // Calculate height based on fontSize (typically 1.5x fontSize is a good ratio)
   const height = fontSize * 1.5
+  const DIGIT_DEGREE = 360 / 10
+
+  // Calculate inRadius for 3D effect - similar to the reference code
+  const getTanFromDegrees = (degrees: number) => {
+    return Math.tan((degrees * Math.PI) / 180)
+  }
+
+  const inRadius = height / 2 / getTanFromDegrees(DIGIT_DEGREE / 2)
 
   // Create the filter shadow effect with reduced blur
   const neonFilter = `
@@ -30,27 +38,35 @@ const DigitWheel: React.FC<DigitWheelProps> = ({
   return (
     <div
       className="digit-wheel relative overflow-hidden"
-      style={{ height: `${height}px`, width: `${fontSize * 0.75}px` }}
+      style={{
+        height: `${height}px`,
+        width: `${fontSize * 0.75}px`,
+      }}
     >
       <div
-        className="digits-container absolute transition-transform duration-500 ease-in-out will-change-transform"
+        className="digits-container absolute w-full h-full transition-transform duration-500 will-change-transform"
         style={{
-          transform: `translateY(-${value * height}px)`,
-          width: "100%",
+          transitionTimingFunction: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+          transformStyle: "preserve-3d",
+          transform: `rotateX(${value * DIGIT_DEGREE - 360}deg)`,
         }}
       >
         {digits.map((digit) => (
           <div
             key={digit}
-            className="digit flex items-center justify-center font-mono font-bold"
+            className="digit absolute top-0 left-0 w-full h-full flex items-center justify-center font-mono font-semibold leading-none"
             style={{
-              height: `${height}px`,
               fontSize: `${fontSize}px`,
               color: color,
               filter: neonFilter,
+              backfaceVisibility: "hidden",
+              transform: `rotateX(${
+                0 - digit * DIGIT_DEGREE
+              }deg) translateZ(${inRadius}px)`,
+              transformStyle: "preserve-3d",
             }}
           >
-            {digit}
+            <span className="block leading-none">{digit}</span>
           </div>
         ))}
       </div>
@@ -69,7 +85,7 @@ const TimeDisplay: React.FC<TimeDisplayProps> = ({
   time,
   showColon = true,
   fontSize = 40,
-  color = COLOR_OPTIONS[4].value, // Emerald (green)
+  color = COLOR_OPTIONS[2].value, // Aquamarine
 }) => {
   const hours = time.getHours().toString().padStart(2, "0")
   const minutes = time.getMinutes().toString().padStart(2, "0")
@@ -179,12 +195,14 @@ interface DigitWheelClockProps {
   className?: string
   fontSize?: number
   color?: string
+  perspective?: boolean
 }
 
 const DigitWheelClock: React.FC<DigitWheelClockProps> = ({
   className = "",
   fontSize = 40,
-  color = COLOR_OPTIONS[4].value, // Emerald (green)
+  color = COLOR_OPTIONS[2].value, // Aquamarine
+  perspective = false,
 }) => {
   const [currentTime, setCurrentTime] = useState<Date>(new Date())
 
@@ -200,6 +218,9 @@ const DigitWheelClock: React.FC<DigitWheelClockProps> = ({
   return (
     <div
       className={`digit-wheel-clock flex items-center justify-center ${className}`}
+      style={{
+        transform: perspective ? "perspective(1000px) rotateY(-30deg)" : "",
+      }}
     >
       <TimeDisplay time={currentTime} fontSize={fontSize} color={color} />
     </div>

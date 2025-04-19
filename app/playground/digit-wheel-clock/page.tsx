@@ -19,7 +19,7 @@ import { useIsMobile } from "@/hooks/use-mobile"
 
 export default function DigitWheelClockPage() {
   const title = "Digit Wheel Clock"
-  const [neonColor, setNeonColor] = useState<string>(COLOR_OPTIONS[4].value)
+  const [neonColor, setNeonColor] = useState<string>(COLOR_OPTIONS[2].value)
   const [autoChangeEnabled, setAutoChangeEnabled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const isMobile = useIsMobile()
@@ -62,7 +62,7 @@ export default function DigitWheelClockPage() {
   const ColorPickerContent = () => (
     <div className="space-y-4">
       <div>
-        <h4 className="font-medium text-neutral-100 mb-2">选择颜色</h4>
+        <h4 className="font-medium text-neutral-100 mb-2">Select color</h4>
         <RadioGroup
           value={neonColor}
           onValueChange={handleColorChange}
@@ -77,10 +77,10 @@ export default function DigitWheelClockPage() {
               />
               <XLabel
                 htmlFor={`inline-${color.value}`}
-                className="flex flex-col items-center justify-between rounded-md border-2 border-transparent p-2 hover:border-neutral-600 peer-data-[state=checked]:border-neutral-400"
+                className="flex flex-col items-center justify-between rounded-md border-2 border-transparent px-8 py-4"
               >
                 <div
-                  className="h-8 w-8 rounded-full mb-1"
+                  className="h-8 w-8 rounded-full mb-1 hover:scale-110 transition-transform duration-300"
                   style={{
                     backgroundColor: color.value,
                     boxShadow:
@@ -97,7 +97,7 @@ export default function DigitWheelClockPage() {
       </div>
 
       <div className="flex items-center justify-between mt-4 mb-2">
-        <h4 className="font-medium text-neutral-100">自动更换颜色</h4>
+        <h4 className="font-medium text-neutral-100">Auto change color</h4>
         <div className="relative inline-flex h-6 w-11 items-center rounded-full border-transparent transition-colors bg-neutral-700 focus:outline-none">
           <input
             type="checkbox"
@@ -121,7 +121,7 @@ export default function DigitWheelClockPage() {
       </div>
 
       <div>
-        <h4 className="font-medium text-neutral-100 mb-2">自定义颜色</h4>
+        <h4 className="font-medium text-neutral-100 mb-2">Custom color</h4>
         <div className="flex gap-3 items-center">
           <XInput
             type="color"
@@ -164,9 +164,9 @@ export default function DigitWheelClockPage() {
                     backgroundColor: neonColor,
                     boxShadow: `0 0 10px ${neonColor}`,
                   }}
-                  aria-label="打开颜色选择器"
+                  aria-label="Open color picker"
                 >
-                  <span className="sr-only">选择颜色</span>
+                  <span className="sr-only">Open color picker</span>
                 </button>
               </PopoverTrigger>
               <PopoverContent className="bg-neutral-800 border-neutral-700 w-80">
