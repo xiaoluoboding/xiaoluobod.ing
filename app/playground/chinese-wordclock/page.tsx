@@ -7,7 +7,7 @@ import { XScrollArea } from "@/components/ui/XScrollArea"
 import ChineseWordClock from "@/components/WordClock/ChineseWordClock"
 
 export default function ChineseClockPage() {
-  const title = "Chinese Word Clock"
+  const title = "Chinese Word Clock | 中文刻字时钟"
 
   return (
     <XScrollArea className="scrollable-area">

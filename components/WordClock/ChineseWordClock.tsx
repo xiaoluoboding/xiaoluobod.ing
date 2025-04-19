@@ -4,10 +4,11 @@ import { useIsMobile } from "@/hooks/use-mobile"
 import React, { useState, useEffect, useMemo } from "react"
 import { XInput } from "../ui/XInput"
 import { XLabel } from "../ui/XLabel"
-import { Sheet, SheetContent, SheetTrigger } from "../ui/XSheet"
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from "../ui/XSheet"
 import { RadioGroup, RadioGroupItem } from "../ui/XRadioGroup"
 import { COLOR_OPTIONS } from "./constants"
 import MinuteDots from "./MinuteDots"
+import { RiCloseLine } from "@remixicon/react"
 
 // Chinese grid layout based on the provided image (11x10 grid)
 const CHINESE_GRID = [
@@ -406,6 +407,7 @@ const ChineseWordClock: React.FC = () => {
   const [autoChangeEnabled, setAutoChangeEnabled] = useState(true)
   const [testMode, setTestMode] = useState(false)
   const [testTimeIndex, setTestTimeIndex] = useState(0)
+  const [isHovering, setIsHovering] = useState(false)
   const [testTimes, setTestTimes] = useState<
     Array<{
       time: string
@@ -480,6 +482,11 @@ const ChineseWordClock: React.FC = () => {
   }, [autoChangeEnabled, colorOptions, testMode])
 
   const isHighlighted = (rowIndex: number, colIndex: number): boolean => {
+    // Special case for the "書" character when hovering
+    if (rowIndex === 0 && colIndex === 5 && isHovering) {
+      return true
+    }
+
     // Special handling for "半" (half) character
     if (CHINESE_GRID[rowIndex][colIndex] === "半") {
       // Only process "半" if it's in the activeWords
@@ -608,6 +615,24 @@ const ChineseWordClock: React.FC = () => {
       `,
       filter: "brightness(1.5)",
       fontWeight: "semibold",
+    }
+  }
+
+  const getShuPulseStyle = () => {
+    if (!isHovering) return {}
+
+    return {
+      color: neonColor,
+      textShadow: `
+        0 0 4px ${neonColor},
+        0 0 8px ${neonColor},
+        0 0 12px ${neonColor},
+        0 0 16px ${neonColor}
+      `,
+      filter: "brightness(1.5)",
+      fontWeight: "semibold",
+      animation: "pulse 1.5s infinite ease-in-out",
+      cursor: "pointer",
     }
   }
 
@@ -775,56 +800,88 @@ const ChineseWordClock: React.FC = () => {
     <div
       className="w-full sm:max-w-lg lg:max-w-2xl aspect-square bg-black rounded-lg shadow-2xl overflow-hidden relative"
       style={getNeonBorderStyle()}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
     >
-      <div className="grid grid-rows-10 grid-cols-11 gap-1 h-full p-6">
+      <MinuteDots count={minuteDotCount} color={neonColor} type="square" />
+      <div className="grid grid-rows-10 grid-cols-11 gap-1 h-full p-6 z-10 relative">
         {CHINESE_GRID.map((row, rowIndex) =>
           row.map((char, colIndex) => {
             const highlighted = isHighlighted(rowIndex, colIndex)
+            const isShuChar = rowIndex === 0 && colIndex === 5
+
             return (
               <div
                 key={`${rowIndex}-${colIndex}`}
                 className={`flex items-center justify-center text-sm sm:text-base md:text-xl lg:text-2xl text-glow-transition ${
                   highlighted ? "" : "text-neutral-700"
-                }`}
-                style={getNeonStyle(highlighted)}
+                } ${isShuChar ? "cursor-pointer z-20 relative" : ""}`}
+                style={
+                  isShuChar ? getShuPulseStyle() : getNeonStyle(highlighted)
+                }
               >
-                {char}
+                {isShuChar ? (
+                  <Sheet>
+                    <SheetTrigger asChild>
+                      <button
+                        className={`w-full h-full flex items-center justify-center ${
+                          isHovering ? "pulse-animation" : ""
+                        }`}
+                        tabIndex={0}
+                        aria-label="開啟顏色選擇器"
+                        type="button"
+                      >
+                        {char}
+                      </button>
+                    </SheetTrigger>
+
+                    <SheetContent
+                      side="right"
+                      className="bg-neutral-800 border-l-neutral-700"
+                    >
+                      <ColorPickerContent />
+                    </SheetContent>
+                  </Sheet>
+                ) : (
+                  char
+                )}
               </div>
             )
           })
         )}
       </div>
-      <MinuteDots count={minuteDotCount} color={neonColor} />
-
-      <Sheet>
-        <SheetTrigger asChild>
-          <button
-            className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex items-center justify-center w-6 h-6 rounded-full bg-black/60 border border-neutral-800 hover:border-neutral-600 cursor-pointer z-20"
-            aria-label="開啟顏色選擇器"
-          >
-            <div
-              className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: neonColor }}
-            />
-          </button>
-        </SheetTrigger>
-        <SheetContent
-          side="right"
-          className="bg-neutral-800 border-t-neutral-700"
-        >
-          <ColorPickerContent />
-        </SheetContent>
-      </Sheet>
     </div>
   )
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-neutral-900 p-4 z-10">
+      <style jsx global>{`
+        @keyframes pulse {
+          0% {
+            opacity: 1;
+            filter: brightness(1.5);
+          }
+          50% {
+            opacity: 0.7;
+            filter: brightness(1);
+          }
+          100% {
+            opacity: 1;
+            filter: brightness(1.5);
+          }
+        }
+
+        .pulse-animation {
+          animation: pulse 1.5s infinite ease-in-out;
+        }
+      `}</style>
       {clockFace}
 
       <div className="text-primary mt-8 text-center">
         <p className="text-xs mt-2 text-neutral-400">
-          當前時間=表盤上時間+亮起的圓點個數（每個圓點表示1分鐘）
+          當前時間=表盤上時間+亮起的<span className="text-primary">圓點</span>
+          個數（每個圓點表示1分鐘），將鼠標懸停在&quot;
+          <span className="text-primary">書</span>&quot;字可以更改顏色
           {testMode && testTimes.length > 0 && (
             <> | 測試模式：{testTimes[testTimeIndex].formattedTime}</>
           )}
