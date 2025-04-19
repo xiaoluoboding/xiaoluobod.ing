@@ -64,6 +64,24 @@ export default function PlaygroundPage() {
                 </CardFooter>
               </Card>
             </Link>
+
+            <Link href="/playground/hexclock" className="block">
+              <Card className="h-full hover:bg-neutral-800/50 transition-colors">
+                <CardHeader>
+                  <CardTitle>Hex Clock</CardTitle>
+                  <CardDescription>Time as hexadecimal colors</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-neutral-400">
+                    A clock that converts time to hex color codes. Each second
+                    creates a new color.
+                  </p>
+                </CardContent>
+                <CardFooter className="text-xs text-neutral-500">
+                  Interactive • Real-time
+                </CardFooter>
+              </Card>
+            </Link>
           </div>
         </div>
       </div>

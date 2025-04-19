@@ -35,6 +35,12 @@ export default function ToolsLayout({
                   title="Chinese Word Clock"
                   description="Chinese Word Clock inspired by QLOCKTWO®"
                 />
+                <ListItem
+                  key="hexclock"
+                  path="/playground/hexclock"
+                  title="Hex Clock"
+                  description="Time as hexadecimal colors"
+                />
               </div>
             </Suspense>
           </SideMenu>
